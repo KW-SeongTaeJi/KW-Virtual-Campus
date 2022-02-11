@@ -152,7 +152,8 @@ PlayerSettings:
   resolutionScalingMode: 0
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
-  applicationIdentifier: {}
+  applicationIdentifier:
+    Standalone: com.DefaultCompany.KWcampus
   buildNumber:
     Standalone: 0
     iPhone: 0
@@ -590,7 +591,7 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
-    1: UNISTORM_PRESENT
+    1: UNISTORM_PRESENT;STARTER_ASSETS_PACKAGES_CHECKED
     7: UNISTORM_PRESENT
   additionalCompilerArguments: {}
   platformArchitecture: {}
@@ -679,7 +680,7 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  activeInputHandler: 0
+  activeInputHandler: 2
   cloudProjectId: 
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
