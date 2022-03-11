@@ -1,16 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Define;
 
 public class LoginScene : BaseScene
 {
-    public override void Clear()
+    UI_LoginScene _sceneUI;
+
+
+    protected override void Init()
     {
         base.Init();
 
-        SceneType = Scene.Login;
+        SceneType = Define.Scene.Login;
 
+        // TODO : url check
+        Managers.Web.BaseUrl = "https://localhost:5001/api";
+
+        _sceneUI = Managers.UI.ShowSceneUI<UI_LoginScene>();
+
+    }
+
+    public override void Clear()
+    {
 
     }
 }
