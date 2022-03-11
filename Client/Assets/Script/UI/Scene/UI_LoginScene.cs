@@ -32,8 +32,6 @@ public class UI_LoginScene : UI_Scene
 
     public void OnClickLoginButton(PointerEventData evt)
     {
-        Debug.Log("Ca");
-
         string id = GetInputField((int)InputFields.Id).text;
         string password = GetInputField((int)InputFields.Password).text;
 
@@ -64,7 +62,7 @@ public class UI_LoginScene : UI_Scene
 
     public void OnClickRegisterButton(PointerEventData evt)
     {
-
+        
     }
     void OnRecvRegisterPacket(CreateAccountPacketRes res)
     {
