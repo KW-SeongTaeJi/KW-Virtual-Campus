@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Managers : MonoBehaviour
 {
     static Managers _instance;
-    public static Managers Singleton 
+    public static Managers Instance 
     {
         get 
         {
@@ -17,11 +16,13 @@ public class Managers : MonoBehaviour
     PoolManager _pool = new PoolManager();
     ResourceManager _resource = new ResourceManager();
     SceneLoadManager _sceneLoad = new SceneLoadManager();
+    UIManager _ui = new UIManager();
     WebManager _web = new WebManager();
-    public static PoolManager Pool { get { return Singleton._pool; } }
-    public static ResourceManager Resource { get { return Singleton._resource; } }
-    public static SceneLoadManager SceneLoad { get { return Singleton._sceneLoad; } }
-    public static WebManager Web { get { return Singleton._web; } }
+    public static PoolManager Pool { get { return Instance._pool; } }
+    public static ResourceManager Resource { get { return Instance._resource; } }
+    public static SceneLoadManager SceneLoad { get { return Instance._sceneLoad; } }
+    public static UIManager UI { get { return Instance._ui; } } 
+    public static WebManager Web { get { return Instance._web; } }
 
 
     void Start()
@@ -54,6 +55,7 @@ public class Managers : MonoBehaviour
     public static void Clear()
     {
         SceneLoad.Clear();
+        UI.Clear();
         Pool.Clear();
     }
 }

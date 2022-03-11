@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public static class Extension
 {
@@ -8,4 +10,9 @@ public static class Extension
 	{
 		return Util.GetOrAddComponent<T>(gameObject);
 	}
+
+	public static void BindEvent(this GameObject gameObject, Action<PointerEventData> action, Define.UIEvent type)
+    {
+		UI_Base.BindEvent(gameObject, action, type);
+    }
 }

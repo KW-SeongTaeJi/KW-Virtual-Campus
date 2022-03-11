@@ -11,4 +11,9 @@ public class Define
         Lobby,
         Game,
     }
+
+    public enum UIEvent
+    {
+        Click,
+    }
 }

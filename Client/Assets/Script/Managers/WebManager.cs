@@ -43,6 +43,6 @@ public class WebManager
     }
     public void SendPostRequest<T>(string extraUrl, object packet, Action<T> resCallback)
     {
-        Managers.Singleton.StartCoroutine(CoSendWebRequest(extraUrl, UnityWebRequest.kHttpVerbPOST, packet, resCallback));
+        Managers.Instance.StartCoroutine(CoSendWebRequest(extraUrl, UnityWebRequest.kHttpVerbPOST, packet, resCallback));
     }
 }
