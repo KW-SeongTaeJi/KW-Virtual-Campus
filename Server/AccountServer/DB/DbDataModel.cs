@@ -12,5 +12,6 @@ namespace AccountServer.DB
         public int AccountDBId { get; set; }
         public string AccountId { get; set; }
         public string Password { get; set; }
+        public string Name { get; set; }
     }
 }
