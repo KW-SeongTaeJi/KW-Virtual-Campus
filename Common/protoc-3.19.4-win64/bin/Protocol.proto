@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+package Protocol;
+import "google/protobuf/timestamp.proto";
+option csharp_namespace = "Google.Protobuf.Protocol";
+
+
+enum MsgId {
+	L_CONNECTED = 0;
+	S_CONNECTED = 1;
+	S_PING = 2;
+	C_PONG = 3;
+	C_ENTER_GAME = 4;
+	S_ENTER_GAME = 5;
+	S_LEAVE_GAME = 6;
+	S_SPAWN = 7;
+	S_DESPAWN = 8; 
+	C_MOVE = 9;
+	S_MOVE = 10;
+}
+
+enum GameObjectType {
+  NONE = 0;
+  PLAYER = 1;
+}
+
+
+message L_Connected {
+}
+
+message S_Connected {
+}
+
+message S_Ping {
+}
+
+message C_Pong {
+}
+
+message C_EnterGame {
+	string accountId = 1;
+}
+
+message S_EnterGame {
+	ObjectInfo myPlayer = 1;
+}
+
+message S_LeaveGame {
+}
+
+message S_Spawn {
+	repeated ObjectInfo objects = 1;
+}
+
+message S_Despawn {
+	int32 objectId = 1;
+}
+
+message C_Move {
+	Vector3D position = 1;
+	float rotationY = 2;
+	float targetSpeed = 3;
+	float targetRotation = 4;
+	bool jump = 5;
+}
+
+message S_Move {
+	int32 objectId = 1;
+	Vector3D position = 2;
+	float rotationY = 3;
+	float targetSpeed = 4;
+	float targetRotation = 5;
+	bool jump = 6;
+}
+
+
+message Vector3D {
+	float x = 1;
+	float y = 2;
+	float z = 3;
+}
+
+message ObjectInfo {
+	int32 objectId = 1;
+	string name = 2;
+	Vector3D position = 3;
+	float rotationY = 4;
+}

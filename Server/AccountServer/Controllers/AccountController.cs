@@ -43,7 +43,8 @@ namespace AccountServer.Controllers
                 AccountDB newAccount = new AccountDB()
                 {
                     AccountId = req.AccountId,
-                    Password = req.Password
+                    Password = req.Password,
+                    Name = req.Name
                 };
                 _appDb.Accounts.Add(newAccount);
                 res.CreateAccountOk = _appDb.SaveChangesEx();
@@ -81,9 +82,10 @@ namespace AccountServer.Controllers
                 var options = new DistributedCacheEntryOptions().SetAbsoluteExpiration(DateTime.Now.AddMinutes(10));
                 _redisCache.Set(tokenKey, tokenValue, options);
 
-               res.LoginOk = true;
-                res.AccountDBId = account.AccountDBId;
+                res.LoginOk = true;
+                res.AccountId = account.AccountId;
                 res.Token = newToken;
+                res.Name = account.Name;
                 // TODO : 채널 정보 수정
                 res.Channel = new ChannelInfo()
                 {

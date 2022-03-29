@@ -7,6 +7,7 @@ public class CreateAccountPacketReq
 {
     public string AccountId { get; set; }
     public string Password { get; set; }
+    public string Name { get; set; }
 }
 public class CreateAccountPacketRes
 {
@@ -21,8 +22,9 @@ public class LoginPacketReq
 public class LoginPakcetRes
 {
     public bool LoginOk { get; set; }
-    public int AccountDBId { get; set; }
+    public string AccountId { get; set; }
     public string Token { get; set; }
+    public string Name { get; set; }
 
     public ChannelInfo Channel { get; set; }
 }
