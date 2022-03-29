@@ -97,7 +97,14 @@ namespace Server
 
         public override void OnDisconnected()
         {
+            GameLogic.Instance.PushQueue(() =>
+            {
+                if (MyPlayer == null)
+                    return;
 
+                GameWorld gameWorld = GameLogic.Instance.GameWorld;
+                gameWorld.PushQueue(gameWorld.LeaveGame, MyPlayer.Info.ObjectId);
+            });
 
             SessionManager.Instance.Remove(this);
         }

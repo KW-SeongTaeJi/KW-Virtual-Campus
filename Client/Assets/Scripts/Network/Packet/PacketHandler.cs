@@ -1,4 +1,5 @@
-﻿using Google.Protobuf;
+﻿using Cinemachine;
+using Google.Protobuf;
 using Google.Protobuf.Protocol;
 using NetworkCore;
 using System;
@@ -28,7 +29,20 @@ class PacketHandler
 	{
 		S_EnterGame enterGamePacket = (S_EnterGame)packet;
 
-		Managers.Object.Add(enterGamePacket.MyPlayer, myPlayer: true);
+		// Instantiate my player
+		GameObject myPlayer = Managers.Object.Add(enterGamePacket.MyPlayer, myPlayer: true);
+
+		// Set player follow Camera
+		GameObject gameObject = Managers.Resource.Instantiate("Object/MyPlayerFollowCamera");
+		CinemachineVirtualCamera followCamera = gameObject.GetComponent<CinemachineVirtualCamera>();
+		followCamera.Follow = myPlayer.FindChild("PlayerCameraRoot").transform;
+	}
+
+	public static void S_LeaveGameHandler(PacketSession session, IMessage packet)
+	{
+		S_LeaveGame leaveGamePacket = packet as S_LeaveGame;
+
+		Managers.Object.Clear();
 	}
 
 	public static void S_SpawnHandler(PacketSession session, IMessage packet)
@@ -39,5 +53,35 @@ class PacketHandler
 		{
 			Managers.Object.Add(obj);
 		}
+	}
+
+	public static void S_DespawnHandler(PacketSession session, IMessage packet)
+	{
+		S_Despawn despawnPacket = packet as S_Despawn;
+
+		Managers.Object.Remove(despawnPacket.ObjectId);
+	}
+
+	public static void S_MoveHandler(PacketSession session, IMessage packet)
+    {
+		S_Move movePacket = (S_Move)packet;
+
+		GameObject gameObject = Managers.Object.FindById(movePacket.ObjectId);
+		if (gameObject == null)
+			return;
+
+		PlayerController player = gameObject.GetComponent<PlayerController>();
+		if (player == null)
+			return;
+
+		/* Set property used for move sync */
+		// For  player Move() And JumpAndGravity()
+		player.TargetSpeed = movePacket.TargetSpeed;
+		player.TargetRotation = movePacket.TargetRotation;
+		player.Jump = movePacket.Jump;
+		// For player SyncPosition()
+		player.Sync = true;
+		player.Position = new Vector3(movePacket.Position.X, movePacket.Position.Y, movePacket.Position.Z);
+		player.RotationY = movePacket.RotationY;
 	}
 }

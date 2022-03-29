@@ -15,36 +15,46 @@ public class ObjectManager
         return (GameObjectType)type;
     }
 
-	public void Add(ObjectInfo info, bool myPlayer = false)
+	public GameObject Add(ObjectInfo info, bool myPlayer = false)
 	{
 		if (MyPlayer != null && MyPlayer.Id == info.ObjectId)
-			return;
+			return null;
 
 		if (_objects.ContainsKey(info.ObjectId))
-			return;
+			return null;
 
 		GameObjectType objectType = GetObjectTypeById(info.ObjectId);
 		if (objectType == GameObjectType.Player)
 		{
 			if (myPlayer)
 			{
-				GameObject gameObject = Managers.Resource.Instantiate("Object/Player");
+				GameObject gameObject = Managers.Resource.Instantiate("Object/MyPlayer");
 				gameObject.name = info.Name;
+				gameObject.transform.position = new Vector3(info.Position.X, info.Position.Y, info.Position.Z);
+				gameObject.transform.rotation = Quaternion.Euler(0, info.RotationY, 0);
 				_objects.Add(info.ObjectId, gameObject);
 
 				MyPlayer = gameObject.GetComponent<MyPlayerController>();
 				MyPlayer.Id = info.ObjectId;
+
+				return gameObject;
 			}
 			else
 			{
 				GameObject gameObject = Managers.Resource.Instantiate("Object/Player");
 				gameObject.name = info.Name;
+				gameObject.transform.position = new Vector3(info.Position.X, info.Position.Y, info.Position.Z);
+				gameObject.transform.rotation = Quaternion.Euler(0, info.RotationY, 0);
 				_objects.Add(info.ObjectId, gameObject);
 
 				PlayerController player = gameObject.GetComponent<PlayerController>();
 				player.Id = info.ObjectId;
+
+				return gameObject;
 			}
 		}
+
+		return null;
 	}
 
 	public GameObject FindById(int id)

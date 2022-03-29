@@ -9,21 +9,24 @@ namespace Server.Game
     {
         public GameObjectType ObjectType { get; protected set; } = GameObjectType.None;
 
-        public GameWorld World { get; set; }
-
         public ObjectInfo Info { get; set; } = new ObjectInfo();
-        public PositionInfo PosInfo { get; private set; } = new PositionInfo();
+        public Vector3D Position { get; set; } = new Vector3D();
 
         public int Id
         {
             get { return Info.ObjectId; }
             set { Info.ObjectId = value; }
         }
+        public float RotationY
+        {
+            get { return Info.RotationY; }
+            set { Info.RotationY = value; }
+        }
 
 
         public GameObject()
         {
-            Info.PosInfo = PosInfo;
+            Info.Position = Position;
         }
     }
 }

@@ -33,9 +33,10 @@ namespace Server
                     {
                         // TODO : 초기 플레이어 접속 정보 설정
                         MyPlayer.Info.Name = findAccount.Name;
-                        MyPlayer.Info.PosInfo.PosX = -37;
-                        MyPlayer.Info.PosInfo.PosY = 14;
-                        MyPlayer.Info.PosInfo.PosZ = -35;
+                        MyPlayer.Info.Position.X = -37;
+                        MyPlayer.Info.Position.Y = 14;
+                        MyPlayer.Info.Position.Z = -37;
+                        MyPlayer.Info.RotationY = 0;
                         MyPlayer.PlayerDbId = findAccount.Player.PlayerDbId;
                         MyPlayer.Session = this;
                     }

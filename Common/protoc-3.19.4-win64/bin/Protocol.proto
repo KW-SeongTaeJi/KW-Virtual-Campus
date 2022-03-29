@@ -12,7 +12,11 @@ enum MsgId {
 	C_PONG = 3;
 	C_ENTER_GAME = 4;
 	S_ENTER_GAME = 5;
-	S_SPAWN = 6;
+	S_LEAVE_GAME = 6;
+	S_SPAWN = 7;
+	S_DESPAWN = 8; 
+	C_MOVE = 9;
+	S_MOVE = 10;
 }
 
 enum GameObjectType {
@@ -41,19 +45,44 @@ message S_EnterGame {
 	ObjectInfo myPlayer = 1;
 }
 
+message S_LeaveGame {
+}
+
 message S_Spawn {
 	repeated ObjectInfo objects = 1;
 }
 
+message S_Despawn {
+	int32 objectId = 1;
+}
+
+message C_Move {
+	Vector3D position = 1;
+	float rotationY = 2;
+	float targetSpeed = 3;
+	float targetRotation = 4;
+	bool jump = 5;
+}
+
+message S_Move {
+	int32 objectId = 1;
+	Vector3D position = 2;
+	float rotationY = 3;
+	float targetSpeed = 4;
+	float targetRotation = 5;
+	bool jump = 6;
+}
+
+
+message Vector3D {
+	float x = 1;
+	float y = 2;
+	float z = 3;
+}
 
 message ObjectInfo {
 	int32 objectId = 1;
 	string name = 2;
-	PositionInfo posInfo = 3;
-}
-
-message PositionInfo {
-	int32 posX = 1;
-	int32 posY = 2;
-	int32 posZ = 3;
+	Vector3D position = 3;
+	float rotationY = 4;
 }
