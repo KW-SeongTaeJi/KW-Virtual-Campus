@@ -10,7 +10,7 @@ public class GameScene : BaseScene
 
         SceneType = Define.Scene.Game;
 
-        Screen.SetResolution(1200, 600, false);
+        Screen.SetResolution(1280, 640, false);
     }
 
     public override void Clear()

@@ -6,10 +6,12 @@ public class CreateAccountPacketReq
 {
     public string AccountId;
     public string Password;
+    public string Name;
 }
 public class CreateAccountPacketRes
 {
     public bool CreateAccountOk;
+    public int ErrorCode;
 }
 
 public class LoginPacketReq
@@ -20,6 +22,7 @@ public class LoginPacketReq
 public class LoginPakcetRes
 {
     public bool LoginOk;
+    public int ErrorCode;
     public string AccountId;
     public string Token;
     public string Name;

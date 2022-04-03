@@ -21,6 +21,10 @@ namespace AccountServer.DB
             builder.Entity<AccountDB>()
                 .HasIndex(a => a.AccountId)
                 .IsUnique();
+
+            builder.Entity<AccountDB>()
+                .HasIndex(a => a.Name)
+                .IsUnique();
         }
     }
 }

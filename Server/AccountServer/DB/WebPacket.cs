@@ -12,6 +12,7 @@ public class CreateAccountPacketReq
 public class CreateAccountPacketRes
 {
     public bool CreateAccountOk { get; set; }
+    public int ErrorCode { get; set; }
 }
 
 public class LoginPacketReq
@@ -22,6 +23,7 @@ public class LoginPacketReq
 public class LoginPakcetRes
 {
     public bool LoginOk { get; set; }
+    public int ErrorCode { get; set; }
     public string AccountId { get; set; }
     public string Token { get; set; }
     public string Name { get; set; }
