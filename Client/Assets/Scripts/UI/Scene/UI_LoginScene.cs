@@ -60,19 +60,18 @@ public class UI_LoginScene : UI_Scene
         GetInputField((int)InputFields.Id).text = "";
         GetInputField((int)InputFields.Password).text = "";
 
-        // Login Success
+        /* Login Success */
         if (res.LoginOk)
         {
-            // TODO : 로비서버로 연결 및 씬 이동
             Managers.Network.AccountId = res.AccountId;
             Managers.Network.Token = res.Token;
             Managers.Network.Name = res.Name;
 
-            // Temp
-            Managers.Network.ConnectToGameServer(res.Channel);
-            Managers.SceneLoad.LoadScene(Define.Scene.Game);
+            // TODO : 로비서버로 연결 및 씬 이동
+            Managers.Network.ConnectToLobbyServer(res.Channel);
+            Managers.SceneLoad.LoadScene(Define.Scene.Lobby);
         }
-        // Login Fail
+        /* Login Fail */
         else
         {
             // ErrorCode 1 : not registered ID

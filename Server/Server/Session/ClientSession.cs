@@ -13,6 +13,7 @@ namespace Server
         public int SessionId { get; set; }
 
         object _lock = new object();
+
         List<ArraySegment<byte>> _sendQueue = new List<ArraySegment<byte>>();
         int _reservedBytes = 0;
         long _lastSendTick = 0;

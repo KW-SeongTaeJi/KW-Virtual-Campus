@@ -7,6 +7,7 @@ using Microsoft.Extensions.Caching.StackExchangeRedis;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -94,7 +95,7 @@ namespace AccountServer.Controllers
             /* Login Success */
             // Save token to Redis
             string newToken = new Random().Next(Int32.MinValue, Int32.MaxValue).ToString();
-            string tokenKey = account.AccountDBId.ToString();
+            string tokenKey = account.AccountId.ToString();
             byte[] tokenValue = Encoding.UTF8.GetBytes(newToken);
             var options = new DistributedCacheEntryOptions().SetAbsoluteExpiration(DateTime.Now.AddMinutes(10));
             _redisCache.Set(tokenKey, tokenValue, options);
@@ -104,11 +105,14 @@ namespace AccountServer.Controllers
             res.AccountId = account.AccountId;
             res.Token = newToken;
             res.Name = account.Name;
-            // TODO : 채널 정보 수정
+            // TODO : 채널 주소 정보 수정
+            string host = Dns.GetHostName();
+            IPHostEntry ipHost = Dns.GetHostEntry(host);
+            IPAddress ipAddr = ipHost.AddressList[0];
             res.Channel = new ChannelInfo()
             {
-                IpAddress = "temp",
-                Port = 8000
+                IpAddress = ipAddr.ToString(),
+                Port = 4000
             };
 
             return res;

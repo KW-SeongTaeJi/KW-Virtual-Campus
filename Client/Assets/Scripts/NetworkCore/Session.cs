@@ -11,7 +11,7 @@ namespace NetworkCore
     {
         object _lock = new object();
 
-        int _isDisconnect = 0;
+        int _isDisconnect = 1;
 
         Socket _socket;
 
@@ -30,6 +30,8 @@ namespace NetworkCore
 
         public void Start(Socket socket)
         {
+            _isDisconnect = 0;
+
             _socket = socket;
             _sendArgs.Completed += new EventHandler<SocketAsyncEventArgs>(SendCompleted);
             _recvArgs.Completed += new EventHandler<SocketAsyncEventArgs>(RecvCompleted);

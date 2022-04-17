@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-class PacketHandler
+partial class PacketHandler
 {
 	public static void S_ConnectedHandler(PacketSession session, IMessage packet)
 	{
