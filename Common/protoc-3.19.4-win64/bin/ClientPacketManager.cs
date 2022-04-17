@@ -23,6 +23,12 @@ class PacketManager
 
 	public void Register()
 	{		
+		_onRecv.Add((ushort)MsgId.LConnected, MakePacket<L_Connected>);
+		_handler.Add((ushort)MsgId.LConnected, PacketHandler.L_ConnectedHandler);		
+		_onRecv.Add((ushort)MsgId.LPing, MakePacket<L_Ping>);
+		_handler.Add((ushort)MsgId.LPing, PacketHandler.L_PingHandler);		
+		_onRecv.Add((ushort)MsgId.LEnterLobby, MakePacket<L_EnterLobby>);
+		_handler.Add((ushort)MsgId.LEnterLobby, PacketHandler.L_EnterLobbyHandler);		
 		_onRecv.Add((ushort)MsgId.SConnected, MakePacket<S_Connected>);
 		_handler.Add((ushort)MsgId.SConnected, PacketHandler.S_ConnectedHandler);		
 		_onRecv.Add((ushort)MsgId.SPing, MakePacket<S_Ping>);

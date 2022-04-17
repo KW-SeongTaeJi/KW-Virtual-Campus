@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 
 public class WebManager
 {
-    public string BaseUrl { get; set; } = "https://localhost:5001/api";
+    public string BaseUrl { get; set; }
 
 
     // <T>: response packet type, res: response callback function 

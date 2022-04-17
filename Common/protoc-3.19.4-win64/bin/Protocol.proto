@@ -7,25 +7,45 @@ option csharp_namespace = "Google.Protobuf.Protocol";
 
 enum MsgId {
 	L_CONNECTED = 0;
-	S_CONNECTED = 1;
-	S_PING = 2;
-	C_PONG = 3;
-	C_ENTER_GAME = 4;
-	S_ENTER_GAME = 5;
-	S_LEAVE_GAME = 6;
-	S_SPAWN = 7;
-	S_DESPAWN = 8; 
-	C_MOVE = 9;
-	S_MOVE = 10;
-}
-
-enum GameObjectType {
-  NONE = 0;
-  PLAYER = 1;
+	L_PING = 1;
+	B_PONG = 2;
+	B_ENTER_LOBBY = 3;
+	L_ENTER_LOBBY = 4;
+	S_CONNECTED = 100;
+	S_PING = 101;
+	C_PONG = 102;
+	C_ENTER_GAME = 103;
+	S_ENTER_GAME = 104;
+	S_LEAVE_GAME = 105;
+	S_SPAWN = 106;
+	S_DESPAWN = 107; 
+	C_MOVE = 108;
+	S_MOVE = 109;
 }
 
 
 message L_Connected {
+}
+
+message L_Ping {
+}
+
+message B_Pong {
+}
+
+message B_EnterLobby {
+	string accountId = 1;
+	string token = 2;
+}
+
+message L_EnterLobby {
+	bool accessOk = 1;
+}
+
+
+enum GameObjectType {
+  NONE = 0;
+  PLAYER = 1;
 }
 
 message S_Connected {
@@ -72,7 +92,6 @@ message S_Move {
 	float targetRotation = 5;
 	bool jump = 6;
 }
-
 
 message Vector3D {
 	float x = 1;

@@ -35,7 +35,7 @@ namespace Server
 
         static void Main(string[] args)
         {
-
+            // TODO : 접속 주소 변경
             string host = Dns.GetHostName();
             IPHostEntry ipHost = Dns.GetHostEntry(host);
             IPAddress ipAddr = ipHost.AddressList[0];

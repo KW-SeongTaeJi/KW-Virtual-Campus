@@ -12,7 +12,7 @@ public class NetworkManager
     public string Token { get; set; }
 	public string Name { get; set; }
 
-    ServerSession _session = new ServerSession();
+    ServerSession _session;
 
 
     public void Send(IMessage packet)
@@ -31,18 +31,28 @@ public class NetworkManager
 		}
 	}
 
-	public void ConnectToGameServer(ChannelInfo info)
+	public void ConnectToLobbyServer(ChannelInfo info)
 	{
-		string host = Dns.GetHostName();
-		IPHostEntry ipHost = Dns.GetHostEntry(host);
-		IPAddress ipAddr = ipHost.AddressList[0];
-		//IPEndPoint endPoint = new IPEndPoint(ipAddr, 7777);
-
-		//IPAddress ipAddr = IPAddress.Parse(info.IpAddress);
+		_session = new ServerSession();
+		IPAddress ipAddr = IPAddress.Parse(info.IpAddress);
 		IPEndPoint endPoint = new IPEndPoint(ipAddr, info.Port);
 
 		Connector connector = new Connector();
-
 		connector.Connect(endPoint, () => { return _session; }, 1);
 	}
+
+	public void ConnectToGameServer(ChannelInfo info)
+	{
+		_session = new ServerSession();
+		IPAddress ipAddr = IPAddress.Parse(info.IpAddress);
+		IPEndPoint endPoint = new IPEndPoint(ipAddr, info.Port);
+
+		Connector connector = new Connector();
+		connector.Connect(endPoint, () => { return _session; }, 1);
+	}
+
+	public void DisconnectSession()
+    {
+		_session.Disconnect();
+    }
 }

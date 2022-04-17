@@ -7,6 +7,7 @@ namespace PacketGenerator
     {
         static string clientRegisterText;
         static string serverRegisterText;
+        static string lobbyRegisterText;
 
         static void Main(string[] args)
         {
@@ -15,6 +16,7 @@ namespace PacketGenerator
             if (args.Length >= 1)
                 protoFile = args[0];
 
+            // Packets from enum MsgId
             bool startParsing = false;
             foreach (string line in File.ReadAllLines(protoFile))
             {
@@ -53,12 +55,37 @@ namespace PacketGenerator
                     string packetName = $"C_{msgName.Substring(1)}";
                     serverRegisterText += string.Format(PacketFormat.managerRegisterFormat, msgName, packetName);
                 }
+                else if (name.StartsWith("L_"))
+                {
+                    string[] words = name.Split("_");
+
+                    string msgName = "";
+                    foreach (string word in words)
+                        msgName += FirstCharToUpper(word);
+
+                    string packetName = $"L_{msgName.Substring(1)}";
+                    clientRegisterText += string.Format(PacketFormat.managerRegisterFormat, msgName, packetName);
+
+                }
+                else if (name.StartsWith("B_"))
+                {
+                    string[] words = name.Split("_");
+
+                    string msgName = "";
+                    foreach (string word in words)
+                        msgName += FirstCharToUpper(word);
+
+                    string packetName = $"B_{msgName.Substring(1)}";
+                    lobbyRegisterText += string.Format(PacketFormat.managerRegisterFormat, msgName, packetName);
+                }
             }
 
             string clientManagerText = string.Format(PacketFormat.managerFormat, clientRegisterText);
             string serverManagerText = string.Format(PacketFormat.managerFormat, serverRegisterText);
+            string lobbyManagerText = string.Format(PacketFormat.managerFormat, lobbyRegisterText);
             File.WriteAllText("ClientPacketManager.cs", clientManagerText);
             File.WriteAllText("ServerPacketManager.cs", serverManagerText);
+            File.WriteAllText("LobbyPacketManager.cs", lobbyManagerText);
         }
 
         public static string FirstCharToUpper(string input)
