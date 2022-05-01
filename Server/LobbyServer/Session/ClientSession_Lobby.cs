@@ -9,24 +9,30 @@ namespace LobbyServer
 {
     public partial class ClientSession : PacketSession
     {
+        public Player MyPlayer { get; set; }
+
+
         public void HandleEnterLobby(B_EnterLobby packet)
         {
             using (RedisDb redisDb = new RedisDb())
             {
+                // Compare authentication token from client and in Redis 
                 string tokenKey = packet.AccountId;
                 string tokenValue = redisDb.GetHash(tokenKey, "data");
-
-                L_EnterLobby enterPacket = new L_EnterLobby();
+                
+                /* If valid access */  
                 if (tokenValue == packet.Token)
                 {
-                    enterPacket.AccessOk = true;
+                    Lobby lobby = MainLogic.Instance.Lobby;
+                    lobby.PushQueue(lobby.EnterLobby, this, packet.AccountId, packet.Name);
                 }
+                /* If invalid access */
                 else
                 {
+                    L_EnterLobby enterPacket = new L_EnterLobby();
                     enterPacket.AccessOk = false;
+                    Send(enterPacket);
                 }
-
-                Send(enterPacket);
             }
         }
     }

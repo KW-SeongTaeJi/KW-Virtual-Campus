@@ -20,4 +20,13 @@ class PacketHandler
 		B_EnterLobby enterLobbyPacket = (B_EnterLobby)packet;
 		clientSession.HandleEnterLobby(enterLobbyPacket);
 	}
+
+	public static void B_SaveCustermizeHandler(PacketSession session, IMessage packet)
+    {
+		ClientSession clientSession = (ClientSession)session;
+		B_SaveCustermize custermizePacket = (B_SaveCustermize)packet;
+
+		Lobby lobby = MainLogic.Instance.Lobby;
+		lobby.PushQueue(lobby.HandleCustermize, clientSession, custermizePacket);
+	}
 }

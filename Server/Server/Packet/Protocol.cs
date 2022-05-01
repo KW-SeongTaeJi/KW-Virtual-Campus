@@ -26,38 +26,62 @@ namespace Google.Protobuf.Protocol {
           string.Concat(
             "Cg5Qcm90b2NvbC5wcm90bxIIUHJvdG9jb2waH2dvb2dsZS9wcm90b2J1Zi90",
             "aW1lc3RhbXAucHJvdG8iDQoLTF9Db25uZWN0ZWQiCAoGTF9QaW5nIggKBkJf",
-            "UG9uZyIwCgxCX0VudGVyTG9iYnkSEQoJYWNjb3VudElkGAEgASgJEg0KBXRv",
-            "a2VuGAIgASgJIiAKDExfRW50ZXJMb2JieRIQCghhY2Nlc3NPaxgBIAEoCCIN",
-            "CgtTX0Nvbm5lY3RlZCIICgZTX1BpbmciCAoGQ19Qb25nIiAKC0NfRW50ZXJH",
-            "YW1lEhEKCWFjY291bnRJZBgBIAEoCSI1CgtTX0VudGVyR2FtZRImCghteVBs",
-            "YXllchgBIAEoCzIULlByb3RvY29sLk9iamVjdEluZm8iDQoLU19MZWF2ZUdh",
-            "bWUiMAoHU19TcGF3bhIlCgdvYmplY3RzGAEgAygLMhQuUHJvdG9jb2wuT2Jq",
-            "ZWN0SW5mbyIdCglTX0Rlc3Bhd24SEAoIb2JqZWN0SWQYASABKAUifAoGQ19N",
-            "b3ZlEiQKCHBvc2l0aW9uGAEgASgLMhIuUHJvdG9jb2wuVmVjdG9yM0QSEQoJ",
-            "cm90YXRpb25ZGAIgASgCEhMKC3RhcmdldFNwZWVkGAMgASgCEhYKDnRhcmdl",
-            "dFJvdGF0aW9uGAQgASgCEgwKBGp1bXAYBSABKAgijgEKBlNfTW92ZRIQCghv",
-            "YmplY3RJZBgBIAEoBRIkCghwb3NpdGlvbhgCIAEoCzISLlByb3RvY29sLlZl",
-            "Y3RvcjNEEhEKCXJvdGF0aW9uWRgDIAEoAhITCgt0YXJnZXRTcGVlZBgEIAEo",
-            "AhIWCg50YXJnZXRSb3RhdGlvbhgFIAEoAhIMCgRqdW1wGAYgASgIIisKCFZl",
-            "Y3RvcjNEEgkKAXgYASABKAISCQoBeRgCIAEoAhIJCgF6GAMgASgCImUKCk9i",
-            "amVjdEluZm8SEAoIb2JqZWN0SWQYASABKAUSDAoEbmFtZRgCIAEoCRIkCghw",
-            "b3NpdGlvbhgDIAEoCzISLlByb3RvY29sLlZlY3RvcjNEEhEKCXJvdGF0aW9u",
-            "WRgEIAEoAirpAQoFTXNnSWQSDwoLTF9DT05ORUNURUQQABIKCgZMX1BJTkcQ",
-            "ARIKCgZCX1BPTkcQAhIRCg1CX0VOVEVSX0xPQkJZEAMSEQoNTF9FTlRFUl9M",
-            "T0JCWRAEEg8KC1NfQ09OTkVDVEVEEGQSCgoGU19QSU5HEGUSCgoGQ19QT05H",
-            "EGYSEAoMQ19FTlRFUl9HQU1FEGcSEAoMU19FTlRFUl9HQU1FEGgSEAoMU19M",
-            "RUFWRV9HQU1FEGkSCwoHU19TUEFXThBqEg0KCVNfREVTUEFXThBrEgoKBkNf",
-            "TU9WRRBsEgoKBlNfTU9WRRBtKiYKDkdhbWVPYmplY3RUeXBlEggKBE5PTkUQ",
-            "ABIKCgZQTEFZRVIQAUIbqgIYR29vZ2xlLlByb3RvYnVmLlByb3RvY29sYgZw",
-            "cm90bzM="));
+            "UG9uZyI+CgxCX0VudGVyTG9iYnkSEQoJYWNjb3VudElkGAEgASgJEgwKBG5h",
+            "bWUYAiABKAkSDQoFdG9rZW4YAyABKAki5QEKDExfRW50ZXJMb2JieRIQCghh",
+            "Y2Nlc3NPaxgBIAEoCBIkCghoYWlyVHlwZRgCIAEoDjISLlByb3RvY29sLkhh",
+            "aXJUeXBlEiQKCGZhY2VUeXBlGAMgASgOMhIuUHJvdG9jb2wuRmFjZVR5cGUS",
+            "KAoKamFja2V0VHlwZRgEIAEoDjIULlByb3RvY29sLkphY2tldFR5cGUSJgoJ",
+            "aGFpckNvbG9yGAUgASgOMhMuUHJvdG9jb2wuSGFpckNvbG9yEiUKCWZhY2VD",
+            "b2xvchgGIAEoCzISLlByb3RvY29sLlZlY3RvcjNEItcBChBCX1NhdmVDdXN0",
+            "ZXJtaXplEiQKCGhhaXJUeXBlGAEgASgOMhIuUHJvdG9jb2wuSGFpclR5cGUS",
+            "JAoIZmFjZVR5cGUYAiABKA4yEi5Qcm90b2NvbC5GYWNlVHlwZRIoCgpqYWNr",
+            "ZXRUeXBlGAMgASgOMhQuUHJvdG9jb2wuSmFja2V0VHlwZRImCgloYWlyQ29s",
+            "b3IYBCABKA4yEy5Qcm90b2NvbC5IYWlyQ29sb3ISJQoJZmFjZUNvbG9yGAUg",
+            "ASgLMhIuUHJvdG9jb2wuVmVjdG9yM0QiIgoQTF9TYXZlQ3VzdGVybWl6ZRIO",
+            "CgZTYXZlT2sYASABKAgiDQoLU19Db25uZWN0ZWQiCAoGU19QaW5nIggKBkNf",
+            "UG9uZyIgCgtDX0VudGVyR2FtZRIRCglhY2NvdW50SWQYASABKAkiNQoLU19F",
+            "bnRlckdhbWUSJgoIbXlQbGF5ZXIYASABKAsyFC5Qcm90b2NvbC5PYmplY3RJ",
+            "bmZvIg0KC1NfTGVhdmVHYW1lIjAKB1NfU3Bhd24SJQoHb2JqZWN0cxgBIAMo",
+            "CzIULlByb3RvY29sLk9iamVjdEluZm8iHQoJU19EZXNwYXduEhAKCG9iamVj",
+            "dElkGAEgASgFInwKBkNfTW92ZRIkCghwb3NpdGlvbhgBIAEoCzISLlByb3Rv",
+            "Y29sLlZlY3RvcjNEEhEKCXJvdGF0aW9uWRgCIAEoAhITCgt0YXJnZXRTcGVl",
+            "ZBgDIAEoAhIWCg50YXJnZXRSb3RhdGlvbhgEIAEoAhIMCgRqdW1wGAUgASgI",
+            "Io4BCgZTX01vdmUSEAoIb2JqZWN0SWQYASABKAUSJAoIcG9zaXRpb24YAiAB",
+            "KAsyEi5Qcm90b2NvbC5WZWN0b3IzRBIRCglyb3RhdGlvblkYAyABKAISEwoL",
+            "dGFyZ2V0U3BlZWQYBCABKAISFgoOdGFyZ2V0Um90YXRpb24YBSABKAISDAoE",
+            "anVtcBgGIAEoCCIrCghWZWN0b3IzRBIJCgF4GAEgASgCEgkKAXkYAiABKAIS",
+            "CQoBehgDIAEoAiJlCgpPYmplY3RJbmZvEhAKCG9iamVjdElkGAEgASgFEgwK",
+            "BG5hbWUYAiABKAkSJAoIcG9zaXRpb24YAyABKAsyEi5Qcm90b2NvbC5WZWN0",
+            "b3IzRBIRCglyb3RhdGlvblkYBCABKAIqlwIKBU1zZ0lkEg8KC0xfQ09OTkVD",
+            "VEVEEAASCgoGTF9QSU5HEAESCgoGQl9QT05HEAISEQoNQl9FTlRFUl9MT0JC",
+            "WRADEhEKDUxfRU5URVJfTE9CQlkQBBIVChFCX1NBVkVfQ1VTVEVSTUlaRRAF",
+            "EhUKEUxfU0FWRV9DVVNURVJNSVpFEAYSDwoLU19DT05ORUNURUQQZBIKCgZT",
+            "X1BJTkcQZRIKCgZDX1BPTkcQZhIQCgxDX0VOVEVSX0dBTUUQZxIQCgxTX0VO",
+            "VEVSX0dBTUUQaBIQCgxTX0xFQVZFX0dBTUUQaRILCgdTX1NQQVdOEGoSDQoJ",
+            "U19ERVNQQVdOEGsSCgoGQ19NT1ZFEGwSCgoGU19NT1ZFEG0qYQoISGFpclR5",
+            "cGUSCwoHTk9fSEFJUhAAEgwKCEhBSVJfT05FEAESDAoISEFJUl9UV08QAhIO",
+            "CgpIQUlSX1RIUkVFEAMSDQoJSEFJUl9GT1VSEAQSDQoJSEFJUl9GSVZFEAUq",
+            "YQoIRmFjZVR5cGUSCwoHTk9fRkFDRRAAEgwKCEZBQ0VfT05FEAESDAoIRkFD",
+            "RV9UV08QAhIOCgpGQUNFX1RIUkVFEAMSDQoJRkFDRV9GT1VSEAQSDQoJRkFD",
+            "RV9GSVZFEAUq2gEKCkphY2tldFR5cGUSDQoJTk9fSkFDS0VUEAASJgoiRUxF",
+            "Q1RST05JQ19DT05WRVJHRU5DRV9FTkdJTkVFUklORxABEgkKBVJPQk9UEAIS",
+            "GAoUQ09NUFVURVJfRU5HSU5FRVJJTkcQAxIOCgpNQVRITUFUSUNTEAQSDQoJ",
+            "Q0hFTUlTVFJZEAUSIQodRUxFQ1RSSUNBTF9CSU9MT0dJQ0FMX1BIWVNJQ1MQ",
+            "BhIKCgZTUE9SVFMQBxIMCghCVVNJTkVTUxAIEgsKB0VOR0xJU0gQCRIHCgNM",
+            "QVcQCipPCglIYWlyQ29sb3ISDAoITk9fQ09MT1IQABIHCgNSRUQQARIICgRC",
+            "TFVFEAISCgoGUFVSUExFEAMSCgoGWUVMTE9XEAQSCQoFQkxBQ0sQBSomCg5H",
+            "YW1lT2JqZWN0VHlwZRIICgROT05FEAASCgoGUExBWUVSEAFCG6oCGEdvb2ds",
+            "ZS5Qcm90b2J1Zi5Qcm90b2NvbGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Google.Protobuf.Protocol.MsgId), typeof(global::Google.Protobuf.Protocol.GameObjectType), }, null, new pbr::GeneratedClrTypeInfo[] {
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Google.Protobuf.Protocol.MsgId), typeof(global::Google.Protobuf.Protocol.HairType), typeof(global::Google.Protobuf.Protocol.FaceType), typeof(global::Google.Protobuf.Protocol.JacketType), typeof(global::Google.Protobuf.Protocol.HairColor), typeof(global::Google.Protobuf.Protocol.GameObjectType), }, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.L_Connected), global::Google.Protobuf.Protocol.L_Connected.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.L_Ping), global::Google.Protobuf.Protocol.L_Ping.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.B_Pong), global::Google.Protobuf.Protocol.B_Pong.Parser, null, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.B_EnterLobby), global::Google.Protobuf.Protocol.B_EnterLobby.Parser, new[]{ "AccountId", "Token" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.L_EnterLobby), global::Google.Protobuf.Protocol.L_EnterLobby.Parser, new[]{ "AccessOk" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.B_EnterLobby), global::Google.Protobuf.Protocol.B_EnterLobby.Parser, new[]{ "AccountId", "Name", "Token" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.L_EnterLobby), global::Google.Protobuf.Protocol.L_EnterLobby.Parser, new[]{ "AccessOk", "HairType", "FaceType", "JacketType", "HairColor", "FaceColor" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.B_SaveCustermize), global::Google.Protobuf.Protocol.B_SaveCustermize.Parser, new[]{ "HairType", "FaceType", "JacketType", "HairColor", "FaceColor" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.L_SaveCustermize), global::Google.Protobuf.Protocol.L_SaveCustermize.Parser, new[]{ "SaveOk" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_Connected), global::Google.Protobuf.Protocol.S_Connected.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_Ping), global::Google.Protobuf.Protocol.S_Ping.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.C_Pong), global::Google.Protobuf.Protocol.C_Pong.Parser, null, null, null, null, null),
@@ -82,6 +106,8 @@ namespace Google.Protobuf.Protocol {
     [pbr::OriginalName("B_PONG")] BPong = 2,
     [pbr::OriginalName("B_ENTER_LOBBY")] BEnterLobby = 3,
     [pbr::OriginalName("L_ENTER_LOBBY")] LEnterLobby = 4,
+    [pbr::OriginalName("B_SAVE_CUSTERMIZE")] BSaveCustermize = 5,
+    [pbr::OriginalName("L_SAVE_CUSTERMIZE")] LSaveCustermize = 6,
     [pbr::OriginalName("S_CONNECTED")] SConnected = 100,
     [pbr::OriginalName("S_PING")] SPing = 101,
     [pbr::OriginalName("C_PONG")] CPong = 102,
@@ -92,6 +118,47 @@ namespace Google.Protobuf.Protocol {
     [pbr::OriginalName("S_DESPAWN")] SDespawn = 107,
     [pbr::OriginalName("C_MOVE")] CMove = 108,
     [pbr::OriginalName("S_MOVE")] SMove = 109,
+  }
+
+  public enum HairType {
+    [pbr::OriginalName("NO_HAIR")] NoHair = 0,
+    [pbr::OriginalName("HAIR_ONE")] HairOne = 1,
+    [pbr::OriginalName("HAIR_TWO")] HairTwo = 2,
+    [pbr::OriginalName("HAIR_THREE")] HairThree = 3,
+    [pbr::OriginalName("HAIR_FOUR")] HairFour = 4,
+    [pbr::OriginalName("HAIR_FIVE")] HairFive = 5,
+  }
+
+  public enum FaceType {
+    [pbr::OriginalName("NO_FACE")] NoFace = 0,
+    [pbr::OriginalName("FACE_ONE")] FaceOne = 1,
+    [pbr::OriginalName("FACE_TWO")] FaceTwo = 2,
+    [pbr::OriginalName("FACE_THREE")] FaceThree = 3,
+    [pbr::OriginalName("FACE_FOUR")] FaceFour = 4,
+    [pbr::OriginalName("FACE_FIVE")] FaceFive = 5,
+  }
+
+  public enum JacketType {
+    [pbr::OriginalName("NO_JACKET")] NoJacket = 0,
+    [pbr::OriginalName("ELECTRONIC_CONVERGENCE_ENGINEERING")] ElectronicConvergenceEngineering = 1,
+    [pbr::OriginalName("ROBOT")] Robot = 2,
+    [pbr::OriginalName("COMPUTER_ENGINEERING")] ComputerEngineering = 3,
+    [pbr::OriginalName("MATHMATICS")] Mathmatics = 4,
+    [pbr::OriginalName("CHEMISTRY")] Chemistry = 5,
+    [pbr::OriginalName("ELECTRICAL_BIOLOGICAL_PHYSICS")] ElectricalBiologicalPhysics = 6,
+    [pbr::OriginalName("SPORTS")] Sports = 7,
+    [pbr::OriginalName("BUSINESS")] Business = 8,
+    [pbr::OriginalName("ENGLISH")] English = 9,
+    [pbr::OriginalName("LAW")] Law = 10,
+  }
+
+  public enum HairColor {
+    [pbr::OriginalName("NO_COLOR")] NoColor = 0,
+    [pbr::OriginalName("RED")] Red = 1,
+    [pbr::OriginalName("BLUE")] Blue = 2,
+    [pbr::OriginalName("PURPLE")] Purple = 3,
+    [pbr::OriginalName("YELLOW")] Yellow = 4,
+    [pbr::OriginalName("BLACK")] Black = 5,
   }
 
   public enum GameObjectType {
@@ -593,6 +660,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public B_EnterLobby(B_EnterLobby other) : this() {
       accountId_ = other.accountId_;
+      name_ = other.name_;
       token_ = other.token_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -615,8 +683,20 @@ namespace Google.Protobuf.Protocol {
       }
     }
 
+    /// <summary>Field number for the "name" field.</summary>
+    public const int NameFieldNumber = 2;
+    private string name_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Name {
+      get { return name_; }
+      set {
+        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     /// <summary>Field number for the "token" field.</summary>
-    public const int TokenFieldNumber = 2;
+    public const int TokenFieldNumber = 3;
     private string token_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -643,6 +723,7 @@ namespace Google.Protobuf.Protocol {
         return true;
       }
       if (AccountId != other.AccountId) return false;
+      if (Name != other.Name) return false;
       if (Token != other.Token) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -652,6 +733,7 @@ namespace Google.Protobuf.Protocol {
     public override int GetHashCode() {
       int hash = 1;
       if (AccountId.Length != 0) hash ^= AccountId.GetHashCode();
+      if (Name.Length != 0) hash ^= Name.GetHashCode();
       if (Token.Length != 0) hash ^= Token.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -675,8 +757,12 @@ namespace Google.Protobuf.Protocol {
         output.WriteRawTag(10);
         output.WriteString(AccountId);
       }
-      if (Token.Length != 0) {
+      if (Name.Length != 0) {
         output.WriteRawTag(18);
+        output.WriteString(Name);
+      }
+      if (Token.Length != 0) {
+        output.WriteRawTag(26);
         output.WriteString(Token);
       }
       if (_unknownFields != null) {
@@ -693,8 +779,12 @@ namespace Google.Protobuf.Protocol {
         output.WriteRawTag(10);
         output.WriteString(AccountId);
       }
-      if (Token.Length != 0) {
+      if (Name.Length != 0) {
         output.WriteRawTag(18);
+        output.WriteString(Name);
+      }
+      if (Token.Length != 0) {
+        output.WriteRawTag(26);
         output.WriteString(Token);
       }
       if (_unknownFields != null) {
@@ -709,6 +799,9 @@ namespace Google.Protobuf.Protocol {
       int size = 0;
       if (AccountId.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(AccountId);
+      }
+      if (Name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
       }
       if (Token.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Token);
@@ -727,6 +820,9 @@ namespace Google.Protobuf.Protocol {
       }
       if (other.AccountId.Length != 0) {
         AccountId = other.AccountId;
+      }
+      if (other.Name.Length != 0) {
+        Name = other.Name;
       }
       if (other.Token.Length != 0) {
         Token = other.Token;
@@ -751,6 +847,10 @@ namespace Google.Protobuf.Protocol {
             break;
           }
           case 18: {
+            Name = input.ReadString();
+            break;
+          }
+          case 26: {
             Token = input.ReadString();
             break;
           }
@@ -774,6 +874,10 @@ namespace Google.Protobuf.Protocol {
             break;
           }
           case 18: {
+            Name = input.ReadString();
+            break;
+          }
+          case 26: {
             Token = input.ReadString();
             break;
           }
@@ -819,6 +923,11 @@ namespace Google.Protobuf.Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public L_EnterLobby(L_EnterLobby other) : this() {
       accessOk_ = other.accessOk_;
+      hairType_ = other.hairType_;
+      faceType_ = other.faceType_;
+      jacketType_ = other.jacketType_;
+      hairColor_ = other.hairColor_;
+      faceColor_ = other.faceColor_ != null ? other.faceColor_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -840,6 +949,66 @@ namespace Google.Protobuf.Protocol {
       }
     }
 
+    /// <summary>Field number for the "hairType" field.</summary>
+    public const int HairTypeFieldNumber = 2;
+    private global::Google.Protobuf.Protocol.HairType hairType_ = global::Google.Protobuf.Protocol.HairType.NoHair;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Google.Protobuf.Protocol.HairType HairType {
+      get { return hairType_; }
+      set {
+        hairType_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "faceType" field.</summary>
+    public const int FaceTypeFieldNumber = 3;
+    private global::Google.Protobuf.Protocol.FaceType faceType_ = global::Google.Protobuf.Protocol.FaceType.NoFace;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Google.Protobuf.Protocol.FaceType FaceType {
+      get { return faceType_; }
+      set {
+        faceType_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "jacketType" field.</summary>
+    public const int JacketTypeFieldNumber = 4;
+    private global::Google.Protobuf.Protocol.JacketType jacketType_ = global::Google.Protobuf.Protocol.JacketType.NoJacket;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Google.Protobuf.Protocol.JacketType JacketType {
+      get { return jacketType_; }
+      set {
+        jacketType_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "hairColor" field.</summary>
+    public const int HairColorFieldNumber = 5;
+    private global::Google.Protobuf.Protocol.HairColor hairColor_ = global::Google.Protobuf.Protocol.HairColor.NoColor;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Google.Protobuf.Protocol.HairColor HairColor {
+      get { return hairColor_; }
+      set {
+        hairColor_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "faceColor" field.</summary>
+    public const int FaceColorFieldNumber = 6;
+    private global::Google.Protobuf.Protocol.Vector3D faceColor_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Google.Protobuf.Protocol.Vector3D FaceColor {
+      get { return faceColor_; }
+      set {
+        faceColor_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -856,6 +1025,11 @@ namespace Google.Protobuf.Protocol {
         return true;
       }
       if (AccessOk != other.AccessOk) return false;
+      if (HairType != other.HairType) return false;
+      if (FaceType != other.FaceType) return false;
+      if (JacketType != other.JacketType) return false;
+      if (HairColor != other.HairColor) return false;
+      if (!object.Equals(FaceColor, other.FaceColor)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -864,6 +1038,11 @@ namespace Google.Protobuf.Protocol {
     public override int GetHashCode() {
       int hash = 1;
       if (AccessOk != false) hash ^= AccessOk.GetHashCode();
+      if (HairType != global::Google.Protobuf.Protocol.HairType.NoHair) hash ^= HairType.GetHashCode();
+      if (FaceType != global::Google.Protobuf.Protocol.FaceType.NoFace) hash ^= FaceType.GetHashCode();
+      if (JacketType != global::Google.Protobuf.Protocol.JacketType.NoJacket) hash ^= JacketType.GetHashCode();
+      if (HairColor != global::Google.Protobuf.Protocol.HairColor.NoColor) hash ^= HairColor.GetHashCode();
+      if (faceColor_ != null) hash ^= FaceColor.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -886,6 +1065,26 @@ namespace Google.Protobuf.Protocol {
         output.WriteRawTag(8);
         output.WriteBool(AccessOk);
       }
+      if (HairType != global::Google.Protobuf.Protocol.HairType.NoHair) {
+        output.WriteRawTag(16);
+        output.WriteEnum((int) HairType);
+      }
+      if (FaceType != global::Google.Protobuf.Protocol.FaceType.NoFace) {
+        output.WriteRawTag(24);
+        output.WriteEnum((int) FaceType);
+      }
+      if (JacketType != global::Google.Protobuf.Protocol.JacketType.NoJacket) {
+        output.WriteRawTag(32);
+        output.WriteEnum((int) JacketType);
+      }
+      if (HairColor != global::Google.Protobuf.Protocol.HairColor.NoColor) {
+        output.WriteRawTag(40);
+        output.WriteEnum((int) HairColor);
+      }
+      if (faceColor_ != null) {
+        output.WriteRawTag(50);
+        output.WriteMessage(FaceColor);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -900,6 +1099,26 @@ namespace Google.Protobuf.Protocol {
         output.WriteRawTag(8);
         output.WriteBool(AccessOk);
       }
+      if (HairType != global::Google.Protobuf.Protocol.HairType.NoHair) {
+        output.WriteRawTag(16);
+        output.WriteEnum((int) HairType);
+      }
+      if (FaceType != global::Google.Protobuf.Protocol.FaceType.NoFace) {
+        output.WriteRawTag(24);
+        output.WriteEnum((int) FaceType);
+      }
+      if (JacketType != global::Google.Protobuf.Protocol.JacketType.NoJacket) {
+        output.WriteRawTag(32);
+        output.WriteEnum((int) JacketType);
+      }
+      if (HairColor != global::Google.Protobuf.Protocol.HairColor.NoColor) {
+        output.WriteRawTag(40);
+        output.WriteEnum((int) HairColor);
+      }
+      if (faceColor_ != null) {
+        output.WriteRawTag(50);
+        output.WriteMessage(FaceColor);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -912,6 +1131,21 @@ namespace Google.Protobuf.Protocol {
       int size = 0;
       if (AccessOk != false) {
         size += 1 + 1;
+      }
+      if (HairType != global::Google.Protobuf.Protocol.HairType.NoHair) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) HairType);
+      }
+      if (FaceType != global::Google.Protobuf.Protocol.FaceType.NoFace) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) FaceType);
+      }
+      if (JacketType != global::Google.Protobuf.Protocol.JacketType.NoJacket) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) JacketType);
+      }
+      if (HairColor != global::Google.Protobuf.Protocol.HairColor.NoColor) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) HairColor);
+      }
+      if (faceColor_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(FaceColor);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -927,6 +1161,24 @@ namespace Google.Protobuf.Protocol {
       }
       if (other.AccessOk != false) {
         AccessOk = other.AccessOk;
+      }
+      if (other.HairType != global::Google.Protobuf.Protocol.HairType.NoHair) {
+        HairType = other.HairType;
+      }
+      if (other.FaceType != global::Google.Protobuf.Protocol.FaceType.NoFace) {
+        FaceType = other.FaceType;
+      }
+      if (other.JacketType != global::Google.Protobuf.Protocol.JacketType.NoJacket) {
+        JacketType = other.JacketType;
+      }
+      if (other.HairColor != global::Google.Protobuf.Protocol.HairColor.NoColor) {
+        HairColor = other.HairColor;
+      }
+      if (other.faceColor_ != null) {
+        if (faceColor_ == null) {
+          FaceColor = new global::Google.Protobuf.Protocol.Vector3D();
+        }
+        FaceColor.MergeFrom(other.FaceColor);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -947,6 +1199,29 @@ namespace Google.Protobuf.Protocol {
             AccessOk = input.ReadBool();
             break;
           }
+          case 16: {
+            HairType = (global::Google.Protobuf.Protocol.HairType) input.ReadEnum();
+            break;
+          }
+          case 24: {
+            FaceType = (global::Google.Protobuf.Protocol.FaceType) input.ReadEnum();
+            break;
+          }
+          case 32: {
+            JacketType = (global::Google.Protobuf.Protocol.JacketType) input.ReadEnum();
+            break;
+          }
+          case 40: {
+            HairColor = (global::Google.Protobuf.Protocol.HairColor) input.ReadEnum();
+            break;
+          }
+          case 50: {
+            if (faceColor_ == null) {
+              FaceColor = new global::Google.Protobuf.Protocol.Vector3D();
+            }
+            input.ReadMessage(FaceColor);
+            break;
+          }
         }
       }
     #endif
@@ -964,6 +1239,564 @@ namespace Google.Protobuf.Protocol {
             break;
           case 8: {
             AccessOk = input.ReadBool();
+            break;
+          }
+          case 16: {
+            HairType = (global::Google.Protobuf.Protocol.HairType) input.ReadEnum();
+            break;
+          }
+          case 24: {
+            FaceType = (global::Google.Protobuf.Protocol.FaceType) input.ReadEnum();
+            break;
+          }
+          case 32: {
+            JacketType = (global::Google.Protobuf.Protocol.JacketType) input.ReadEnum();
+            break;
+          }
+          case 40: {
+            HairColor = (global::Google.Protobuf.Protocol.HairColor) input.ReadEnum();
+            break;
+          }
+          case 50: {
+            if (faceColor_ == null) {
+              FaceColor = new global::Google.Protobuf.Protocol.Vector3D();
+            }
+            input.ReadMessage(FaceColor);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class B_SaveCustermize : pb::IMessage<B_SaveCustermize>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<B_SaveCustermize> _parser = new pb::MessageParser<B_SaveCustermize>(() => new B_SaveCustermize());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<B_SaveCustermize> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[5]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public B_SaveCustermize() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public B_SaveCustermize(B_SaveCustermize other) : this() {
+      hairType_ = other.hairType_;
+      faceType_ = other.faceType_;
+      jacketType_ = other.jacketType_;
+      hairColor_ = other.hairColor_;
+      faceColor_ = other.faceColor_ != null ? other.faceColor_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public B_SaveCustermize Clone() {
+      return new B_SaveCustermize(this);
+    }
+
+    /// <summary>Field number for the "hairType" field.</summary>
+    public const int HairTypeFieldNumber = 1;
+    private global::Google.Protobuf.Protocol.HairType hairType_ = global::Google.Protobuf.Protocol.HairType.NoHair;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Google.Protobuf.Protocol.HairType HairType {
+      get { return hairType_; }
+      set {
+        hairType_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "faceType" field.</summary>
+    public const int FaceTypeFieldNumber = 2;
+    private global::Google.Protobuf.Protocol.FaceType faceType_ = global::Google.Protobuf.Protocol.FaceType.NoFace;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Google.Protobuf.Protocol.FaceType FaceType {
+      get { return faceType_; }
+      set {
+        faceType_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "jacketType" field.</summary>
+    public const int JacketTypeFieldNumber = 3;
+    private global::Google.Protobuf.Protocol.JacketType jacketType_ = global::Google.Protobuf.Protocol.JacketType.NoJacket;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Google.Protobuf.Protocol.JacketType JacketType {
+      get { return jacketType_; }
+      set {
+        jacketType_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "hairColor" field.</summary>
+    public const int HairColorFieldNumber = 4;
+    private global::Google.Protobuf.Protocol.HairColor hairColor_ = global::Google.Protobuf.Protocol.HairColor.NoColor;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Google.Protobuf.Protocol.HairColor HairColor {
+      get { return hairColor_; }
+      set {
+        hairColor_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "faceColor" field.</summary>
+    public const int FaceColorFieldNumber = 5;
+    private global::Google.Protobuf.Protocol.Vector3D faceColor_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Google.Protobuf.Protocol.Vector3D FaceColor {
+      get { return faceColor_; }
+      set {
+        faceColor_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as B_SaveCustermize);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(B_SaveCustermize other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (HairType != other.HairType) return false;
+      if (FaceType != other.FaceType) return false;
+      if (JacketType != other.JacketType) return false;
+      if (HairColor != other.HairColor) return false;
+      if (!object.Equals(FaceColor, other.FaceColor)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (HairType != global::Google.Protobuf.Protocol.HairType.NoHair) hash ^= HairType.GetHashCode();
+      if (FaceType != global::Google.Protobuf.Protocol.FaceType.NoFace) hash ^= FaceType.GetHashCode();
+      if (JacketType != global::Google.Protobuf.Protocol.JacketType.NoJacket) hash ^= JacketType.GetHashCode();
+      if (HairColor != global::Google.Protobuf.Protocol.HairColor.NoColor) hash ^= HairColor.GetHashCode();
+      if (faceColor_ != null) hash ^= FaceColor.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (HairType != global::Google.Protobuf.Protocol.HairType.NoHair) {
+        output.WriteRawTag(8);
+        output.WriteEnum((int) HairType);
+      }
+      if (FaceType != global::Google.Protobuf.Protocol.FaceType.NoFace) {
+        output.WriteRawTag(16);
+        output.WriteEnum((int) FaceType);
+      }
+      if (JacketType != global::Google.Protobuf.Protocol.JacketType.NoJacket) {
+        output.WriteRawTag(24);
+        output.WriteEnum((int) JacketType);
+      }
+      if (HairColor != global::Google.Protobuf.Protocol.HairColor.NoColor) {
+        output.WriteRawTag(32);
+        output.WriteEnum((int) HairColor);
+      }
+      if (faceColor_ != null) {
+        output.WriteRawTag(42);
+        output.WriteMessage(FaceColor);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (HairType != global::Google.Protobuf.Protocol.HairType.NoHair) {
+        output.WriteRawTag(8);
+        output.WriteEnum((int) HairType);
+      }
+      if (FaceType != global::Google.Protobuf.Protocol.FaceType.NoFace) {
+        output.WriteRawTag(16);
+        output.WriteEnum((int) FaceType);
+      }
+      if (JacketType != global::Google.Protobuf.Protocol.JacketType.NoJacket) {
+        output.WriteRawTag(24);
+        output.WriteEnum((int) JacketType);
+      }
+      if (HairColor != global::Google.Protobuf.Protocol.HairColor.NoColor) {
+        output.WriteRawTag(32);
+        output.WriteEnum((int) HairColor);
+      }
+      if (faceColor_ != null) {
+        output.WriteRawTag(42);
+        output.WriteMessage(FaceColor);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (HairType != global::Google.Protobuf.Protocol.HairType.NoHair) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) HairType);
+      }
+      if (FaceType != global::Google.Protobuf.Protocol.FaceType.NoFace) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) FaceType);
+      }
+      if (JacketType != global::Google.Protobuf.Protocol.JacketType.NoJacket) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) JacketType);
+      }
+      if (HairColor != global::Google.Protobuf.Protocol.HairColor.NoColor) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) HairColor);
+      }
+      if (faceColor_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(FaceColor);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(B_SaveCustermize other) {
+      if (other == null) {
+        return;
+      }
+      if (other.HairType != global::Google.Protobuf.Protocol.HairType.NoHair) {
+        HairType = other.HairType;
+      }
+      if (other.FaceType != global::Google.Protobuf.Protocol.FaceType.NoFace) {
+        FaceType = other.FaceType;
+      }
+      if (other.JacketType != global::Google.Protobuf.Protocol.JacketType.NoJacket) {
+        JacketType = other.JacketType;
+      }
+      if (other.HairColor != global::Google.Protobuf.Protocol.HairColor.NoColor) {
+        HairColor = other.HairColor;
+      }
+      if (other.faceColor_ != null) {
+        if (faceColor_ == null) {
+          FaceColor = new global::Google.Protobuf.Protocol.Vector3D();
+        }
+        FaceColor.MergeFrom(other.FaceColor);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            HairType = (global::Google.Protobuf.Protocol.HairType) input.ReadEnum();
+            break;
+          }
+          case 16: {
+            FaceType = (global::Google.Protobuf.Protocol.FaceType) input.ReadEnum();
+            break;
+          }
+          case 24: {
+            JacketType = (global::Google.Protobuf.Protocol.JacketType) input.ReadEnum();
+            break;
+          }
+          case 32: {
+            HairColor = (global::Google.Protobuf.Protocol.HairColor) input.ReadEnum();
+            break;
+          }
+          case 42: {
+            if (faceColor_ == null) {
+              FaceColor = new global::Google.Protobuf.Protocol.Vector3D();
+            }
+            input.ReadMessage(FaceColor);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            HairType = (global::Google.Protobuf.Protocol.HairType) input.ReadEnum();
+            break;
+          }
+          case 16: {
+            FaceType = (global::Google.Protobuf.Protocol.FaceType) input.ReadEnum();
+            break;
+          }
+          case 24: {
+            JacketType = (global::Google.Protobuf.Protocol.JacketType) input.ReadEnum();
+            break;
+          }
+          case 32: {
+            HairColor = (global::Google.Protobuf.Protocol.HairColor) input.ReadEnum();
+            break;
+          }
+          case 42: {
+            if (faceColor_ == null) {
+              FaceColor = new global::Google.Protobuf.Protocol.Vector3D();
+            }
+            input.ReadMessage(FaceColor);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class L_SaveCustermize : pb::IMessage<L_SaveCustermize>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<L_SaveCustermize> _parser = new pb::MessageParser<L_SaveCustermize>(() => new L_SaveCustermize());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<L_SaveCustermize> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[6]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public L_SaveCustermize() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public L_SaveCustermize(L_SaveCustermize other) : this() {
+      saveOk_ = other.saveOk_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public L_SaveCustermize Clone() {
+      return new L_SaveCustermize(this);
+    }
+
+    /// <summary>Field number for the "SaveOk" field.</summary>
+    public const int SaveOkFieldNumber = 1;
+    private bool saveOk_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool SaveOk {
+      get { return saveOk_; }
+      set {
+        saveOk_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as L_SaveCustermize);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(L_SaveCustermize other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (SaveOk != other.SaveOk) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (SaveOk != false) hash ^= SaveOk.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (SaveOk != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(SaveOk);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (SaveOk != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(SaveOk);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (SaveOk != false) {
+        size += 1 + 1;
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(L_SaveCustermize other) {
+      if (other == null) {
+        return;
+      }
+      if (other.SaveOk != false) {
+        SaveOk = other.SaveOk;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            SaveOk = input.ReadBool();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            SaveOk = input.ReadBool();
             break;
           }
         }
@@ -987,7 +1820,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[5]; }
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1139,7 +1972,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[6]; }
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1291,7 +2124,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[7]; }
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[9]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1443,7 +2276,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[8]; }
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[10]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1632,7 +2465,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[9]; }
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[11]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1830,7 +2663,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[10]; }
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[12]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1982,7 +2815,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[11]; }
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[13]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2160,7 +2993,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[12]; }
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[14]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2349,7 +3182,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[13]; }
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[15]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2695,7 +3528,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[14]; }
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[16]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3078,7 +3911,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[15]; }
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[17]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3341,7 +4174,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[16]; }
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[18]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

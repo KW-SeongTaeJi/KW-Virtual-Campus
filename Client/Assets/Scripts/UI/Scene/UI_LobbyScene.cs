@@ -22,6 +22,8 @@ public class UI_LobbyScene : UI_Scene
         NameText
     }
 
+    public UI_CustermizePopup CustermizePopup { get; set; }
+
 
     public override void Init()
     {
@@ -33,9 +35,9 @@ public class UI_LobbyScene : UI_Scene
         GetButton((int)Buttons.LogoutButton).gameObject.BindEvent(OnClickLogoutButton, Define.UIEvent.Click);
         GetButton((int)Buttons.SettingsButton).gameObject.BindEvent(OnClickSettingsButton, Define.UIEvent.Click);
         GetButton((int)Buttons.CampusEnterButton).gameObject.BindEvent(OnClickCampusEnterButton, Define.UIEvent.Click);
-        GetButton((int)Buttons.CustermizeButton).gameObject.BindEvent(OnClickCampusCutermizeButton, Define.UIEvent.Click);
-        GetButton((int)Buttons.FriendsButton).gameObject.BindEvent(OnClickCampusFriendsButton, Define.UIEvent.Click);
-        GetButton((int)Buttons.InfoButton).gameObject.BindEvent(OnClickCampusInfoButton, Define.UIEvent.Click);
+        GetButton((int)Buttons.CustermizeButton).gameObject.BindEvent(OnClickCutermizeButton, Define.UIEvent.Click);
+        GetButton((int)Buttons.FriendsButton).gameObject.BindEvent(OnClickFriendsButton, Define.UIEvent.Click);
+        GetButton((int)Buttons.InfoButton).gameObject.BindEvent(OnClickInfoButton, Define.UIEvent.Click);
 
         GetText((int)Texts.NameText).text = $"{Managers.Network.Name} ดิ";
     }
@@ -68,17 +70,17 @@ public class UI_LobbyScene : UI_Scene
         Managers.SceneLoad.LoadScene(Define.Scene.Game);
     }
 
-    public void OnClickCampusCutermizeButton(PointerEventData evt)
+    public void OnClickCutermizeButton(PointerEventData evt)
+    {
+        CustermizePopup = Managers.UI.ShowPopupUI<UI_CustermizePopup>();
+    }
+
+    public void OnClickFriendsButton(PointerEventData evt)
     {
 
     }
 
-    public void OnClickCampusFriendsButton(PointerEventData evt)
-    {
-
-    }
-
-    public void OnClickCampusInfoButton(PointerEventData evt)
+    public void OnClickInfoButton(PointerEventData evt)
     {
 
     }

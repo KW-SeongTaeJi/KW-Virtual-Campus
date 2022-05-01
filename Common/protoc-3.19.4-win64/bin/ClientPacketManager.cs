@@ -29,6 +29,8 @@ class PacketManager
 		_handler.Add((ushort)MsgId.LPing, PacketHandler.L_PingHandler);		
 		_onRecv.Add((ushort)MsgId.LEnterLobby, MakePacket<L_EnterLobby>);
 		_handler.Add((ushort)MsgId.LEnterLobby, PacketHandler.L_EnterLobbyHandler);		
+		_onRecv.Add((ushort)MsgId.LSaveCustermize, MakePacket<L_SaveCustermize>);
+		_handler.Add((ushort)MsgId.LSaveCustermize, PacketHandler.L_SaveCustermizeHandler);		
 		_onRecv.Add((ushort)MsgId.SConnected, MakePacket<S_Connected>);
 		_handler.Add((ushort)MsgId.SConnected, PacketHandler.S_ConnectedHandler);		
 		_onRecv.Add((ushort)MsgId.SPing, MakePacket<S_Ping>);
