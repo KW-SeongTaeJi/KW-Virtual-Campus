@@ -6,6 +6,8 @@ public class LobbyScene : BaseScene
 {
     UI_LobbyScene _sceneUI;
 
+    public PlayerInfo playerInfo { get; set; }
+
 
     protected override void Init()
     {

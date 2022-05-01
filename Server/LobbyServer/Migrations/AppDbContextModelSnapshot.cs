@@ -54,6 +54,27 @@ namespace LobbyServer.Migrations
                     b.Property<int>("AccountDbId")
                         .HasColumnType("int");
 
+                    b.Property<float>("FaceColor_X")
+                        .HasColumnType("real");
+
+                    b.Property<float>("FaceColor_Y")
+                        .HasColumnType("real");
+
+                    b.Property<float>("FaceColor_Z")
+                        .HasColumnType("real");
+
+                    b.Property<int>("FaceType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HairColor")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HairType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("JacketType")
+                        .HasColumnType("int");
+
                     b.HasKey("PlayerDbId");
 
                     b.HasIndex("AccountDbId")

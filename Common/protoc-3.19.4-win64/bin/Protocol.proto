@@ -11,6 +11,8 @@ enum MsgId {
 	B_PONG = 2;
 	B_ENTER_LOBBY = 3;
 	L_ENTER_LOBBY = 4;
+	B_SAVE_CUSTERMIZE = 5;
+	L_SAVE_CUSTERMIZE = 6;
 	S_CONNECTED = 100;
 	S_PING = 101;
 	C_PONG = 102;
@@ -24,6 +26,44 @@ enum MsgId {
 }
 
 
+enum HairType {
+    NO_HAIR = 0;
+    HAIR_ONE = 1;
+    HAIR_TWO = 2;
+    HAIR_THREE = 3;
+    HAIR_FOUR = 4;
+    HAIR_FIVE = 5;
+}
+enum FaceType {
+	NO_FACE = 0;
+    FACE_ONE = 1;
+    FACE_TWO = 2;
+    FACE_THREE = 3;
+    FACE_FOUR = 4;
+    FACE_FIVE = 5;
+}
+enum JacketType {
+	NO_JACKET = 0;
+    ELECTRONIC_CONVERGENCE_ENGINEERING = 1;
+    ROBOT = 2;
+    COMPUTER_ENGINEERING = 3;
+    MATHMATICS = 4;
+    CHEMISTRY = 5;
+    ELECTRICAL_BIOLOGICAL_PHYSICS = 6;
+    SPORTS = 7;
+    BUSINESS = 8;
+    ENGLISH = 9;
+    LAW = 10;
+}
+enum HairColor {
+	NO_COLOR = 0;
+	RED = 1;
+	BLUE = 2;
+	PURPLE = 3;
+	YELLOW = 4;
+	BLACK = 5;
+}
+
 message L_Connected {
 }
 
@@ -35,11 +75,29 @@ message B_Pong {
 
 message B_EnterLobby {
 	string accountId = 1;
-	string token = 2;
+	string name = 2;
+	string token = 3;
 }
 
 message L_EnterLobby {
 	bool accessOk = 1;
+	HairType hairType = 2;
+	FaceType faceType = 3;
+	JacketType jacketType = 4;
+	HairColor hairColor = 5;
+	Vector3D faceColor = 6;
+}
+
+message B_SaveCustermize {
+	HairType hairType = 1;
+	FaceType faceType = 2;
+	JacketType jacketType = 3;
+	HairColor hairColor = 4;
+	Vector3D faceColor = 5;
+}
+
+message L_SaveCustermize {
+	bool SaveOk = 1;
 }
 
 
@@ -92,6 +150,7 @@ message S_Move {
 	float targetRotation = 5;
 	bool jump = 6;
 }
+
 
 message Vector3D {
 	float x = 1;

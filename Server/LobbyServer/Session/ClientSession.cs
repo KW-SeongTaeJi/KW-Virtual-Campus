@@ -97,14 +97,14 @@ namespace LobbyServer
 
         public override void OnDisconnected()
         {
-            //MainLogic.Instance.PushQueue(() =>
-            //{
-            //    if (MyPlayer == null)
-            //        return;
+            MainLogic.Instance.PushQueue(() =>
+            {
+                if (MyPlayer == null)
+                    return;
 
-            //    GameWorld gameWorld = GameLogic.Instance.GameWorld;
-            //    gameWorld.PushQueue(gameWorld.LeaveGame, MyPlayer.Info.ObjectId);
-            //});
+                Lobby lobby = MainLogic.Instance.Lobby;
+                lobby.PushQueue(lobby.LeaveLobby, MyPlayer.PlayerDbId);
+            });
 
             SessionManager.Instance.Remove(this);
         }

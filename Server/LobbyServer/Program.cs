@@ -1,4 +1,5 @@
-﻿using NetworkCore;
+﻿using LobbyServer.DB;
+using NetworkCore;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -32,6 +33,15 @@ namespace LobbyServer
             }
         }
 
+        static void DbTask()
+        {
+            while (true)
+            {
+                DbTransaction.Instance.Flush();
+                Thread.Sleep(0); 
+            }
+        }
+
         static void Main(string[] args)
         {
             // TODO : 접속 주소 변경
@@ -48,6 +58,13 @@ namespace LobbyServer
             {
                 Thread t = new Thread(PacketSendTask);
                 t.Name = "PacketSend";
+                t.Start();
+            }
+
+            // 1 Thread : DbTask
+            {
+                Thread t = new Thread(DbTask);
+                t.Name = "DB";
                 t.Start();
             }
 

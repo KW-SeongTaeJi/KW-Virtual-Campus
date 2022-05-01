@@ -52,6 +52,7 @@ public abstract class UI_Base : MonoBehaviour
     protected Text GetText(int idx) { return Get<Text>(idx); }
     protected Button GetButton(int idx) { return Get<Button>(idx); }
     protected Image GetImage(int idx) { return Get<Image>(idx); }
+    protected Slider GetSlider(int idx) { return Get<Slider>(idx); }
 
     public static void BindEvent(GameObject gameObject, Action<PointerEventData> action, Define.UIEvent type)
     {
@@ -63,7 +64,6 @@ public abstract class UI_Base : MonoBehaviour
                 eventHandler.OnClickHandler -= action;
                 eventHandler.OnClickHandler += action;
                 break;
-
             default:
                 Debug.Log("Error : Undefined UI eventType");
                 break;

@@ -13,4 +13,5 @@ public class UI_EventHandler : MonoBehaviour, IPointerClickHandler
         if (OnClickHandler != null)
             OnClickHandler.Invoke(eventData);
     }
+    
 }
