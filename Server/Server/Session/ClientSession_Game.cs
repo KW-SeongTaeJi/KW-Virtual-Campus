@@ -28,22 +28,30 @@ namespace Server
 
                 if (findAccount != null)
                 {
+                    // Load client player infomation
                     AccountDbId = findAccount.AccountDbId;
                     MyPlayer = ObjectManager.Instance.Add<Player>();
                     {
-                        // TODO : 초기 플레이어 접속 정보 설정
-                        MyPlayer.Info.Name = findAccount.Name;
-                        MyPlayer.Info.Position.X = -37;
-                        MyPlayer.Info.Position.Y = 14;
-                        MyPlayer.Info.Position.Z = -37;
-                        MyPlayer.Info.RotationY = 0;
+                        MyPlayer.Position.X = -37;
+                        MyPlayer.Position.Y = 14;
+                        MyPlayer.Position.Z = -37;
+                        MyPlayer.RotationY = 0;
                         MyPlayer.PlayerDbId = findAccount.Player.PlayerDbId;
+                        MyPlayer.Name = findAccount.Name;
                         MyPlayer.Session = this;
+                        MyPlayer.HairType = findAccount.Player.HairType;
+                        MyPlayer.FaceType = findAccount.Player.FaceType;
+                        MyPlayer.JacketType = findAccount.Player.JacketType;
+                        MyPlayer.HairColor = findAccount.Player.HairColor;
+                        MyPlayer.FaceColor.X = findAccount.Player.FaceColor_X;
+                        MyPlayer.FaceColor.Y = findAccount.Player.FaceColor_Y;
+                        MyPlayer.FaceColor.Z = findAccount.Player.FaceColor_Z;
                     }
+                    GameWorld gameWorld = GameLogic.Instance.GameWorld;
+                    gameWorld.PushQueue(gameWorld.EnterGame, MyPlayer);
                 }
 
-                GameWorld gameWorld = GameLogic.Instance.GameWorld;
-                gameWorld.PushQueue(gameWorld.EnterGame, MyPlayer);
+                // TODO : DB에 정보 없을 때 오류 처리
             }
         }
     }

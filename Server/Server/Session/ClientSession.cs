@@ -104,7 +104,7 @@ namespace Server
                     return;
 
                 GameWorld gameWorld = GameLogic.Instance.GameWorld;
-                gameWorld.PushQueue(gameWorld.LeaveGame, MyPlayer.Info.ObjectId);
+                gameWorld.PushQueue(gameWorld.LeaveGame, MyPlayer.Id);
             });
 
             SessionManager.Instance.Remove(this);

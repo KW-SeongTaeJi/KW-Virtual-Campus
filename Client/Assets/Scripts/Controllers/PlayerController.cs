@@ -21,15 +21,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
     protected bool grounded = true;
     [SerializeField, Tooltip("Useful for rough ground")]
-    protected float groundedOffset = -0.14f;
+    protected float groundedOffset = -0.5f;
     [SerializeField, Tooltip("The radius of the grounded check. Should match the radius of the CharacterController")]
-    protected float groundedRadius = 0.28f;
+    protected float groundedRadius = 1.5f;
     [SerializeField, Tooltip("What layers the character uses as ground")]
     protected LayerMask groundLayers;
 
     [Space(10)]
     [SerializeField, Tooltip("The height the player can jump")]
-    protected float jumpHeight = 1.2f;
+    protected float jumpHeight = 3.0f;
     [SerializeField, Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
     protected float gravity = -15.0f;
 
@@ -64,8 +64,6 @@ public class PlayerController : MonoBehaviour
 
     protected Animator _animator;
     protected CharacterController _controller;
-
-    public int Id { get; set; }
 
     // Using for movement sycn
     public float TargetSpeed

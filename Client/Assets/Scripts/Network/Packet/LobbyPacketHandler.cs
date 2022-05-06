@@ -35,7 +35,7 @@ partial class PacketHandler
 		}
 
 		// Set player in lobby
-		GameObject player = Managers.Resource.Instantiate("Object/LobbyPlayer");
+		GameObject player = Managers.Resource.Instantiate("Object/MyLobbyPlayer");
 		PlayerInfo info = player.GetComponent<PlayerInfo>();
 		{
 			info.HairType = enterPacket.HairType;
