@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerInfo : MonoBehaviour
 {
     public int Id { get; set; }
+    public string Name { get; set; }
 
     #region Custermization Info
     HairType _hairType;
@@ -118,7 +119,7 @@ public class PlayerInfo : MonoBehaviour
         {
             if (hairType == HairType.NoHair)
                 continue;
-            _hairs.Add(hairType, gameObject.FindChild($"{hairType.ToString()}"));
+            _hairs.Add(hairType, gameObject.FindChild($"{hairType.ToString()}", recursive:true));
         }
 
         // Save hair color's data
@@ -147,7 +148,7 @@ public class PlayerInfo : MonoBehaviour
         }
 
         // Get player prefab's body and jacket material
-        _bodyMaterial = gameObject.FindChild<Renderer>("body").material;
-        _jacketMaterial = gameObject.FindChild<Renderer>("jacket").material;
+        _bodyMaterial = gameObject.FindChild<Renderer>("body", recursive:true).material;
+        _jacketMaterial = gameObject.FindChild<Renderer>("jacket", recursive: true).material;
     }
 }

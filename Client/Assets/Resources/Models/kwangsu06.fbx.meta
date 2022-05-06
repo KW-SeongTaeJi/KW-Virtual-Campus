@@ -78,7 +78,8 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    rigImportErrors: 
+    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
+      human bone 'LeftFoot' not found\n"
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
@@ -86,7 +87,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -140,7 +141,142 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: kwangsu06(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: body
+      parentName: kwangsu06(Clone)
+      position: {x: 0.10107107, y: 3.37633, z: 0.44306841}
+      rotation: {x: -0.3427956, y: 0.34279543, z: 0.61845875, w: 0.6184588}
+      scale: {x: 100, y: 100, z: 100}
+    - name: hair
+      parentName: kwangsu06(Clone)
+      position: {x: 0.10107107, y: 3.593931, z: 0.29180866}
+      rotation: {x: -0.3427956, y: 0.34279543, z: 0.61845875, w: 0.6184588}
+      scale: {x: 100, y: 100, z: 100}
+    - name: "\uC544\uB9C8\uD29C\uC5B4"
+      parentName: kwangsu06(Clone)
+      position: {x: 0.14052744, y: 0, z: 0.058523245}
+      rotation: {x: -0.7071068, y: 0, z: 8.659561e-17, w: 0.7071068}
+      scale: {x: 100, y: 100, z: 100}
+    - name: hip
+      parentName: "\uC544\uB9C8\uD29C\uC5B4"
+      position: {x: -0, y: 0, z: 0.0054479274}
+      rotation: {x: 0.7071068, y: -0.00000015812272, z: -0.000000095571366, w: 0.7071068}
+      scale: {x: 1, y: 0.9999997, z: 0.9999997}
+    - name: foot_L
+      parentName: hip
+      position: {x: -0.0050303168, y: 0.0016901505, z: 0.000000001199321}
+      rotation: {x: -0.676946, y: 0.039429076, z: 0.73493403, w: 0.007834309}
+      scale: {x: 1.0000062, y: 1.0000002, z: 1.0000039}
+    - name: foot_L_end
+      parentName: foot_L
+      position: {x: -0, y: 0.0078083514, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: foot_R
+      parentName: hip
+      position: {x: 0.0050303168, y: 0.0016901505, z: -0.000000001199321}
+      rotation: {x: 0.6769461, y: 0.039429106, z: 0.73493403, w: -0.007834259}
+      scale: {x: 1.0000073, y: 1.0000012, z: 1.0000033}
+    - name: foot_R_end
+      parentName: foot_R
+      position: {x: -0, y: 0.0078083514, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: spine
+      parentName: hip
+      position: {x: -0, y: 0.0057526194, z: 0}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: chest
+      parentName: spine
+      position: {x: -0, y: 0.006013739, z: 0}
+      rotation: {x: 0.07835003, y: 7.1054265e-15, z: -0.000000018680096, w: 0.99692595}
+      scale: {x: 1, y: 0.9999992, z: 0.99999934}
+    - name: head
+      parentName: chest
+      position: {x: -5.4400926e-17, y: 0.006571037, z: -2.2351741e-10}
+      rotation: {x: -0.022462366, y: 0.00024966197, z: 0.0049026324, w: 0.99973565}
+      scale: {x: 0.99999946, y: 1.0000005, z: 1.0000007}
+    - name: head_end
+      parentName: head
+      position: {x: -0, y: 0.018556977, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: shoulder_L
+      parentName: chest
+      position: {x: -5.4400926e-17, y: 0.006571037, z: -2.2351741e-10}
+      rotation: {x: -0.07038593, y: 0.042948533, z: 0.7603043, w: 0.6443126}
+      scale: {x: 1.0000023, y: 0.99999994, z: 1.0000006}
+    - name: hand_L
+      parentName: shoulder_L
+      position: {x: -0.0000000010151416, y: 0.008393607, z: 1.7510045e-11}
+      rotation: {x: 0.06499583, y: -0.005234096, z: -0.08010196, w: 0.9946517}
+      scale: {x: 1.0000018, y: 1.0000025, z: 0.99999994}
+    - name: hand_L_end
+      parentName: hand_L
+      position: {x: -0, y: 0.009235144, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: shoulder_R
+      parentName: chest
+      position: {x: -5.4400926e-17, y: 0.006571037, z: -2.2351741e-10}
+      rotation: {x: -0.07038606, y: -0.042948347, z: -0.76030415, w: 0.64431274}
+      scale: {x: 1.0000018, y: 1.0000012, z: 1.0000005}
+    - name: hand_R
+      parentName: shoulder_R
+      position: {x: 0.000000001162989, y: 0.008393607, z: 7.7652655e-11}
+      rotation: {x: 0.06499584, y: 0.005234014, z: 0.080101915, w: 0.9946516}
+      scale: {x: 1.0000025, y: 1.0000018, z: 1}
+    - name: hand_R_end
+      parentName: hand_R
+      position: {x: -0, y: 0.009235144, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: tail1
+      parentName: spine
+      position: {x: -0.000000002051865, y: 0.0003518009, z: -0.008606145}
+      rotation: {x: -0.5094054, y: -0.056213416, z: 0.033517413, w: 0.8580343}
+      scale: {x: 1.0000007, y: 1.0000008, z: 1.0000002}
+    - name: tail2
+      parentName: tail1
+      position: {x: -8.236384e-11, y: 0.01059594, z: 0.0000000011064548}
+      rotation: {x: -0.22547036, y: 0.066328704, z: -0.0030378988, w: 0.9719848}
+      scale: {x: 0.99999994, y: 1.0000019, z: 1.0000023}
+    - name: tail2_end
+      parentName: tail2
+      position: {x: -0, y: 0.009974963, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: jacket
+      parentName: kwangsu06(Clone)
+      position: {x: 0.10107107, y: 3.37633, z: 0.44306841}
+      rotation: {x: -0.3427956, y: 0.34279543, z: 0.61845875, w: 0.6184588}
+      scale: {x: 100, y: 100, z: 100}
+    - name: hair.001
+      parentName: kwangsu06(Clone)
+      position: {x: 0.14478941, y: 3.7409656, z: -0.04133618}
+      rotation: {x: -0.3427956, y: 0.34279543, z: 0.61845875, w: 0.6184588}
+      scale: {x: 100, y: 100, z: 100}
+    - name: hair.002
+      parentName: kwangsu06(Clone)
+      position: {x: 0.11765818, y: 3.593931, z: 0.26367247}
+      rotation: {x: -0.3427956, y: 0.34279543, z: 0.61845875, w: 0.6184588}
+      scale: {x: 100, y: 100, z: 100}
+    - name: hair.003
+      parentName: kwangsu06(Clone)
+      position: {x: 0.10526477, y: 3.593931, z: 0.27812517}
+      rotation: {x: -0.3427956, y: 0.34279543, z: 0.61845875, w: 0.6184588}
+      scale: {x: 100, y: 100, z: 100}
+    - name: hair.004
+      parentName: kwangsu06(Clone)
+      position: {x: 0.112957664, y: 3.593931, z: 0.27812517}
+      rotation: {x: -0.3427956, y: 0.34279543, z: 0.61845875, w: 0.6184588}
+      scale: {x: 100, y: 100, z: 100}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -151,13 +287,13 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   additionalBone: 0
   userData: 

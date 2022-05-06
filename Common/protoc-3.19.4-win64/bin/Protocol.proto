@@ -160,7 +160,15 @@ message Vector3D {
 
 message ObjectInfo {
 	int32 objectId = 1;
-	string name = 2;
-	Vector3D position = 3;
-	float rotationY = 4;
+	Vector3D position = 2;
+	float rotationY = 3;
+	PlayerInfo playerInfo = 4;
+}
+message PlayerInfo {
+	string name = 1;
+	HairType hairType = 2;
+	FaceType faceType = 3;
+	JacketType jacketType = 4;
+	HairColor hairColor = 5;
+	Vector3D faceColor = 6;
 }
