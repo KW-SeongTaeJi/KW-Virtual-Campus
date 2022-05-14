@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
-[RequireComponent(typeof(PlayerInput))]
 public class MyPlayerController : PlayerController
 {
     [Header("Cinemachine")]
@@ -42,7 +41,7 @@ public class MyPlayerController : PlayerController
     protected override void Init()
     {
         base.Init();
-        _input = GetComponent<MyPlayerInput>();
+        _input = ((GameScene)Managers.SceneLoad.CurrentScene).GetComponent<MyPlayerInput>();
     }
 
     protected override void OnUpdate()

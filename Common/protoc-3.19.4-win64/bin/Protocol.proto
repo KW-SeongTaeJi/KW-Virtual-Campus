@@ -23,6 +23,8 @@ enum MsgId {
 	S_DESPAWN = 107; 
 	C_MOVE = 108;
 	S_MOVE = 109;
+	C_CHAT = 110;
+	S_CHAT = 111;
 }
 
 
@@ -149,6 +151,15 @@ message S_Move {
 	float targetSpeed = 4;
 	float targetRotation = 5;
 	bool jump = 6;
+}
+
+message C_Chat {
+	string message = 1;
+}
+
+message S_Chat {
+	int32 objectId = 1;
+	string message = 2;
 }
 
 

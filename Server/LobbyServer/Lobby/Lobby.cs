@@ -51,17 +51,28 @@ namespace LobbyServer
             };
             session.MyPlayer = PlayerManager.Instance.Add(newPlayer);
 
-            // Send player information to client
-            L_EnterLobby enterPacket = new L_EnterLobby()
+            /* if same player already entered */
+            if (session.MyPlayer == null)
             {
-                AccessOk = true,
-                HairType = newPlayer.HairType,
-                FaceType = newPlayer.FaceType,
-                JacketType = newPlayer.JacketType,
-                HairColor = newPlayer.HairColor,
-                FaceColor = newPlayer.FaceColor
-            };
-            session.Send(enterPacket);
+                L_EnterLobby enterPacket = new L_EnterLobby();
+                enterPacket.AccessOk = false;
+                session.Send(enterPacket);
+            }
+            /* enter success */
+            else
+            {
+                // Send player information to client
+                L_EnterLobby enterPacket = new L_EnterLobby()
+                {
+                    AccessOk = true,
+                    HairType = newPlayer.HairType,
+                    FaceType = newPlayer.FaceType,
+                    JacketType = newPlayer.JacketType,
+                    HairColor = newPlayer.HairColor,
+                    FaceColor = newPlayer.FaceColor
+                };
+                session.Send(enterPacket);
+            }
         }
 
         public void LeaveLobby(int playerDbId)
