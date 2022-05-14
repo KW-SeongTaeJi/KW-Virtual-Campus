@@ -96,4 +96,19 @@ partial class PacketHandler
 		PlayerCanvasController playerCanvas = gameObject.FindChild<Canvas>().GetComponent<PlayerCanvasController>();
 		playerCanvas.OnEnterChat(chatPacket.Message);
 	}
+	
+	public static void S_EmotionHandler(PacketSession session, IMessage packet)
+    {
+		S_Emotion emotionPacket = (S_Emotion)packet;
+
+		GameObject gameObject = Managers.Object.FindById(emotionPacket.ObjectId);
+		if (gameObject == null)
+			return;
+
+		PlayerController player = gameObject.GetComponent<PlayerController>();
+		if (player == null)
+			return;
+
+		player.SetEmotionAnimation(emotionPacket.EmotionNum);
+	}
 }

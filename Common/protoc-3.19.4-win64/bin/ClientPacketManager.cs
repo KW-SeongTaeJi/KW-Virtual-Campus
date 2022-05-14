@@ -46,7 +46,9 @@ class PacketManager
 		_onRecv.Add((ushort)MsgId.SMove, MakePacket<S_Move>);
 		_handler.Add((ushort)MsgId.SMove, PacketHandler.S_MoveHandler);		
 		_onRecv.Add((ushort)MsgId.SChat, MakePacket<S_Chat>);
-		_handler.Add((ushort)MsgId.SChat, PacketHandler.S_ChatHandler);
+		_handler.Add((ushort)MsgId.SChat, PacketHandler.S_ChatHandler);		
+		_onRecv.Add((ushort)MsgId.SEmotion, MakePacket<S_Emotion>);
+		_handler.Add((ushort)MsgId.SEmotion, PacketHandler.S_EmotionHandler);
 	}
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)

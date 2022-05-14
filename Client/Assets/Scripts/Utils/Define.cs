@@ -9,12 +9,13 @@ public class Define
         Unknown,
         Login,
         Lobby,
-        Game,
+        Game
     }
 
     public enum UIEvent
     {
         Click,
-
+        Enter,
+        Exit
     }
 }

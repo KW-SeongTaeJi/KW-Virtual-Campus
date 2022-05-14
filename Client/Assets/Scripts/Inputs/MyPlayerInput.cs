@@ -12,23 +12,37 @@ public class MyPlayerInput : MonoBehaviour
 	public bool Jump { get; set; }
 	public bool Sprint { get; set; }
 	public bool Enter { get; set; }
+	public bool Tap { get; set; }
 
 	// Mouse Cursor Settings
-	public bool CursorLocked { get; set; } = true;
-	public bool CursorInputForLook { get; set; } = true;
+	bool _cursorLock;
+	public bool CursorLock 
+	{ 
+		get { return _cursorLock; }
+        set
+        {
+			_cursorLock = value;
+			if (_cursorLock == true)
+				Cursor.lockState = CursorLockMode.Locked;
+			else
+				Cursor.lockState = CursorLockMode.None;
+		} 
+	}
 
-	TMP_InputField _chatInputField;
+	UI_GameScene _gameSceneUI;
 
 
     private void Awake()
     {
-		_chatInputField = ((UI_GameScene)Managers.UI.SceneUI).ChatInputField;
+		_gameSceneUI = (UI_GameScene)Managers.UI.SceneUI;
+
+		CursorLock = true;
 	}
 
-    #region Input Events
-    public void OnMove(InputAction.CallbackContext value)
+	#region Input Events
+	public void OnMove(InputAction.CallbackContext value)
 	{
-		if (_chatInputField.isFocused == false)
+		if (_gameSceneUI.ChatInputField.isFocused == false)
 			MoveInput(value.ReadValue<Vector2>());
 		else
 			MoveInput(new Vector2(0, 0));
@@ -36,15 +50,19 @@ public class MyPlayerInput : MonoBehaviour
 
 	public void OnLook(InputAction.CallbackContext value)
 	{
-		if (CursorInputForLook)
+		if (CursorLock && (_gameSceneUI.EmotionPanel.activeSelf == false))
 		{
 			LookInput(value.ReadValue<Vector2>());
 		}
+		else
+        {
+			LookInput(new Vector2(0, 0));
+        }
 	}
 
 	public void OnJump(InputAction.CallbackContext value)
 	{
-		if (_chatInputField.isFocused == false)
+		if (_gameSceneUI.ChatInputField.isFocused == false)
 			JumpInput(value.action.triggered);
 		else
 			JumpInput(false);
@@ -52,7 +70,7 @@ public class MyPlayerInput : MonoBehaviour
 
 	public void OnSprint(InputAction.CallbackContext value)
 	{
-		if (_chatInputField.isFocused == false)
+		if (_gameSceneUI.ChatInputField.isFocused == false)
 			SprintInput(value.action.ReadValue<float>() == 1);
 		else
 			SprintInput(false);
@@ -62,6 +80,16 @@ public class MyPlayerInput : MonoBehaviour
     {
 		EnterInput(value.action.triggered);
     }
+
+	public void OnTap(InputAction.CallbackContext value)
+	{
+		TapInput(value.action.ReadValue<float>() == 1);
+	}
+
+	public void OnCursorLock(InputAction.CallbackContext value)
+	{
+		CursorLockInput(value.action.triggered);
+	}
 	#endregion
 
 
@@ -90,13 +118,35 @@ public class MyPlayerInput : MonoBehaviour
 		Enter = newEnterState;
     }
 
-	private void OnApplicationFocus(bool hasFocus)
+	public void TapInput(bool newTapState)
 	{
-		SetCursorState(CursorLocked);
+		Tap = newTapState;
 	}
 
-	private void SetCursorState(bool newState)
-	{
-		Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
+	public void CursorLockInput(bool newCursorLockState)
+    {
+		if (newCursorLockState == true)
+        {
+			if (Cursor.lockState == CursorLockMode.None)
+			{
+				CursorLock = true;
+			}
+			else
+			{
+				CursorLock = false;
+			}
+		}
 	}
+
+	//public bool CursorLocked { get; set; } = true;
+	//public bool CursorInputForLook { get; set; } = true;
+
+	//private void OnApplicationFocus()
+	//{
+	//}
+
+	//private void SetCursorState(bool newState)
+	//{
+	//	Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
+	//}
 }

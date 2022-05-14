@@ -46,7 +46,10 @@ public class ObjectManager
 				MyPlayer.FaceColor_Z = info.PlayerInfo.FaceColor.Z;
 
 				gameObject.FindChild<TextMeshProUGUI>("NameText", recursive: true).text = MyPlayer.Name;
-				((UI_GameScene)Managers.UI.SceneUI).MyPlayerCanvas = gameObject.FindChild<Canvas>().GetComponent<PlayerCanvasController>();
+
+				UI_GameScene gameSceneUI = (UI_GameScene)Managers.UI.SceneUI;
+				gameSceneUI.MyPlayerCanvas = gameObject.FindChild<Canvas>().GetComponent<PlayerCanvasController>();
+				gameSceneUI.MyPlayerController = gameObject.GetComponent<MyPlayerController>();
 
 				return gameObject;
 			}
