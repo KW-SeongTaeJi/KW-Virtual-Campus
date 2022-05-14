@@ -118,6 +118,16 @@ namespace Server.Game
             Broadcast(chatPacket, objectId);
         }
 
+        public void HandleEmotion(int objectId, C_Emotion packet)
+        {
+            S_Emotion emotionPacket = new S_Emotion()
+            {
+                ObjectId = objectId,
+                EmotionNum = packet.EmotionNum
+            };
+            Broadcast(emotionPacket, objectId);
+        }
+
         public void Broadcast(IMessage packet)
         {
             foreach (Player player in _players.Values)

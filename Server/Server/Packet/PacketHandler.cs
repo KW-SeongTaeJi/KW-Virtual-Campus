@@ -45,4 +45,14 @@ class PacketHandler
 		GameWorld gameWorld = GameLogic.Instance.GameWorld;
 		gameWorld.PushQueue(gameWorld.HandleChat, playerId, chatPacket);
 	}
+
+	public static void C_EmotionHandler(PacketSession session, IMessage packet)
+	{
+		ClientSession clientSession = (ClientSession)session;
+		C_Emotion emotionPacket = (C_Emotion)packet;
+
+		int playerId = clientSession.MyPlayer.Id;
+		GameWorld gameWorld = GameLogic.Instance.GameWorld;
+		gameWorld.PushQueue(gameWorld.HandleEmotion, playerId, emotionPacket);
+	}
 }

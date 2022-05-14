@@ -25,6 +25,8 @@ enum MsgId {
 	S_MOVE = 109;
 	C_CHAT = 110;
 	S_CHAT = 111;
+	C_EMOTION = 112;
+	S_EMOTION = 113;
 }
 
 
@@ -160,6 +162,15 @@ message C_Chat {
 message S_Chat {
 	int32 objectId = 1;
 	string message = 2;
+}
+
+message C_Emotion {
+	int32 emotionNum = 1;
+}
+
+message S_Emotion {
+	int32 objectId = 1;
+	int32 emotionNum = 2;
 }
 
 

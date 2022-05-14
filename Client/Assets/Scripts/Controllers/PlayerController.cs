@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
     protected int _animIDJump;
     protected int _animIDFreeFall;
     protected int _animIDMotionSpeed;
+    protected int _animIDEmotionNum;
 
     // Player
     protected float _targetSpeed = 0.0f;
@@ -128,6 +129,7 @@ public class PlayerController : MonoBehaviour
         _animIDJump = Animator.StringToHash("Jump");
         _animIDFreeFall = Animator.StringToHash("FreeFall");
         _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+        _animIDEmotionNum = Animator.StringToHash("EmotionNum");
     }
 
     protected void GroundedCheck()
@@ -265,6 +267,14 @@ public class PlayerController : MonoBehaviour
                 transform.rotation = Quaternion.Lerp(startRot, destRot, t);
             }
             Sync = false;
+        }
+    }
+
+    public void SetEmotionAnimation(int num)
+    {
+        if (_hasAnimator)
+        {
+            _animator.SetInteger(_animIDEmotionNum, num);
         }
     }
 }

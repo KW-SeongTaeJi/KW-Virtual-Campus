@@ -65,6 +65,14 @@ public abstract class UI_Base : MonoBehaviour
                 eventHandler.OnClickHandler -= action;
                 eventHandler.OnClickHandler += action;
                 break;
+            case Define.UIEvent.Enter:
+                eventHandler.OnEnterHandler -= action;
+                eventHandler.OnEnterHandler += action;
+                break;
+            case Define.UIEvent.Exit:
+                eventHandler.OnExitHandler -= action;
+                eventHandler.OnExitHandler += action;
+                break;
             default:
                 Debug.Log("Error : Undefined UI eventType");
                 break;
