@@ -2,6 +2,7 @@ using Google.Protobuf.Protocol;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ObjectManager
 {
@@ -44,6 +45,9 @@ public class ObjectManager
 				MyPlayer.FaceColor_Y = info.PlayerInfo.FaceColor.Y;
 				MyPlayer.FaceColor_Z = info.PlayerInfo.FaceColor.Z;
 
+				gameObject.FindChild<TextMeshProUGUI>("NameText", recursive: true).text = MyPlayer.Name;
+				((UI_GameScene)Managers.UI.SceneUI).MyPlayerCanvas = gameObject.FindChild<Canvas>().GetComponent<PlayerCanvasController>();
+
 				return gameObject;
 			}
 			else
@@ -63,6 +67,8 @@ public class ObjectManager
 				player.FaceColor_X = info.PlayerInfo.FaceColor.X;
 				player.FaceColor_Y = info.PlayerInfo.FaceColor.Y;
 				player.FaceColor_Z = info.PlayerInfo.FaceColor.Z;
+
+				gameObject.FindChild<TextMeshProUGUI>("NameText", recursive: true).text = player.Name;
 
 				return gameObject;
 			}

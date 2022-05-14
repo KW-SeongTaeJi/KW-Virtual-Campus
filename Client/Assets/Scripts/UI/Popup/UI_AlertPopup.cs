@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class UI_AlertPopup : UI_Popup
 {
-    public bool CloasAll { get; set; } = false;
-    
     // each name of components to bind
     enum Texts
     {
@@ -17,6 +15,11 @@ public class UI_AlertPopup : UI_Popup
     {
         ConfirmButton
     }
+
+    public bool CloasAll { get; set; } = false;
+    public bool Quit { get; set; } = false;
+
+    bool _initEnter = true;
 
 
     public override void Init()
@@ -31,14 +34,27 @@ public class UI_AlertPopup : UI_Popup
 
     public void OnClickConfirmButton(PointerEventData evt)
     {
-        if (CloasAll)
-            CloseAllPopup();
+        if (Quit)
+            Application.Quit();
         else
-            ClosePopup();
+        {
+            if (CloasAll)
+                CloseAllPopup();
+            else
+                ClosePopup();
+        }
     }
 
     public void SetMessageText(string message)
     {
         GetText((int)Texts.MessageText).text = message;
+    }
+
+    public void HandleKeyEvent(bool enter)
+    {
+        if ((_initEnter == false) && enter)
+            OnClickConfirmButton(null);
+        if (enter == false)
+            _initEnter = false;
     }
 }

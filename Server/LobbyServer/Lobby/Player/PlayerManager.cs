@@ -18,6 +18,9 @@ namespace LobbyServer
 
         public Player Add(int playerDbId)
         {
+            if (_players.ContainsKey(playerDbId))
+                return null;
+
             Player player = new Player();
             player.PlayerDbId = playerDbId;
 
@@ -29,6 +32,9 @@ namespace LobbyServer
         }
         public Player Add(Player player)
         {
+            if (_players.ContainsKey(player.PlayerDbId))
+                return null;
+         
             lock (_lock)
             {
                 _players.Add(player.PlayerDbId, player);

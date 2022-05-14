@@ -84,4 +84,16 @@ partial class PacketHandler
 		player.Position = new Vector3(movePacket.Position.X, movePacket.Position.Y, movePacket.Position.Z);
 		player.RotationY = movePacket.RotationY;
 	}
+
+	public static void S_ChatHandler(PacketSession session, IMessage packet)
+    {
+		S_Chat chatPacket = (S_Chat)packet;
+
+		GameObject gameObject = Managers.Object.FindById(chatPacket.ObjectId);
+		if (gameObject == null)
+			return;
+
+		PlayerCanvasController playerCanvas = gameObject.FindChild<Canvas>().GetComponent<PlayerCanvasController>();
+		playerCanvas.OnEnterChat(chatPacket.Message);
+	}
 }

@@ -2,13 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class UI_RegisterPopup : UI_Popup
 {
-    UI_AlertPopup _alertPopup;
-    UI_LoadingCirclePopup _loadingPopup;
-
     // each name of components to bind
     enum InputFields
     {
@@ -22,6 +20,11 @@ public class UI_RegisterPopup : UI_Popup
         RegisterButton,
         CancelButton
     }
+
+    UI_AlertPopup _alertPopup;
+    UI_LoadingCirclePopup _loadingPopup;
+
+    bool _prevTap = false;
 
 
     public override void Init()
@@ -116,5 +119,25 @@ public class UI_RegisterPopup : UI_Popup
     public void OnClickCancelButton(PointerEventData evt)
     {
         ClosePopup();
+    }
+
+    public void HandleKeyEvent(bool tap)
+    {
+        bool isValid = (_loadingPopup == null) && (_alertPopup == null);
+
+        if ((_prevTap == false) && tap && isValid)
+        {
+            _prevTap = true;
+            if (GetInputField((int)InputFields.Name).isFocused)
+                GetInputField((int)InputFields.Id).Select();
+            else if (GetInputField((int)InputFields.Id).isFocused)
+                GetInputField((int)InputFields.Password).Select();
+            else if (GetInputField((int)InputFields.Password).isFocused)
+                GetInputField((int)InputFields.PasswordCheck).Select();
+            else
+                GetInputField((int)InputFields.Name).Select();
+        }
+        if (tap == false)
+            _prevTap = false;
     }
 }

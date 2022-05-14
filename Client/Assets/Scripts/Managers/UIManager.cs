@@ -19,7 +19,7 @@ public class UIManager
     public UI_Scene SceneUI { get; private set; }
 
     // can have many ordered Popup UI 
-    Stack<UI_Popup> _popupUIStack = new Stack<UI_Popup>();
+    public Stack<UI_Popup> PopupUIStack { get; set; } = new Stack<UI_Popup>();
     int _popupOrder = 10;
 
 
@@ -54,7 +54,7 @@ public class UIManager
 
         GameObject gameObject = Managers.Resource.Instantiate($"UI/Popup/{name}");
         T popupUI = Util.GetOrAddComponent<T>(gameObject);
-        _popupUIStack.Push(popupUI);
+        PopupUIStack.Push(popupUI);
         gameObject.transform.SetParent(Root.transform);
 
         return popupUI;
@@ -62,10 +62,10 @@ public class UIManager
 
     public void ClosePopupUI()
     {
-        if (_popupUIStack.Count == 0)
+        if (PopupUIStack.Count == 0)
             return;
 
-        UI_Popup popup = _popupUIStack.Pop();
+        UI_Popup popup = PopupUIStack.Pop();
         Managers.Resource.Destroy(popup.gameObject);
         popup = null;
         _popupOrder--;
@@ -73,7 +73,7 @@ public class UIManager
 
     public void CloseAllPopupUI()
     {
-        while (_popupUIStack.Count > 0)
+        while (PopupUIStack.Count > 0)
             ClosePopupUI();
     }
 

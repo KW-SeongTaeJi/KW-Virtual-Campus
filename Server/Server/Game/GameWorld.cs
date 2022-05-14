@@ -108,6 +108,16 @@ namespace Server.Game
             Broadcast(movePacket, myPlayer.Id);
         }
 
+        public void HandleChat(int objectId, C_Chat packet)
+        {
+            S_Chat chatPacket = new S_Chat()
+            {
+                ObjectId = objectId,
+                Message = packet.Message
+            };
+            Broadcast(chatPacket, objectId);
+        }
+
         public void Broadcast(IMessage packet)
         {
             foreach (Player player in _players.Values)
