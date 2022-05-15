@@ -23,6 +23,10 @@ enum MsgId {
 	S_DESPAWN = 107; 
 	C_MOVE = 108;
 	S_MOVE = 109;
+	C_CHAT = 110;
+	S_CHAT = 111;
+	C_EMOTION = 112;
+	S_EMOTION = 113;
 }
 
 
@@ -151,6 +155,24 @@ message S_Move {
 	bool jump = 6;
 }
 
+message C_Chat {
+	string message = 1;
+}
+
+message S_Chat {
+	int32 objectId = 1;
+	string message = 2;
+}
+
+message C_Emotion {
+	int32 emotionNum = 1;
+}
+
+message S_Emotion {
+	int32 objectId = 1;
+	int32 emotionNum = 2;
+}
+
 
 message Vector3D {
 	float x = 1;
@@ -160,7 +182,15 @@ message Vector3D {
 
 message ObjectInfo {
 	int32 objectId = 1;
-	string name = 2;
-	Vector3D position = 3;
-	float rotationY = 4;
+	Vector3D position = 2;
+	float rotationY = 3;
+	PlayerInfo playerInfo = 4;
+}
+message PlayerInfo {
+	string name = 1;
+	HairType hairType = 2;
+	FaceType faceType = 3;
+	JacketType jacketType = 4;
+	HairColor hairColor = 5;
+	Vector3D faceColor = 6;
 }

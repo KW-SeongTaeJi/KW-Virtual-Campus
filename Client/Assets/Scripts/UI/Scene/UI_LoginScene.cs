@@ -6,9 +6,6 @@ using UnityEngine.UI;
 
 public class UI_LoginScene : UI_Scene
 {
-    UI_AlertPopup _alertPopup;
-    UI_LoadingCirclePopup _loadingPopup;
-
     // each name of components to bind
     enum InputFields
     {
@@ -20,6 +17,13 @@ public class UI_LoginScene : UI_Scene
         LoginButton,
         RegisterButton
     }
+
+    UI_AlertPopup _alertPopup;
+    UI_LoadingCirclePopup _loadingPopup;
+    UI_RegisterPopup _registerPopup;
+
+    bool _prevTap = false;
+    bool _prevEnter = false;
 
 
     public override void Init()
@@ -91,6 +95,32 @@ public class UI_LoginScene : UI_Scene
 
     public void OnClickRegisterButton(PointerEventData evt)
     {
-        Managers.UI.ShowPopupUI<UI_RegisterPopup>();
+        _registerPopup = Managers.UI.ShowPopupUI<UI_RegisterPopup>();
+    }
+
+    public void HandleKeyEvent(bool tap, bool enter)
+    {
+        bool isValid = (_loadingPopup == null) && (_alertPopup == null) && (_registerPopup == null);
+
+        // Input "Tap"
+        if ((_prevTap == false) && tap && isValid)
+        {
+            _prevTap = true;
+            if (GetInputField((int)InputFields.Id).isFocused)
+                GetInputField((int)InputFields.Password).Select();
+            else
+                GetInputField((int)InputFields.Id).Select();
+        }
+        if (tap == false)
+            _prevTap = false;
+
+        // Input "Enter"
+        if ((_prevEnter == false) && enter && isValid)
+        {
+            _prevEnter = true;
+            OnClickLoginButton(null);
+        }
+        if (enter == false)
+            _prevEnter = false;
     }
 }

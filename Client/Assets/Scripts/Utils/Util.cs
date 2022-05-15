@@ -32,7 +32,7 @@ public class Util
         }
         else
         {
-            foreach (T component in gameObject.GetComponentsInChildren<T>())
+            foreach (T component in gameObject.GetComponentsInChildren<T>(includeInactive:true))
             {
                 if (string.IsNullOrEmpty(name) || component.name == name)
                 {

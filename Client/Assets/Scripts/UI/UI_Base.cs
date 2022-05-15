@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 public abstract class UI_Base : MonoBehaviour
 {
@@ -63,6 +64,14 @@ public abstract class UI_Base : MonoBehaviour
             case Define.UIEvent.Click:
                 eventHandler.OnClickHandler -= action;
                 eventHandler.OnClickHandler += action;
+                break;
+            case Define.UIEvent.Enter:
+                eventHandler.OnEnterHandler -= action;
+                eventHandler.OnEnterHandler += action;
+                break;
+            case Define.UIEvent.Exit:
+                eventHandler.OnExitHandler -= action;
+                eventHandler.OnExitHandler += action;
                 break;
             default:
                 Debug.Log("Error : Undefined UI eventType");

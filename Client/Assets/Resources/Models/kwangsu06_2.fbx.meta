@@ -1,0 +1,180 @@
+fileFormatVersion: 2
+guid: 008d6cef7e6b3b64eb7b52454cd320d5
+ModelImporter:
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      74: -5433279887242498599
+    second: 04_0_jump
+  - first:
+      74: 1330672395091969051
+    second: 04_1_jump.idle
+  - first:
+      74: 4222572015534985681
+    second: 04_2_jump_stand
+  - first:
+      74: 3695091515744108769
+    second: Skeleton|01_idle
+  - first:
+      74: -3110092524948600707
+    second: Skeleton|02_walk
+  - first:
+      74: -5179159798467249290
+    second: Skeleton|03_run
+  - first:
+      74: 5409394311695395915
+    second: Skeleton|04_0_jump
+  - first:
+      74: -7097592044564044738
+    second: Skeleton|04_1_jump.idle
+  - first:
+      74: 5261591835917169777
+    second: Skeleton|04_2_jump_stand
+  - first:
+      74: 2133087305856094285
+    second: Skeleton|05_yes
+  - first:
+      74: 466862248798263312
+    second: Skeleton|06_no
+  - first:
+      74: -4060412967188462759
+    second: Skeleton|07_sit
+  - first:
+      74: -5339021393010139195
+    second: Skeleton|08_sit_idle
+  - first:
+      74: 8648513302850692219
+    second: Skeleton|09_sit_stand
+  - first:
+      74: 5464744456819321668
+    second: Skeleton|10_lie
+  - first:
+      74: -8821657309664104747
+    second: Skeleton|11_lie_idle
+  - first:
+      74: -3061399606552996503
+    second: Skeleton|12_lie_stand
+  - first:
+      74: 1901934605987466941
+    second: Skeleton|13_wave_hand
+  - first:
+      74: -6931982424528744350
+    second: Skeleton|14_point
+  - first:
+      74: -8638562429118987235
+    second: Skeleton|15_clap
+  - first:
+      74: -7459793126507511433
+    second: Skeleton|16_guitar
+  - first:
+      74: 5394252613126032010
+    second: Skeleton|17_book
+  - first:
+      74: -4178195913494316617
+    second: Skeleton|18_ball
+  - first:
+      74: 149720867024413020
+    second: Skeleton|19_notebook
+  - first:
+      74: 2609939504638923480
+    second: Skeleton|PoseLib
+  - first:
+      74: 1662757937964309788
+    second: "Skeleton|\uC561\uC158"
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

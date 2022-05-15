@@ -31,11 +31,14 @@ partial class PacketHandler
 		if (enterPacket.AccessOk == false)
         {
 			Managers.Network.DisconnectSession();
+			UI_AlertPopup alertPopup = Managers.UI.ShowPopupUI<UI_AlertPopup>();
+			alertPopup.SetMessageText("이미 접속중인 계정이거나, 올바르지 않은 접근입니다!\n프로그램을 종료합니다.");
+			alertPopup.Quit = true;
 			return;
 		}
 
 		// Set player in lobby
-		GameObject player = Managers.Resource.Instantiate("Object/LobbyPlayer");
+		GameObject player = Managers.Resource.Instantiate("Object/MyLobbyPlayer");
 		PlayerInfo info = player.GetComponent<PlayerInfo>();
 		{
 			info.HairType = enterPacket.HairType;

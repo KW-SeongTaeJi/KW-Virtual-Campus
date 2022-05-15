@@ -23,31 +23,45 @@ namespace Server.Game
 
             GameObjectType type = ObjectManager.GetObjectTypeById(gameObject.Id);
 
-            // 자기 자신 & 접속 중인 플레이어 정보 전송
             if (type == GameObjectType.Player)
             {
                 Player myPlayer = gameObject as Player;
                 _players.Add(gameObject.Id, myPlayer);
 
-                S_EnterGame enterPacket = new S_EnterGame();
-                enterPacket.MyPlayer = myPlayer.Info;
-                myPlayer.Session.Send(enterPacket);
-
-                S_Spawn spawnPacket = new S_Spawn();
-                foreach (Player player in _players.Values)
+                // my player -> my client
                 {
-                    if (player.PlayerDbId != myPlayer.PlayerDbId)
-                        spawnPacket.Objects.Add(player.Info);
+                    S_EnterGame enterPacket = new S_EnterGame();
+                    enterPacket.MyPlayer = myPlayer.ObjectInfo;
+                    enterPacket.MyPlayer.PlayerInfo = myPlayer.PlayerInfo;
+                    myPlayer.Session.Send(enterPacket);
                 }
-                myPlayer.Session.Send(spawnPacket);
+
+                // other players -> my client
+                {
+                    S_Spawn spawnPacket = new S_Spawn();
+                    foreach (Player player in _players.Values)
+                    {
+                        if (player.PlayerDbId != myPlayer.PlayerDbId)
+                        {
+                            ObjectInfo objectInfo = player.ObjectInfo;
+                            objectInfo.PlayerInfo = player.PlayerInfo;
+                            spawnPacket.Objects.Add(objectInfo);
+                        }
+                    }
+                    myPlayer.Session.Send(spawnPacket);
+                }
+
+                // my player -> other clients
+                {
+                    S_Spawn spawnPacket = new S_Spawn();
+                    ObjectInfo objectInfo = myPlayer.ObjectInfo;
+                    objectInfo.PlayerInfo = myPlayer.PlayerInfo;
+                    spawnPacket.Objects.Add(gameObject.ObjectInfo);
+                    Broadcast(spawnPacket, gameObject.Id);
+                }
             }
 
-            // 본인 정보 boradcast
-            {
-                S_Spawn spawnPacket = new S_Spawn();
-                spawnPacket.Objects.Add(gameObject.Info);
-                Broadcast(spawnPacket, gameObject.Id);
-            }
+            // TODO : 다른 오브젝트들 입장
         }
 
         public void LeaveGame(int objectId)
@@ -92,6 +106,26 @@ namespace Server.Game
             movePacket.TargetRotation = packet.TargetRotation;
             movePacket.Jump = packet.Jump;
             Broadcast(movePacket, myPlayer.Id);
+        }
+
+        public void HandleChat(int objectId, C_Chat packet)
+        {
+            S_Chat chatPacket = new S_Chat()
+            {
+                ObjectId = objectId,
+                Message = packet.Message
+            };
+            Broadcast(chatPacket, objectId);
+        }
+
+        public void HandleEmotion(int objectId, C_Emotion packet)
+        {
+            S_Emotion emotionPacket = new S_Emotion()
+            {
+                ObjectId = objectId,
+                EmotionNum = packet.EmotionNum
+            };
+            Broadcast(emotionPacket, objectId);
         }
 
         public void Broadcast(IMessage packet)

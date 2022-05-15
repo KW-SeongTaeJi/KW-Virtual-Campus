@@ -21,15 +21,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
     protected bool grounded = true;
     [SerializeField, Tooltip("Useful for rough ground")]
-    protected float groundedOffset = -0.14f;
+    protected float groundedOffset = -0.5f;
     [SerializeField, Tooltip("The radius of the grounded check. Should match the radius of the CharacterController")]
-    protected float groundedRadius = 0.28f;
+    protected float groundedRadius = 1.5f;
     [SerializeField, Tooltip("What layers the character uses as ground")]
     protected LayerMask groundLayers;
 
     [Space(10)]
     [SerializeField, Tooltip("The height the player can jump")]
-    protected float jumpHeight = 1.2f;
+    protected float jumpHeight = 3.0f;
     [SerializeField, Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
     protected float gravity = -15.0f;
 
@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
     protected int _animIDJump;
     protected int _animIDFreeFall;
     protected int _animIDMotionSpeed;
+    protected int _animIDEmotionNum;
 
     // Player
     protected float _targetSpeed = 0.0f;
@@ -64,8 +65,6 @@ public class PlayerController : MonoBehaviour
 
     protected Animator _animator;
     protected CharacterController _controller;
-
-    public int Id { get; set; }
 
     // Using for movement sycn
     public float TargetSpeed
@@ -130,6 +129,7 @@ public class PlayerController : MonoBehaviour
         _animIDJump = Animator.StringToHash("Jump");
         _animIDFreeFall = Animator.StringToHash("FreeFall");
         _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+        _animIDEmotionNum = Animator.StringToHash("EmotionNum");
     }
 
     protected void GroundedCheck()
@@ -267,6 +267,14 @@ public class PlayerController : MonoBehaviour
                 transform.rotation = Quaternion.Lerp(startRot, destRot, t);
             }
             Sync = false;
+        }
+    }
+
+    public void SetEmotionAnimation(int num)
+    {
+        if (_hasAnimator)
+        {
+            _animator.SetInteger(_animIDEmotionNum, num);
         }
     }
 }

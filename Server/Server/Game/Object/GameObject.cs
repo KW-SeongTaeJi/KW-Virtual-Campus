@@ -9,24 +9,24 @@ namespace Server.Game
     {
         public GameObjectType ObjectType { get; protected set; } = GameObjectType.None;
 
-        public ObjectInfo Info { get; set; } = new ObjectInfo();
-        public Vector3D Position { get; set; } = new Vector3D();
+        public ObjectInfo ObjectInfo { get; set; } = new ObjectInfo();
 
         public int Id
         {
-            get { return Info.ObjectId; }
-            set { Info.ObjectId = value; }
+            get { return ObjectInfo.ObjectId; }
+            set { ObjectInfo.ObjectId = value; }
         }
         public float RotationY
         {
-            get { return Info.RotationY; }
-            set { Info.RotationY = value; }
+            get { return ObjectInfo.RotationY; }
+            set { ObjectInfo.RotationY = value; }
         }
+        public Vector3D Position { get; set; } = new Vector3D();
 
 
         public GameObject()
         {
-            Info.Position = Position;
+            ObjectInfo.Position = Position;
         }
     }
 }
