@@ -9,6 +9,8 @@ public class Settings_UI : MonoBehaviour
     [SerializeField]
     private Animator animator;
 
+    public static string nickname;
+
     private void Awake()
     {
         animator = GetComponent < Animator>();
@@ -27,6 +29,5 @@ public class Settings_UI : MonoBehaviour
         gameObject.SetActive(false);
         animator.ResetTrigger("close");
     }
-    
 
 }
