@@ -1,6 +1,8 @@
+using Google.Protobuf.Protocol;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -11,18 +13,26 @@ public class UI_LobbyScene : UI_Scene
     enum Buttons
     {
         LogoutButton,
+        HelpButton,
         SettingsButton,
+        ExitButton,
         CampusEnterButton,
-        CustermizeButton,
+        InfoButton,
         FriendsButton,
-        InfoButton
+        CustermizeButton
     }
     enum Texts
     {
         NameText
     }
 
+    UI_Alert2Popup _alert2Popup;
+    UI_LoadingCirclePopup _loadingPopup;
+
+    public UI_InfoPopup InfoPopup { get; set; }
+    public UI_FriendsPopup FriendPopup { get; set; }
     public UI_CustermizePopup CustermizePopup { get; set; }
+    public TextMeshProUGUI NameText { get; set; }
 
 
     public override void Init()
@@ -30,16 +40,19 @@ public class UI_LobbyScene : UI_Scene
         base.Init();
 
         Bind<Button>(typeof(Buttons));
-        Bind<Text>(typeof(Texts));
+        Bind<TextMeshProUGUI>(typeof(Texts));
 
         GetButton((int)Buttons.LogoutButton).gameObject.BindEvent(OnClickLogoutButton, Define.UIEvent.Click);
+        GetButton((int)Buttons.HelpButton).gameObject.BindEvent(OnClickHelpButton, Define.UIEvent.Click);
         GetButton((int)Buttons.SettingsButton).gameObject.BindEvent(OnClickSettingsButton, Define.UIEvent.Click);
+        GetButton((int)Buttons.ExitButton).gameObject.BindEvent(OnClickExitButton, Define.UIEvent.Click);
         GetButton((int)Buttons.CampusEnterButton).gameObject.BindEvent(OnClickCampusEnterButton, Define.UIEvent.Click);
         GetButton((int)Buttons.CustermizeButton).gameObject.BindEvent(OnClickCutermizeButton, Define.UIEvent.Click);
         GetButton((int)Buttons.FriendsButton).gameObject.BindEvent(OnClickFriendsButton, Define.UIEvent.Click);
         GetButton((int)Buttons.InfoButton).gameObject.BindEvent(OnClickInfoButton, Define.UIEvent.Click);
 
-        GetText((int)Texts.NameText).text = $"{Managers.Network.Name} 님";
+        NameText = Get<TextMeshProUGUI>((int)Texts.NameText);
+        NameText.text = $"{Managers.Network.Name} 님";
     }
 
     public void OnClickLogoutButton(PointerEventData evt)
@@ -48,9 +61,21 @@ public class UI_LobbyScene : UI_Scene
         Managers.SceneLoad.LoadScene(Define.Scene.Login);
     }
 
-    public void OnClickSettingsButton(PointerEventData evt)
+    public void OnClickHelpButton(PointerEventData evt)
     {
 
+    }
+
+    public void OnClickSettingsButton(PointerEventData evt)
+    {
+        Managers.UI.ShowPopupUI<UI_SettingsPopup>();
+    }
+
+    public void OnClickExitButton(PointerEventData evt)
+    {
+        _alert2Popup = Managers.UI.ShowPopupUI<UI_Alert2Popup>();
+        _alert2Popup.SetMessageText("프로그램을 종료하시겠습니까?");
+        _alert2Popup.Quit = true;
     }
 
     public void OnClickCampusEnterButton(PointerEventData evt)
@@ -70,18 +95,18 @@ public class UI_LobbyScene : UI_Scene
         Managers.SceneLoad.LoadScene(Define.Scene.Game);
     }
 
-    public void OnClickCutermizeButton(PointerEventData evt)
+    public void OnClickInfoButton(PointerEventData evt)
     {
-        CustermizePopup = Managers.UI.ShowPopupUI<UI_CustermizePopup>();
+        InfoPopup = Managers.UI.ShowPopupUI<UI_InfoPopup>();
     }
 
     public void OnClickFriendsButton(PointerEventData evt)
     {
-
+        FriendPopup = Managers.UI.ShowPopupUI<UI_FriendsPopup>();
     }
 
-    public void OnClickInfoButton(PointerEventData evt)
+    public void OnClickCutermizeButton(PointerEventData evt)
     {
-
+        CustermizePopup = Managers.UI.ShowPopupUI<UI_CustermizePopup>();
     }
 }

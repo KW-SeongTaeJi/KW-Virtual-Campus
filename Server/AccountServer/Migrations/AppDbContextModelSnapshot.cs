@@ -18,9 +18,9 @@ namespace AccountServer.Migrations
                 .HasAnnotation("ProductVersion", "5.0.14")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("AccountServer.DB.AccountDB", b =>
+            modelBuilder.Entity("AccountServer.DB.UserAccountDb", b =>
                 {
-                    b.Property<int>("AccountDBId")
+                    b.Property<int>("UserAccountDbId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -29,18 +29,22 @@ namespace AccountServer.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("AccountDBId");
+                    b.HasKey("UserAccountDbId");
 
                     b.HasIndex("AccountId")
                         .IsUnique()
                         .HasFilter("[AccountId] IS NOT NULL");
 
-                    b.ToTable("Account");
+                    b.HasIndex("Name")
+                        .IsUnique()
+                        .HasFilter("[Name] IS NOT NULL");
+
+                    b.ToTable("UserAccount");
                 });
 #pragma warning restore 612, 618
         }

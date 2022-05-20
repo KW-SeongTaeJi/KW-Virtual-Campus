@@ -9,6 +9,8 @@ namespace LobbyServer.DB
     {
         public DbSet<AccountDb> Accounts { get; set; }
         public DbSet<PlayerDb> Players { get; set; }
+        public DbSet<FriendRelationDb> FriendRelations { get; set; }
+        public DbSet<FriendRequestDb> FriendRequests { get; set; }
 
         string _connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=GameDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 

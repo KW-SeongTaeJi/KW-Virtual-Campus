@@ -44,6 +44,50 @@ namespace LobbyServer.Migrations
                     b.ToTable("Account");
                 });
 
+            modelBuilder.Entity("LobbyServer.DB.FriendRelationDb", b =>
+                {
+                    b.Property<int>("FriendRelationDbId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("FriendDbId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MeDbId")
+                        .HasColumnType("int");
+
+                    b.HasKey("FriendRelationDbId");
+
+                    b.HasIndex("FriendDbId");
+
+                    b.HasIndex("MeDbId");
+
+                    b.ToTable("FriendRelation");
+                });
+
+            modelBuilder.Entity("LobbyServer.DB.FriendRequestDb", b =>
+                {
+                    b.Property<int>("FriendRequestDbId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("FromDbId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ToDbId")
+                        .HasColumnType("int");
+
+                    b.HasKey("FriendRequestDbId");
+
+                    b.HasIndex("FromDbId");
+
+                    b.HasIndex("ToDbId");
+
+                    b.ToTable("FriendRequest");
+                });
+
             modelBuilder.Entity("LobbyServer.DB.PlayerDb", b =>
                 {
                     b.Property<int>("PlayerDbId")
@@ -83,6 +127,44 @@ namespace LobbyServer.Migrations
                     b.ToTable("Player");
                 });
 
+            modelBuilder.Entity("LobbyServer.DB.FriendRelationDb", b =>
+                {
+                    b.HasOne("LobbyServer.DB.PlayerDb", "Friend")
+                        .WithMany()
+                        .HasForeignKey("FriendDbId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LobbyServer.DB.PlayerDb", "Me")
+                        .WithMany("Friends")
+                        .HasForeignKey("MeDbId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Friend");
+
+                    b.Navigation("Me");
+                });
+
+            modelBuilder.Entity("LobbyServer.DB.FriendRequestDb", b =>
+                {
+                    b.HasOne("LobbyServer.DB.PlayerDb", "From")
+                        .WithMany()
+                        .HasForeignKey("FromDbId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LobbyServer.DB.PlayerDb", "To")
+                        .WithMany("Requests")
+                        .HasForeignKey("ToDbId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("From");
+
+                    b.Navigation("To");
+                });
+
             modelBuilder.Entity("LobbyServer.DB.PlayerDb", b =>
                 {
                     b.HasOne("LobbyServer.DB.AccountDb", "Account")
@@ -97,6 +179,13 @@ namespace LobbyServer.Migrations
             modelBuilder.Entity("LobbyServer.DB.AccountDb", b =>
                 {
                     b.Navigation("Player");
+                });
+
+            modelBuilder.Entity("LobbyServer.DB.PlayerDb", b =>
+                {
+                    b.Navigation("Friends");
+
+                    b.Navigation("Requests");
                 });
 #pragma warning restore 612, 618
         }

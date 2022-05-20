@@ -8,6 +8,7 @@ public class ObjectManager
 {
 	public PlayerInfo MyPlayer { get; set; }
     Dictionary<int, GameObject> _objects = new Dictionary<int, GameObject>();
+    Dictionary<string, GameObject> _players = new Dictionary<string, GameObject>();
 
 
     public static GameObjectType GetObjectTypeById(int id)
@@ -33,6 +34,7 @@ public class ObjectManager
 				gameObject.transform.position = new Vector3(info.Position.X, info.Position.Y, info.Position.Z);
 				gameObject.transform.rotation = Quaternion.Euler(0, info.RotationY, 0);
 				_objects.Add(info.ObjectId, gameObject);
+				_players.Add(info.PlayerInfo.Name, gameObject);
 
 				MyPlayer = gameObject.GetComponent<PlayerInfo>();
 				MyPlayer.Id = info.ObjectId;
@@ -59,6 +61,7 @@ public class ObjectManager
 				gameObject.transform.position = new Vector3(info.Position.X, info.Position.Y, info.Position.Z);
 				gameObject.transform.rotation = Quaternion.Euler(0, info.RotationY, 0);
 				_objects.Add(info.ObjectId, gameObject);
+				_players.Add(info.PlayerInfo.Name, gameObject);
 
 				PlayerInfo player = gameObject.GetComponent<PlayerInfo>();
 				player.Id = info.ObjectId;
@@ -87,6 +90,13 @@ public class ObjectManager
 		return gameObject;
 	}
 
+	public GameObject FindPlayerByName(string name)
+    {
+		GameObject gameObject = null;
+		_players.TryGetValue(name, out gameObject);
+		return gameObject;
+    }
+
 	public void Remove(int id)
 	{
 		if (_objects.ContainsKey(id) == false)
@@ -95,6 +105,11 @@ public class ObjectManager
 		GameObject gameObject = FindById(id);
 		if (gameObject == null)
 			return;
+		
+		if (GetObjectTypeById(id) == GameObjectType.Player)
+        {
+			_players.Remove(gameObject.GetComponent<PlayerInfo>().Name);
+        }
 
 		_objects.Remove(id);
 		Managers.Resource.Destroy(gameObject);
@@ -106,6 +121,7 @@ public class ObjectManager
 			Managers.Resource.Destroy(obj);
 
 		_objects.Clear();
+		_players.Clear();
 		MyPlayer = null;
 	}
 }

@@ -30,6 +30,17 @@ namespace LobbyServer.DB
         {
             RedisValue value = redisDb.HashGet(key, field);
             return value.ToString();
-        } 
+        }
+
+        public void Set(string key, string value)
+        {
+            HashEntry[] entry = { new HashEntry("data", value) };
+            redisDb.HashSet(key, entry);
+        }
+
+        public bool Remove(string key)
+        {
+            return redisDb.KeyDelete(key);
+        }
     }
 }

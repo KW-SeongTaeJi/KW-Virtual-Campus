@@ -24,6 +24,12 @@ namespace LobbyServer.DB
         public int AccountDbId { get; set; }
         public AccountDb Account { get; set; }
 
+        [InverseProperty("Me")]
+        public ICollection<FriendRelationDb> Friends { get; set; }
+
+        [InverseProperty("To")]
+        public ICollection<FriendRequestDb> Requests { get; set; }
+
         public HairType HairType { get; set; }
         public FaceType FaceType { get; set; }
         public JacketType JacketType { get; set; }
@@ -31,5 +37,33 @@ namespace LobbyServer.DB
         public float FaceColor_X { get; set; }
         public float FaceColor_Y { get; set; }
         public float FaceColor_Z { get; set; }
+    }
+
+    [Table("FriendRelation")]
+    public class FriendRelationDb
+    {
+        public int FriendRelationDbId { get; set; }
+
+        [ForeignKey("Me")]
+        public int MeDbId { get; set; }
+        public PlayerDb Me { get; set; }
+
+        [ForeignKey("Friend")]
+        public int FriendDbId { get; set; }
+        public PlayerDb Friend { get; set; }
+    }
+
+    [Table("FriendRequest")]
+    public class FriendRequestDb
+    {
+        public int FriendRequestDbId { get; set; }
+
+        [ForeignKey("From")]
+        public int FromDbId { get; set; }
+        public PlayerDb From { get; set; }
+
+        [ForeignKey("To")]
+        public int ToDbId { get; set; }
+        public PlayerDb To { get; set; }
     }
 }

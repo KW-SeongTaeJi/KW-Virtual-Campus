@@ -39,6 +39,8 @@ namespace Server.Game
         }
         public Vector3D FaceColor { get; set; } = new Vector3D();
 
+        public Dictionary<string, PlayerInfo> Friends { get; set; } = new Dictionary<string, PlayerInfo>();
+
 
         public Player()
         {
