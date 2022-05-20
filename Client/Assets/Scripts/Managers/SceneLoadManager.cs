@@ -7,6 +7,26 @@ public class SceneLoadManager
 {
     public BaseScene CurrentScene { get { return GameObject.FindObjectOfType<BaseScene>(); } }
 
+    public List<Resolution> Resolutions { get; set; } = new List<Resolution>();
+
+    FullScreenMode _currentMode;
+
+    
+    public void Init()
+    {
+        for (int i = 0; i < Screen.resolutions.Length; i++)
+        {
+            if (Screen.resolutions[i].refreshRate == 60)
+                Resolutions.Add(Screen.resolutions[i]);
+        }
+        _currentMode = Screen.fullScreenMode;
+    }
+
+    public void Update()
+    {
+        if (_currentMode.Equals(Screen.fullScreen) == false)
+            _currentMode = Screen.fullScreenMode;
+    }
 
     public void LoadScene(Define.Scene sceneType)
     {

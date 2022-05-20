@@ -54,6 +54,8 @@ public abstract class UI_Base : MonoBehaviour
     protected Button GetButton(int idx) { return Get<Button>(idx); }
     protected Image GetImage(int idx) { return Get<Image>(idx); }
     protected Slider GetSlider(int idx) { return Get<Slider>(idx); }
+    protected Toggle GetToggle(int idx) { return Get<Toggle>(idx); }
+    protected TMP_Dropdown GetDropdown(int idx) { return Get<TMP_Dropdown>(idx); }
 
     public static void BindEvent(GameObject gameObject, Action<PointerEventData> action, Define.UIEvent type)
     {

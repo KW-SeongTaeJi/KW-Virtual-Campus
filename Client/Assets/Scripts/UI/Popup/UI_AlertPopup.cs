@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 public class UI_AlertPopup : UI_Popup
 {
@@ -26,7 +27,7 @@ public class UI_AlertPopup : UI_Popup
     {
         base.Init();
 
-        Bind<Text>(typeof(Texts));
+        Bind<TextMeshProUGUI>(typeof(Texts));
         Bind<Button>(typeof(Buttons));
 
         GetButton((int)Buttons.ConfirmButton).gameObject.BindEvent(OnClickConfirmButton, Define.UIEvent.Click);
@@ -47,7 +48,7 @@ public class UI_AlertPopup : UI_Popup
 
     public void SetMessageText(string message)
     {
-        GetText((int)Texts.MessageText).text = message;
+        Get<TextMeshProUGUI>((int)Texts.MessageText).text = message;
     }
 
     public void HandleKeyEvent(bool enter)

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace LobbyServer.DB
 {
-    public class DbTransaction : JobSerializer
+    public partial class DbTransaction : JobSerializer
     {
         #region Singleton
         public static DbTransaction Instance { get; } = new DbTransaction();
@@ -97,10 +97,115 @@ namespace LobbyServer.DB
                     if (success)
                     {
                         Lobby lobby = MainLogic.Instance.Lobby;
-                        lobby.PushQueue(lobby.HandleCustermize_Step2, session);
+                        lobby.PushQueue(lobby.HandleCustermize_Step2, session, packet);
                     }
                 }
             });
+        }
+
+        public static void SaveInfoWork(ClientSession session, B_SaveInfo packet)
+        {
+            if (session == null || packet == null)
+            {
+                Console.WriteLine("Error from SaveInfoWork()");
+                return;
+            }
+
+            int userAccountDbId;
+            int AccountDbId;
+            using (WebDbContext webDb = new WebDbContext())
+            {
+                UserAccountDb findAccount = webDb.UserAccounts
+                        .AsNoTracking()
+                        .Where(a => a.AccountId == session.MyPlayer.AccountId)
+                        .FirstOrDefault();
+                userAccountDbId = findAccount.UserAccountDbId;
+            }
+            using (AppDbContext db = new AppDbContext())
+            {
+                AccountDb findAccount = db.Accounts
+                    .AsNoTracking()
+                    .Where(a => a.AccountId == session.MyPlayer.AccountId)
+                    .FirstOrDefault();
+                AccountDbId = findAccount.AccountDbId;
+            }
+
+            Lobby lobby = MainLogic.Instance.Lobby;
+
+            // Save info not include password change
+            if (packet.Password == "")
+            {
+                /* Push to DB thread (DB update) */
+                Instance.PushQueue(() =>
+                {
+                    using (WebDbContext webDb = new WebDbContext())
+                    {
+                        UserAccountDb accountDb = new UserAccountDb();
+                        accountDb.UserAccountDbId = userAccountDbId;
+                        accountDb.Name = packet.Name;
+                        webDb.Entry(accountDb).State = EntityState.Unchanged;
+                        webDb.Entry(accountDb).Property(nameof(UserAccountDb.Name)).IsModified = true;
+                        bool success = webDb.SaveChangesEx();
+                        if (!success)
+                        {
+                            lobby.PushQueue(lobby.HandleSaveInfo_Step2, session, packet, 10);
+                        }
+                    }
+                    using (AppDbContext db = new AppDbContext())
+                    {
+                        AccountDb accountDb = new AccountDb();
+                        accountDb.AccountDbId = AccountDbId;
+                        accountDb.Name = packet.Name;
+                        db.Entry(accountDb).State = EntityState.Unchanged;
+                        db.Entry(accountDb).Property(nameof(AccountDb.Name)).IsModified = true;
+                        bool success = db.SaveChangesEx();
+                        if (!success)
+                        {
+                            lobby.PushQueue(lobby.HandleSaveInfo_Step2, session, packet, 10);
+                        }
+                    }
+                    /* Push to MainLogic thread (Send save ok to client) */
+                    lobby.PushQueue(lobby.HandleSaveInfo_Step2, session, packet, 0);
+                });
+            }
+            // Save info include password change
+            else
+            {
+                /* Push to DB thread (DB update) */
+                Instance.PushQueue(() =>
+                {
+                    using (WebDbContext webDb = new WebDbContext())
+                    {
+                        UserAccountDb accountDb = new UserAccountDb();
+                        accountDb.UserAccountDbId = userAccountDbId;
+                        accountDb.Name = packet.Name;
+                        accountDb.Password = packet.NewPassword;
+                        webDb.Entry(accountDb).State = EntityState.Unchanged;
+                        webDb.Entry(accountDb).Property(nameof(UserAccountDb.Name)).IsModified = true;
+                        webDb.Entry(accountDb).Property(nameof(UserAccountDb.Password)).IsModified = true;
+                        bool success = webDb.SaveChangesEx();
+                        if (!success)
+                        {
+                            lobby.PushQueue(lobby.HandleSaveInfo_Step2, session, packet, 10);
+                        }
+                    }
+                    using (AppDbContext db = new AppDbContext())
+                    {
+                        AccountDb accountDb = new AccountDb();
+                        accountDb.AccountDbId = AccountDbId;
+                        accountDb.Name = packet.Name;
+                        db.Entry(accountDb).State = EntityState.Unchanged;
+                        db.Entry(accountDb).Property(nameof(AccountDb.Name)).IsModified = true;
+                        bool success = db.SaveChangesEx();
+                        if (!success)
+                        {
+                            lobby.PushQueue(lobby.HandleSaveInfo_Step2, session, packet, 10);
+                        }
+                    }
+                    /* Push to MainLogic thread (Send save ok to client) */
+                    lobby.PushQueue(lobby.HandleSaveInfo_Step2, session, packet, 0);
+                });
+            }
         }
     }
 }

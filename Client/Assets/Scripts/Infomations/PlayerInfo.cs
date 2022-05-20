@@ -101,6 +101,8 @@ public class PlayerInfo : MonoBehaviour
     }
     #endregion
 
+    public Dictionary<string, FriendInfo> Friends { get; set; } = new Dictionary<string, FriendInfo>();
+
     Dictionary<HairType, GameObject> _hairs = new Dictionary<HairType, GameObject>();
     Dictionary<HairColor, Color> _hairColors = new Dictionary<HairColor, Color>();
     Material _bodyMaterial;

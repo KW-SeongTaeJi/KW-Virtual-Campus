@@ -18,10 +18,20 @@ namespace Server
 
         public void HandleEnterGame(C_EnterGame enterGamePacket)
         {
+            // Update token validation
+            using (RedisDb cache = new RedisDb())
+            {
+                cache.Set($"{enterGamePacket.AccountId}Where", "game");
+            }
+
+            // Find player
             using (AppDbContext db = new AppDbContext())
             {
                 AccountDb findAccount = db.Accounts
                     .Include(a => a.Player)
+                    .ThenInclude(p => p.Friends)
+                    .ThenInclude(f => f.Friend)
+                    .ThenInclude(p => p.Account)
                     .AsNoTracking()
                     .Where(a => a.AccountId == enterGamePacket.AccountId)
                     .FirstOrDefault();
@@ -46,6 +56,25 @@ namespace Server
                         MyPlayer.FaceColor.X = findAccount.Player.FaceColor_X;
                         MyPlayer.FaceColor.Y = findAccount.Player.FaceColor_Y;
                         MyPlayer.FaceColor.Z = findAccount.Player.FaceColor_Z;
+                    }
+                    foreach (FriendRelationDb relation in findAccount.Player.Friends)
+                    {
+                        Vector3D faceColor = new Vector3D()
+                        {
+                            X = relation.Friend.FaceColor_X,
+                            Y = relation.Friend.FaceColor_Y,
+                            Z = relation.Friend.FaceColor_Z
+                        };
+                        PlayerInfo friend = new PlayerInfo()
+                        {
+                            Name = relation.Friend.Account.Name,
+                            HairType = relation.Friend.HairType,
+                            FaceType = relation.Friend.FaceType,
+                            JacketType = relation.Friend.JacketType,
+                            HairColor = relation.Friend.HairColor,
+                            FaceColor = faceColor
+                        };
+                        MyPlayer.Friends.Add(friend.Name, friend);
                     }
                     GameWorld gameWorld = GameLogic.Instance.GameWorld;
                     gameWorld.PushQueue(gameWorld.EnterGame, MyPlayer);

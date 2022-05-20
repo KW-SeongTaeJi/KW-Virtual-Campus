@@ -1,8 +1,10 @@
 ﻿using Google.Protobuf.Protocol;
 using LobbyServer.DB;
+using Microsoft.EntityFrameworkCore;
 using NetworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace LobbyServer
@@ -32,6 +34,7 @@ namespace LobbyServer
                     L_EnterLobby enterPacket = new L_EnterLobby();
                     enterPacket.AccessOk = false;
                     Send(enterPacket);
+                    Console.WriteLine("EnterLobby : invalid token");
                 }
             }
         }

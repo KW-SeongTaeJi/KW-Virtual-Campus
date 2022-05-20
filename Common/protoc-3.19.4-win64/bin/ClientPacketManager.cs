@@ -31,6 +31,18 @@ class PacketManager
 		_handler.Add((ushort)MsgId.LEnterLobby, PacketHandler.L_EnterLobbyHandler);		
 		_onRecv.Add((ushort)MsgId.LSaveCustermize, MakePacket<L_SaveCustermize>);
 		_handler.Add((ushort)MsgId.LSaveCustermize, PacketHandler.L_SaveCustermizeHandler);		
+		_onRecv.Add((ushort)MsgId.LSaveInfo, MakePacket<L_SaveInfo>);
+		_handler.Add((ushort)MsgId.LSaveInfo, PacketHandler.L_SaveInfoHandler);		
+		_onRecv.Add((ushort)MsgId.LFriendList, MakePacket<L_FriendList>);
+		_handler.Add((ushort)MsgId.LFriendList, PacketHandler.L_FriendListHandler);		
+		_onRecv.Add((ushort)MsgId.LAddFriend, MakePacket<L_AddFriend>);
+		_handler.Add((ushort)MsgId.LAddFriend, PacketHandler.L_AddFriendHandler);		
+		_onRecv.Add((ushort)MsgId.LFriendRequestList, MakePacket<L_FriendRequestList>);
+		_handler.Add((ushort)MsgId.LFriendRequestList, PacketHandler.L_FriendRequestListHandler);		
+		_onRecv.Add((ushort)MsgId.LAcceptFriend, MakePacket<L_AcceptFriend>);
+		_handler.Add((ushort)MsgId.LAcceptFriend, PacketHandler.L_AcceptFriendHandler);		
+		_onRecv.Add((ushort)MsgId.LDeleteFriend, MakePacket<L_DeleteFriend>);
+		_handler.Add((ushort)MsgId.LDeleteFriend, PacketHandler.L_DeleteFriendHandler);		
 		_onRecv.Add((ushort)MsgId.SConnected, MakePacket<S_Connected>);
 		_handler.Add((ushort)MsgId.SConnected, PacketHandler.S_ConnectedHandler);		
 		_onRecv.Add((ushort)MsgId.SPing, MakePacket<S_Ping>);

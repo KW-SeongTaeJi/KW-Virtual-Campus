@@ -103,7 +103,7 @@ namespace LobbyServer
                     return;
 
                 Lobby lobby = MainLogic.Instance.Lobby;
-                lobby.PushQueue(lobby.LeaveLobby, MyPlayer.PlayerDbId);
+                lobby.PushQueue(lobby.LeaveLobby, MyPlayer.PlayerDbId, MyPlayer.AccountId);
             });
 
             SessionManager.Instance.Remove(this);

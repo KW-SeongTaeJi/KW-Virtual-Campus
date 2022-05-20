@@ -31,6 +31,7 @@ namespace LobbyServer
         public void PushQueue<T1>(Action<T1> action, T1 t1) { PushQueue(new Job<T1>(action, t1)); }
         public void PushQueue<T1, T2>(Action<T1, T2> action, T1 t1, T2 t2) { PushQueue(new Job<T1, T2>(action, t1, t2)); }
         public void PushQueue<T1, T2, T3>(Action<T1, T2, T3> action, T1 t1, T2 t2, T3 t3) { PushQueue(new Job<T1, T2, T3>(action, t1, t2, t3)); }
+        public void PushQueue<T1, T2, T3, T4>(Action<T1, T2, T3, T4> action, T1 t1, T2 t2, T3 t3, T4 t4) { PushQueue(new Job<T1, T2, T3, T4>(action, t1, t2, t3, t4)); }
 
         // flush and execute all jobs
         public void Flush()
