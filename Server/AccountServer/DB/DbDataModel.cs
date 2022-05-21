@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace AccountServer.DB
 {
-    [Table("Account")]
-    public class AccountDB
+    [Table("UserAccount")]
+    public class UserAccountDb
     {
-        public int AccountDBId { get; set; }
+        public int UserAccountDbId { get; set; }
         public string AccountId { get; set; }
         public string Password { get; set; }
         public string Name { get; set; }

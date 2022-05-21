@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UI_LoadingCirclePopup : UI_Popup
 {
@@ -16,11 +17,11 @@ public class UI_LoadingCirclePopup : UI_Popup
     {
         base.Init();
 
-        Bind<Text>(typeof(Texts));
+        Bind<TextMeshProUGUI>(typeof(Texts));
     }
 
     public void SetMessageText(string message)
     {
-        GetText((int)Texts.LoadingMessageText).text = message;
+        Get<TextMeshProUGUI>((int)Texts.LoadingMessageText).text = message;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Google.Protobuf.Protocol;
+using LobbyServer.DB;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,10 @@ namespace LobbyServer
     {
         public int PlayerDbId { get; set; }
         public ClientSession Session { get; set; }
+        public string AccountId { get; set; }
+        public string Name { get; set; }
+
+        public Dictionary<string, PlayerDb> Friends { get; set; } = new Dictionary<string, PlayerDb>();
 
         #region Custermization Info
         public HairType HairType { get; set; }

@@ -18,4 +18,17 @@ public static class Extensions
             return false;
         }
     }
+    public static bool SaveChangesEx(this WebDbContext db)
+    {
+        try
+        {
+            db.SaveChanges();
+            return true;
+        }
+        catch
+        {
+            Console.WriteLine("Error: fail to save DB");
+            return false;
+        }
+    }
 }

@@ -1,3 +1,4 @@
+
 using Google.Protobuf.Protocol;
 using System;
 using System.Collections;
@@ -8,19 +9,6 @@ using UnityEngine.UI;
 
 public class UI_CustermizePopup : UI_Popup
 {
-    UI_AlertPopup _alertPopup;
-    UI_LoadingCirclePopup _loadingPopup;
- 
-    PlayerInfo playerInfo;
-
-    HairType _realHairType;
-    FaceType _realFaceType;
-    JacketType _realJacketType;
-    HairColor _realHairColor;
-    float _realFaceColorX;
-    float _realFaceColorY;
-    float _realFaceColorZ;
-
     // each name of components to bind
     enum Sliders
     {
@@ -60,6 +48,20 @@ public class UI_CustermizePopup : UI_Popup
         RobotButton,
         SportsButton
     }
+
+    UI_AlertPopup _alertPopup;
+    UI_LoadingCirclePopup _loadingPopup;
+ 
+    PlayerInfo playerInfo;
+
+    HairType _realHairType;
+    FaceType _realFaceType;
+    JacketType _realJacketType;
+    HairColor _realHairColor;
+    float _realFaceColorX;
+    float _realFaceColorY;
+    float _realFaceColorZ;
+
 
 
     public override void Init()
@@ -107,7 +109,7 @@ public class UI_CustermizePopup : UI_Popup
         #endregion
 
         // get lobby player custermize infomation 
-        playerInfo = ((LobbyScene)Managers.SceneLoad.CurrentScene).playerInfo;
+        playerInfo = ((LobbyScene)Managers.SceneLoad.CurrentScene).PlayerInfo;
 
         // save previous player custermize infomation 
         SavePlayerInfo();
@@ -196,7 +198,7 @@ public class UI_CustermizePopup : UI_Popup
 
         // Show alert UI
         _alertPopup = Managers.UI.ShowPopupUI<UI_AlertPopup>();
-        _alertPopup.SetMessageText("커스터마이정 저장 완료");
+        _alertPopup.SetMessageText("커스터마이징 저장 완료");
     }
 
     #region Button Click Handler (Custermization)

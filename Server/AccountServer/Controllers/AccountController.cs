@@ -34,14 +34,14 @@ namespace AccountServer.Controllers
         {
             CreateAccountPacketRes res = new CreateAccountPacketRes();
 
-            AccountDB account = _appDb.Accounts
+            UserAccountDb account = _appDb.Accounts
                 .AsNoTracking()
                 .Where(a => a.AccountId == req.AccountId || a.Name == req.Name)
                 .FirstOrDefault();
 
             if (account == null)
             {
-                AccountDB newAccount = new AccountDB()
+                UserAccountDb newAccount = new UserAccountDb()
                 {
                     AccountId = req.AccountId,
                     Password = req.Password,
@@ -71,7 +71,7 @@ namespace AccountServer.Controllers
         {
             LoginPakcetRes res = new LoginPakcetRes();
 
-            AccountDB account = _appDb.Accounts
+            UserAccountDb account = _appDb.Accounts
                 .AsNoTracking()
                 .Where(a => a.AccountId == req.AccountId)
                 .FirstOrDefault();
@@ -91,14 +91,23 @@ namespace AccountServer.Controllers
                 res.ErrorCode = 2;
                 return res;
             }
+            // ErrorCode 3 : same user access 
+            string tokenKey = account.AccountId;
+            byte[] validCheck = _redisCache.Get($"{tokenKey}Where");
+            if (validCheck != null && Encoding.Default.GetString(validCheck).Equals("end") == false)
+            {
+                res.LoginOk = false;
+                res.ErrorCode = 3;
+                return res;
+            }
 
             /* Login Success */
             // Save token to Redis
             string newToken = new Random().Next(Int32.MinValue, Int32.MaxValue).ToString();
-            string tokenKey = account.AccountId.ToString();
             byte[] tokenValue = Encoding.UTF8.GetBytes(newToken);
-            var options = new DistributedCacheEntryOptions().SetAbsoluteExpiration(DateTime.Now.AddMinutes(10));
-            _redisCache.Set(tokenKey, tokenValue, options);
+            //var options = new DistributedCacheEntryOptions().SetAbsoluteExpiration(DateTime.Now.AddMinutes(10));
+            _redisCache.Set(tokenKey, tokenValue);
+            _redisCache.Set($"{tokenKey}Where", Encoding.UTF8.GetBytes("end"));
 
             res.LoginOk = true;
             res.ErrorCode = 0;

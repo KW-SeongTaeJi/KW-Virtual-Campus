@@ -13,8 +13,10 @@ partial class PacketHandler
 {
 	public static void S_ConnectedHandler(PacketSession session, IMessage packet)
 	{
-		C_EnterGame enterGamePacket = new C_EnterGame();
-		enterGamePacket.AccountId = Managers.Network.AccountId;
+		C_EnterGame enterGamePacket = new C_EnterGame()
+		{
+			AccountId = Managers.Network.AccountId,
+		};
 		Managers.Network.Send(enterGamePacket);
 	}
 
@@ -31,6 +33,22 @@ partial class PacketHandler
 
 		// Instantiate my player
 		GameObject myPlayer = Managers.Object.Add(enterGamePacket.MyPlayer, myPlayer: true);
+		for (int i = 0; i < enterGamePacket.Friends.Count; i++)
+        {
+			FriendInfo friend = new FriendInfo()
+			{
+				Name = enterGamePacket.Friends[i].Name,
+				HairType = enterGamePacket.Friends[i].HairType,
+				FaceType = enterGamePacket.Friends[i].FaceType,
+				JacketType = enterGamePacket.Friends[i].JacketType,
+				HairColor = enterGamePacket.Friends[i].HairColor,
+				FaceColor_X = enterGamePacket.Friends[i].FaceColor.X,
+				FaceColor_Y = enterGamePacket.Friends[i].FaceColor.Y,
+				FaceColor_Z = enterGamePacket.Friends[i].FaceColor.Z
+			};
+			Managers.Object.MyPlayer.Friends.Add(friend.Name, friend);
+        }
+		((UI_GameScene)Managers.UI.SceneUI).SetFriendList();
 
 		// Set player follow Camera
 		GameObject gameObject = Managers.Resource.Instantiate("Object/MyPlayerFollowCamera");
@@ -49,9 +67,14 @@ partial class PacketHandler
 	{
 		S_Spawn spawnPacket = (S_Spawn)packet;
 
+		UI_GameScene gameSceneUI = ((UI_GameScene)Managers.UI.SceneUI);
 		foreach (ObjectInfo obj in spawnPacket.Objects)
 		{
 			Managers.Object.Add(obj);
+			if (gameSceneUI.FriendListSlots.ContainsKey(obj.PlayerInfo.Name))
+            {
+				gameSceneUI.FriendListSlots[obj.PlayerInfo.Name].SetOnline();
+            }
 		}
 	}
 
@@ -59,7 +82,12 @@ partial class PacketHandler
 	{
 		S_Despawn despawnPacket = packet as S_Despawn;
 
+		UI_GameScene gameSceneUI = ((UI_GameScene)Managers.UI.SceneUI);
 		Managers.Object.Remove(despawnPacket.ObjectId);
+		if (gameSceneUI.FriendListSlots.ContainsKey(despawnPacket.Name))
+		{
+			gameSceneUI.FriendListSlots[despawnPacket.Name].SetOffline();
+		}
 	}
 
 	public static void S_MoveHandler(PacketSession session, IMessage packet)

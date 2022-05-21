@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 public class UI_LoginScene : UI_Scene
 {
@@ -30,7 +31,7 @@ public class UI_LoginScene : UI_Scene
     {
         base.Init();
 
-        Bind<InputField>(typeof(InputFields));
+        Bind<TMP_InputField>(typeof(InputFields));
         Bind<Button>(typeof(Buttons));
 
         GetButton((int)Buttons.LoginButton).gameObject.BindEvent(OnClickLoginButton, Define.UIEvent.Click);
@@ -43,8 +44,8 @@ public class UI_LoginScene : UI_Scene
         _loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingCirclePopup>();
         _loadingPopup.SetMessageText("로그인 중");
 
-        string id = GetInputField((int)InputFields.Id).text;
-        string password = GetInputField((int)InputFields.Password).text;
+        string id = Get<TMP_InputField>((int)InputFields.Id).text;
+        string password = Get<TMP_InputField>((int)InputFields.Password).text;
 
         // TODO : PW 해시 처리
 
@@ -61,8 +62,8 @@ public class UI_LoginScene : UI_Scene
         // Close Loading Popup
         _loadingPopup.ClosePopup();
 
-        GetInputField((int)InputFields.Id).text = "";
-        GetInputField((int)InputFields.Password).text = "";
+        Get<TMP_InputField>((int)InputFields.Id).text = "";
+        Get<TMP_InputField>((int)InputFields.Password).text = "";
 
         /* Login Success */
         if (res.LoginOk)
@@ -90,6 +91,12 @@ public class UI_LoginScene : UI_Scene
                 _alertPopup = Managers.UI.ShowPopupUI<UI_AlertPopup>();
                 _alertPopup.SetMessageText("로그인 실패!\n비밀번호가 일치하지 않습니다.");
             }
+            // ErrorCode 3 : same user access
+            else if (res.ErrorCode == 3)
+            {
+                _alertPopup = Managers.UI.ShowPopupUI<UI_AlertPopup>();
+                _alertPopup.SetMessageText("로그인 실패!\n이미 접속중인 사용자 입니다!.");
+            }
         }
     }
 
@@ -106,10 +113,10 @@ public class UI_LoginScene : UI_Scene
         if ((_prevTap == false) && tap && isValid)
         {
             _prevTap = true;
-            if (GetInputField((int)InputFields.Id).isFocused)
-                GetInputField((int)InputFields.Password).Select();
+            if (Get<TMP_InputField>((int)InputFields.Id).isFocused)
+                Get<TMP_InputField>((int)InputFields.Password).Select();
             else
-                GetInputField((int)InputFields.Id).Select();
+                Get<TMP_InputField>((int)InputFields.Id).Select();
         }
         if (tap == false)
             _prevTap = false;

@@ -6,7 +6,7 @@ public class LobbyScene : BaseScene
 {
     UI_LobbyScene _sceneUI;
 
-    public PlayerInfo playerInfo { get; set; }
+    public PlayerInfo PlayerInfo { get; set; }
 
 
     protected override void Init()
@@ -15,7 +15,7 @@ public class LobbyScene : BaseScene
 
         SceneType = Define.Scene.Lobby;
 
-        Screen.SetResolution(1280, 640, false);
+        Screen.SetResolution(1920, 1080, Screen.fullScreenMode);
 
         _sceneUI = Managers.UI.ShowSceneUI<UI_LobbyScene>();
     }

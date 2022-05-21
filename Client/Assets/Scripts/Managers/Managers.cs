@@ -38,6 +38,7 @@ public class Managers : MonoBehaviour
     void Update()
     {
         _network.Update();
+        _sceneLoad.Update();
     }
 
     static void Init()
@@ -54,6 +55,7 @@ public class Managers : MonoBehaviour
             _instance = gameObject.GetComponent<Managers>();
 
             _instance._pool.Init();
+            _instance._sceneLoad.Init();
         }
     }
 

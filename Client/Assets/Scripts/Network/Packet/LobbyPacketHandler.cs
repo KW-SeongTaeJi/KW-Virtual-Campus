@@ -41,6 +41,7 @@ partial class PacketHandler
 		GameObject player = Managers.Resource.Instantiate("Object/MyLobbyPlayer");
 		PlayerInfo info = player.GetComponent<PlayerInfo>();
 		{
+			info.Name = Managers.Network.Name;
 			info.HairType = enterPacket.HairType;
 			info.FaceType = enterPacket.FaceType;
 			info.JacketType = enterPacket.JacketType;
@@ -49,8 +50,9 @@ partial class PacketHandler
 			info.FaceColor_Y = enterPacket.FaceColor.Y;
 			info.FaceColor_Z = enterPacket.FaceColor.Z;
 		}
+
 		LobbyScene lobbyScene = (LobbyScene)Managers.SceneLoad.CurrentScene;
-		lobbyScene.playerInfo = info;
+		lobbyScene.PlayerInfo = info;
 	}
 
 	public static void L_SaveCustermizeHandler(PacketSession session, IMessage packet)
@@ -65,4 +67,54 @@ partial class PacketHandler
 		UI_LobbyScene lobbyScene = (UI_LobbyScene)Managers.UI.SceneUI;
 		lobbyScene.CustermizePopup.OnRecvCustermizePacket();
     }
+
+	public static void L_SaveInfoHandler(PacketSession session, IMessage packet)
+	{
+		L_SaveInfo saveInfoPacket = (L_SaveInfo)packet;
+
+		UI_LobbyScene lobbyScene = (UI_LobbyScene)Managers.UI.SceneUI;
+		lobbyScene.InfoPopup.OnRecvSaveInfoPacket(saveInfoPacket);
+	}
+
+	public static void L_FriendListHandler(PacketSession session, IMessage packet)
+	{
+		L_FriendList friendListPacket = (L_FriendList)packet;
+
+		UI_LobbyScene lobbyScene = (UI_LobbyScene)Managers.UI.SceneUI;
+		lobbyScene.FriendPopup.OnRecvFriendListPacket(friendListPacket);
+	}
+
+	public static void L_AddFriendHandler(PacketSession session, IMessage packet)
+    {
+		L_AddFriend addFriendPacket = (L_AddFriend)packet;
+		UI_LobbyScene lobbyScene = (UI_LobbyScene)Managers.UI.SceneUI;
+		lobbyScene.FriendPopup.FriendAddPopup.OnRecvAddFriendPacket(addFriendPacket);
+	}
+
+	public static void L_FriendRequestListHandler(PacketSession session, IMessage packet)
+    {
+		L_FriendRequestList friendRequestPacket = (L_FriendRequestList)packet;
+		UI_LobbyScene lobbyScene = (UI_LobbyScene)Managers.UI.SceneUI;
+		lobbyScene.FriendPopup.FriendRequestPopup.OnRecvFriendRequestListPacket(friendRequestPacket);
+	}
+
+	public static void L_AcceptFriendHandler(PacketSession session, IMessage packet)
+    {
+		L_AcceptFriend acceptFriendPacket = (L_AcceptFriend)packet;
+		UI_LobbyScene lobbyScene = (UI_LobbyScene)Managers.UI.SceneUI;
+		lobbyScene.FriendPopup.FriendRequestPopup.ReqeustSlots[acceptFriendPacket.Friend.Name].OnRecvAcceptFriendPacket(acceptFriendPacket);
+	}
+
+	public static void L_DeleteFriendHandler(PacketSession session, IMessage packet)
+    {
+		L_DeleteFriend deleteFriendPacket = (L_DeleteFriend)packet;
+
+		if (deleteFriendPacket.Success == false)
+        {
+			return;
+        }
+
+		UI_LobbyScene lobbyScene = (UI_LobbyScene)Managers.UI.SceneUI;
+		lobbyScene.FriendPopup.FriendSlots[deleteFriendPacket.FriendName].OnRecvDeleteFriendPacket();
+	}
 }

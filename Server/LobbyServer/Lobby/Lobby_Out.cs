@@ -8,10 +8,16 @@ using System.Text;
 
 namespace LobbyServer
 {
-    public class Lobby : JobSerializer
+    public partial class Lobby : JobSerializer
     {
         public void EnterLobby(ClientSession session, string accountId, string name)
         {
+            // Update token validation
+            using (RedisDb redisDb = new RedisDb())
+            {
+                redisDb.Set($"{accountId}Where", "lobby");
+            }
+
             using (AppDbContext db = new AppDbContext())
             {
                 // Find player infomation 
@@ -38,8 +44,9 @@ namespace LobbyServer
             // Save player infomation in memory
             Player newPlayer = new Player()
             {
-                // TODO : 초기 플레이어 접속 정보 설정
                 PlayerDbId = playerDb.PlayerDbId,
+                AccountId = playerDb.Account.AccountId,
+                Name = playerDb.Account.Name,
                 Session = session,
                 HairType = playerDb.HairType,
                 FaceType = playerDb.FaceType,
@@ -57,6 +64,7 @@ namespace LobbyServer
                 L_EnterLobby enterPacket = new L_EnterLobby();
                 enterPacket.AccessOk = false;
                 session.Send(enterPacket);
+                Console.WriteLine("EnterLobby : already entered player");
             }
             /* enter success */
             else
@@ -75,25 +83,19 @@ namespace LobbyServer
             }
         }
 
-        public void LeaveLobby(int playerDbId)
+        public void LeaveLobby(int playerDbId, string accountId)
         {
+            // Remove client player
             if (PlayerManager.Instance.Remove(playerDbId) == false)
                 return;
 
+            // Update token validation
+            using (RedisDb redisDb = new RedisDb())
+            {
+                redisDb.Set($"{accountId}Where", "end");
+            }
 
             // TODO : 종료 전 DB 저장 및 패킷전송
-
-        }
-
-        public void HandleCustermize(ClientSession session, B_SaveCustermize packet)
-        {
-            DbTransaction.CustermizeWork(session, packet);
-        }
-        public void HandleCustermize_Step2(ClientSession session)
-        {
-            L_SaveCustermize custermizePacket = new L_SaveCustermize();
-            custermizePacket.SaveOk = true;
-            session.Send(custermizePacket);
         }
     }
 }

@@ -1,7 +1,10 @@
 ﻿using Google.Protobuf;
 using Google.Protobuf.Protocol;
+using Microsoft.EntityFrameworkCore;
+using Server.DB;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Server.Game
@@ -33,6 +36,10 @@ namespace Server.Game
                     S_EnterGame enterPacket = new S_EnterGame();
                     enterPacket.MyPlayer = myPlayer.ObjectInfo;
                     enterPacket.MyPlayer.PlayerInfo = myPlayer.PlayerInfo;
+                    foreach (PlayerInfo friend in myPlayer.Friends.Values)
+                    {
+                        enterPacket.Friends.Add(friend);
+                    }
                     myPlayer.Session.Send(enterPacket);
                 }
 
@@ -74,6 +81,21 @@ namespace Server.Game
                 if (_players.Remove(objectId, out player) == false)
                     return;
 
+                // Update token validation
+                string tokenKey;
+                using (AppDbContext db = new AppDbContext())
+                {
+                    AccountDb findAccount = db.Accounts
+                        .AsNoTracking()
+                        .Where(a => a.Name == player.Name)
+                        .FirstOrDefault();
+                    tokenKey = findAccount.AccountId;
+                }
+                using (RedisDb cache = new RedisDb())
+                {
+                    cache.Set($"{tokenKey}Where", "end");
+                }
+
                 // TODO : 종료 전 DB 저장
 
                 // 본인한테 정보 전송
@@ -81,14 +103,16 @@ namespace Server.Game
                     S_LeaveGame leavePacket = new S_LeaveGame();
                     player.Session.Send(leavePacket);
                 }
+
+                // 본인 정보 boradcast
+                {
+                    S_Despawn despawnPacket = new S_Despawn();
+                    despawnPacket.ObjectId = objectId;
+                    despawnPacket.Name = player.Name;
+                    Broadcast(despawnPacket);
+                }
             }
 
-            // 본인 정보 boradcast
-            {
-                S_Despawn despawnPacket = new S_Despawn();
-                despawnPacket.ObjectId = objectId;
-                Broadcast(despawnPacket);
-            }
         }
 
         public void HandleMove(Player myPlayer, C_Move packet)
