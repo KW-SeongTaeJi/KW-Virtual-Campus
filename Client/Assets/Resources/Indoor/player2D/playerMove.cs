@@ -14,6 +14,7 @@ public class playerMove : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
+
     }
 
     private void Start()
@@ -25,27 +26,28 @@ public class playerMove : MonoBehaviour
     {
         float h = 0;
         float v = 0;
+        bool isWalk = false;
 
         if (keyboard.leftArrowKey.isPressed)
         {
             h = -1;
             transform.localScale = new Vector3(-1f, 1f, 1f);
+            isWalk = true;
         }
             
         else if (keyboard.rightArrowKey.isPressed)
         {
             h = 1;
             transform.localScale = new Vector3(1f, 1f, 1f);
+            isWalk = true;
         }
 
 
         var curPos = transform.position;
 
         curPos += new Vector3(h,v, 0) * speed * Time.deltaTime;
-        //curPos.x = Clamp(curPos.x, -3.0f, 3.0f);
-        //curPos.y = Clamp(curPos.y, -5.5f, 5.5f);
 
-        animator.SetFloat("h", h);
+        animator.SetBool("isWalk", isWalk);
 
         transform.position = curPos;
 
