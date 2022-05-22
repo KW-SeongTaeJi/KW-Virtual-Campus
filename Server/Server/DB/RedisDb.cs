@@ -7,9 +7,8 @@ namespace Server.DB
 {
     public class RedisDb: IDisposable
     {
-        // TODO : Redis 커넥션 수정
-        //static string redisConnectionString = "localhost:6379";
-        static string redisConnectionString = "52.78.191.67:6379,password=rlaalsxo";
+        static string redisConnectionString = "localhost:6379";
+        //static string redisConnectionString = "52.78.191.67:6379,password=rlaalsxo";
         ConnectionMultiplexer redisConnection;
         IDatabase redisDb;
 

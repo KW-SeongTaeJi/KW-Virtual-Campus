@@ -47,10 +47,6 @@ namespace LobbyServer
             // Set localhost ipv4 address
             string host = Dns.GetHostName();
             IPHostEntry ipHost = Dns.GetHostEntry(host);
-            foreach (IPAddress ip in ipHost.AddressList)
-            {
-                Console.WriteLine(ip);
-            }
             IPAddress ipAddr = null;
             foreach (IPAddress ip in ipHost.AddressList)
             {
@@ -62,8 +58,6 @@ namespace LobbyServer
                 }
             }
             IPEndPoint endPoint = new IPEndPoint(ipAddr, 4000);
-
-            
 
             // N Threads : Receive Packet
             _listener.Init(endPoint, () => { return SessionManager.Instance.GenerateSession(); });

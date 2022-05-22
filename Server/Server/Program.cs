@@ -38,10 +38,6 @@ namespace Server
             // Set localhost ipv4 address
             string host = Dns.GetHostName();
             IPHostEntry ipHost = Dns.GetHostEntry(host);
-            foreach (IPAddress ip in ipHost.AddressList)
-            {
-                Console.WriteLine(ip);
-            }
             IPAddress ipAddr = null;
             foreach (IPAddress ip in ipHost.AddressList)
             {
@@ -49,6 +45,7 @@ namespace Server
                 {
                     ipAddr = ip;
                     Console.WriteLine(ip);
+                    break;
                 }
             }
             IPEndPoint endPoint = new IPEndPoint(ipAddr, 8000);

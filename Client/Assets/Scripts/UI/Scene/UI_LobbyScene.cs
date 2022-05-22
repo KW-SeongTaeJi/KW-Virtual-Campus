@@ -83,8 +83,16 @@ public class UI_LobbyScene : UI_Scene
         // TODO : 주소 재배치
         string host = Dns.GetHostName();
         IPHostEntry ipHost = Dns.GetHostEntry(host);
-        //IPAddress ipAddr = ipHost.AddressList[0];
-        IPAddress ipAddr = IPAddress.Parse("54.180.31.154");
+        IPAddress ipAddr = null;
+        foreach (IPAddress ip in ipHost.AddressList)
+        {
+            if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+            {
+                ipAddr = ip;
+                break;
+            }
+        }
+        //IPAddress ipAddr = IPAddress.Parse("54.180.31.154");
         ChannelInfo channel = new ChannelInfo()
         {
             IpAddress = ipAddr.ToString(),

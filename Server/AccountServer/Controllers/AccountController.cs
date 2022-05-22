@@ -117,8 +117,16 @@ namespace AccountServer.Controllers
 
             string host = Dns.GetHostName();
             IPHostEntry ipHost = Dns.GetHostEntry(host);
-            //IPAddress ipAddr = ipHost.AddressList[0];
-            IPAddress ipAddr = IPAddress.Parse("52.78.163.252");  // ec2 public ip
+            IPAddress ipAddr = null;
+            foreach (IPAddress ip in ipHost.AddressList)
+            {
+                if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                {
+                    ipAddr = ip;
+                    break;
+                }
+            }
+            //IPAddress ipAddr = IPAddress.Parse("52.78.163.252");  // AWS ec2 public ip
             res.Channel = new ChannelInfo()
             {
                 IpAddress = ipAddr.ToString(),
