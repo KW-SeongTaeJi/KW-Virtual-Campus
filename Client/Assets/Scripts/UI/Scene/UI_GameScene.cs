@@ -109,7 +109,8 @@ public class UI_GameScene : UI_Scene
     {
         string host = Dns.GetHostName();
         IPHostEntry ipHost = Dns.GetHostEntry(host);
-        IPAddress ipAddr = ipHost.AddressList[0];
+        //IPAddress ipAddr = ipHost.AddressList[0];
+        IPAddress ipAddr = IPAddress.Parse("52.78.163.252");
         ChannelInfo channel = new ChannelInfo()
         {
             IpAddress = ipAddr.ToString(),
@@ -176,6 +177,9 @@ public class UI_GameScene : UI_Scene
 
     public void SetFriendList()
     {
+        int curWidth = Screen.width;
+        int curHeight = Screen.height;
+        Screen.SetResolution(1920, 1080, Screen.fullScreenMode);
         foreach (FriendInfo friend in Managers.Object.MyPlayer.Friends.Values)
         {
             UI_FriendListSlot friendSlot = Managers.Resource.Instantiate("UI/Popup/UI_FriendListSlot").GetComponent<UI_FriendListSlot>();
@@ -183,6 +187,7 @@ public class UI_GameScene : UI_Scene
             friendSlot.SetFriendInfo(friend);
             FriendListSlots.Add(friend.Name, friendSlot);
         }
+        Screen.SetResolution(curWidth, curHeight, Screen.fullScreenMode);
     }
 
     void HandleEnter()

@@ -43,6 +43,9 @@ public class UI_FriendRequestPopup : UI_Popup
 
     public void OnRecvFriendRequestListPacket(L_FriendRequestList packet)
     {
+        int curWidth = Screen.width;
+        int curHeight = Screen.height;
+        Screen.SetResolution(1920, 1080, Screen.fullScreenMode);
         // Set friends request list
         foreach (string name in packet.FriendNames)
         {
@@ -51,6 +54,7 @@ public class UI_FriendRequestPopup : UI_Popup
             requestSlot.SetFriendName(name);
             ReqeustSlots.Add(name, requestSlot);
         }
+        Screen.SetResolution(curWidth, curHeight, Screen.fullScreenMode);
 
         // Close loading UI 
         UI_Popup requestPopup = Managers.UI.PopupUIStack.Pop();

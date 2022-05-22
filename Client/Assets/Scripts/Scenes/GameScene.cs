@@ -15,9 +15,12 @@ public class GameScene : BaseScene
 
         SceneType = Define.Scene.Game;
 
+        int curWidth = Screen.width;
+        int curHeight = Screen.height;
         Screen.SetResolution(1920, 1080, Screen.fullScreenMode);
-
         _sceneUI = Managers.UI.ShowSceneUI<UI_GameScene>();
+
+        Screen.SetResolution(curWidth, curHeight, Screen.fullScreenMode);
 
         _input = GetComponent<MyPlayerInput>();
     }
