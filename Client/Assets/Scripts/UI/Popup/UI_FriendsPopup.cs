@@ -59,6 +59,9 @@ public class UI_FriendsPopup : UI_Popup
 
     public void OnRecvFriendListPacket(L_FriendList packet)
     {
+        int curWidth = Screen.width;
+        int curHeight = Screen.height;
+        Screen.SetResolution(1920, 1080, Screen.fullScreenMode);
         // Set friends list
         PlayerInfo playerInfo = ((LobbyScene)Managers.SceneLoad.CurrentScene).PlayerInfo;
         playerInfo.Friends.Clear();
@@ -78,6 +81,7 @@ public class UI_FriendsPopup : UI_Popup
             playerInfo.Friends.Add(friend.Name, friend);
             AddFriendSlot(friend);
         }
+        Screen.SetResolution(curWidth, curHeight, Screen.fullScreenMode);
 
         // Close loading UI 
         UI_Popup friendPopup = Managers.UI.PopupUIStack.Pop();

@@ -114,10 +114,11 @@ namespace AccountServer.Controllers
             res.AccountId = account.AccountId;
             res.Token = newToken;
             res.Name = account.Name;
-            // TODO : 채널 주소 정보 수정
+
             string host = Dns.GetHostName();
             IPHostEntry ipHost = Dns.GetHostEntry(host);
-            IPAddress ipAddr = ipHost.AddressList[0];
+            //IPAddress ipAddr = ipHost.AddressList[0];
+            IPAddress ipAddr = IPAddress.Parse("52.78.163.252");  // ec2 public ip
             res.Channel = new ChannelInfo()
             {
                 IpAddress = ipAddr.ToString(),

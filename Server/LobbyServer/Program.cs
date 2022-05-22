@@ -44,11 +44,26 @@ namespace LobbyServer
 
         static void Main(string[] args)
         {
-            // TODO : 접속 주소 변경
+            // Set localhost ipv4 address
             string host = Dns.GetHostName();
             IPHostEntry ipHost = Dns.GetHostEntry(host);
-            IPAddress ipAddr = ipHost.AddressList[0];
+            foreach (IPAddress ip in ipHost.AddressList)
+            {
+                Console.WriteLine(ip);
+            }
+            IPAddress ipAddr = null;
+            foreach (IPAddress ip in ipHost.AddressList)
+            {
+                if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                {
+                    ipAddr = ip;
+                    Console.WriteLine(ip);
+                    break;
+                }
+            }
             IPEndPoint endPoint = new IPEndPoint(ipAddr, 4000);
+
+            
 
             // N Threads : Receive Packet
             _listener.Init(endPoint, () => { return SessionManager.Instance.GenerateSession(); });
