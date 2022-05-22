@@ -1,12 +1,24 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 1020e824c0e16244792785c6eb93bf8a
+=======
+<<<<<<< HEAD:develop/Building_Inside/Library/PackageCache/com.unity.collab-proxy@1.15.7/Editor/PlasticSCM/Assets/Images/d_iconaddedlocal.png.meta
+guid: 0c6a2a64ca9f9c946a7dbbd1674cf5bd
+=======
+guid: 1020e824c0e16244792785c6eb93bf8a
+>>>>>>> e7645a8df5ea0276289f8db2e3ff5ddd20220494:develop/Building_Inside/Assets/Resources/Assets/ICON/1-01.png.meta
+>>>>>>> e7645a8df5ea0276289f8db2e3ff5ddd20220494
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
     mipMapMode: 0
+<<<<<<< HEAD
     enableMipMap: 1
+=======
+    enableMipMap: 0
+>>>>>>> e7645a8df5ea0276289f8db2e3ff5ddd20220494
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -28,7 +40,15 @@ TextureImporter:
   generateCubemap: 6
   cubemapConvolution: 0
   seamlessCubemap: 0
+<<<<<<< HEAD
   textureFormat: -1
+=======
+<<<<<<< HEAD:develop/Building_Inside/Library/PackageCache/com.unity.collab-proxy@1.15.7/Editor/PlasticSCM/Assets/Images/d_iconaddedlocal.png.meta
+  textureFormat: 1
+=======
+  textureFormat: -1
+>>>>>>> e7645a8df5ea0276289f8db2e3ff5ddd20220494:develop/Building_Inside/Assets/Resources/Assets/ICON/1-01.png.meta
+>>>>>>> e7645a8df5ea0276289f8db2e3ff5ddd20220494
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
@@ -61,7 +81,11 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
+<<<<<<< HEAD
   applyGammaDecoding: 1
+=======
+  applyGammaDecoding: 0
+>>>>>>> e7645a8df5ea0276289f8db2e3ff5ddd20220494
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform

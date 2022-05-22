@@ -7,6 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_Name: Blue
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
@@ -15,6 +16,21 @@ Material:
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
+=======
+<<<<<<< HEAD:develop/Building_Inside/Assets/Mirror/Examples/AdditiveLevels/Materials/Portal.mat
+  m_Name: Portal
+=======
+  m_Name: Blue
+>>>>>>> e7645a8df5ea0276289f8db2e3ff5ddd20220494:develop/Building_Inside/Assets/Mirror/Examples/RigidbodyPhysics/Materials/Blue.mat
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _GLOSSYREFLECTIONS_OFF _SPECULARHIGHLIGHTS_OFF
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 3000
+  stringTagMap:
+    RenderType: Transparent
+>>>>>>> e7645a8df5ea0276289f8db2e3ff5ddd20220494
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -59,6 +75,7 @@ Material:
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
+<<<<<<< HEAD
     - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.816
@@ -74,4 +91,30 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0, g: 0.26089263, b: 1, a: 1}
+=======
+    - _DstBlend: 10
+    - _GlossMapScale: 1
+<<<<<<< HEAD:develop/Building_Inside/Assets/Mirror/Examples/AdditiveLevels/Materials/Portal.mat
+    - _Glossiness: 1
+    - _GlossyReflections: 0
+=======
+    - _Glossiness: 0.816
+    - _GlossyReflections: 1
+>>>>>>> e7645a8df5ea0276289f8db2e3ff5ddd20220494:develop/Building_Inside/Assets/Mirror/Examples/RigidbodyPhysics/Materials/Blue.mat
+    - _Metallic: 0
+    - _Mode: 3
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 0
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 0
+    m_Colors:
+<<<<<<< HEAD:develop/Building_Inside/Assets/Mirror/Examples/AdditiveLevels/Materials/Portal.mat
+    - _Color: {r: 0.54901963, g: 0.54901963, b: 1, a: 0.23529412}
+=======
+    - _Color: {r: 0, g: 0.26089263, b: 1, a: 1}
+>>>>>>> e7645a8df5ea0276289f8db2e3ff5ddd20220494:develop/Building_Inside/Assets/Mirror/Examples/RigidbodyPhysics/Materials/Blue.mat
+>>>>>>> e7645a8df5ea0276289f8db2e3ff5ddd20220494
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

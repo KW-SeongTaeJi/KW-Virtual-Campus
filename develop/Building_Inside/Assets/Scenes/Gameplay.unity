@@ -131,15 +131,26 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< HEAD
+<<<<<<<< HEAD:develop/Building_Inside/Assets/Scenes/Gameplay.unity
+  - component: {fileID: 722850010}
+  - component: {fileID: 722850009}
+========
+=======
 <<<<<<< HEAD:Client/Assets/Scenes/Login.unity
+>>>>>>> e7645a8df5ea0276289f8db2e3ff5ddd20220494
   - component: {fileID: 41920243}
   - component: {fileID: 41920242}
   - component: {fileID: 41920245}
   - component: {fileID: 41920244}
+<<<<<<< HEAD
+>>>>>>>> e7645a8df5ea0276289f8db2e3ff5ddd20220494:Client/Assets/Scenes/Login.unity
+=======
 =======
   - component: {fileID: 722850010}
   - component: {fileID: 722850009}
 >>>>>>> 565bc18df547cd2dd9feea031e334d2c42043702:develop/Building_Inside/Assets/Scenes/Gameplay.unity
+>>>>>>> e7645a8df5ea0276289f8db2e3ff5ddd20220494
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -221,7 +232,15 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+<<<<<<< HEAD
+<<<<<<<< HEAD:develop/Building_Inside/Assets/Scenes/Gameplay.unity
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &820840408
+========
+=======
 <<<<<<< HEAD:Client/Assets/Scenes/Login.unity
+>>>>>>> e7645a8df5ea0276289f8db2e3ff5ddd20220494
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &41920244
@@ -315,11 +334,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1291375275
+<<<<<<< HEAD
+>>>>>>>> e7645a8df5ea0276289f8db2e3ff5ddd20220494:Client/Assets/Scenes/Login.unity
+=======
 =======
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &820840408
 >>>>>>> 565bc18df547cd2dd9feea031e334d2c42043702:develop/Building_Inside/Assets/Scenes/Gameplay.unity
+>>>>>>> e7645a8df5ea0276289f8db2e3ff5ddd20220494
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

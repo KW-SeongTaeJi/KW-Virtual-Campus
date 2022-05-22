@@ -1,7 +1,19 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: a1ac2873c4eb8d64db33d7df8acb9188
 folderAsset: yes
 timeCreated: 1497127550
+=======
+<<<<<<< HEAD:develop/Building_Inside/Library/PackageCache/com.unity.2d.spriteshape@5.1.7/Samples~/Extras/Sprites.meta
+guid: 5e7111d750837fe4e9af7b360e7d667c
+folderAsset: yes
+timeCreated: 1475184630
+=======
+guid: a1ac2873c4eb8d64db33d7df8acb9188
+folderAsset: yes
+timeCreated: 1497127550
+>>>>>>> e7645a8df5ea0276289f8db2e3ff5ddd20220494:develop/Building_Inside/Assets/Mirror/Examples/AdditiveLevels/Textures.meta
+>>>>>>> e7645a8df5ea0276289f8db2e3ff5ddd20220494
 licenseType: Store
 DefaultImporter:
   userData: 

@@ -48,6 +48,88 @@ public class OpenURL : MonoBehaviour
     }
 
 
+<<<<<<< HEAD
+    // Bima Professor
+    public void Professor_Electronic_URL()
+    {
+        Application.OpenURL("https://ee.kw.ac.kr/HTML/member/professor.php");
+    }
+    public void Professor_Elec_Communication_URL()
+    {
+        Application.OpenURL("https://elcomm.kw.ac.kr/introduction/professor.php");
+    }
+    public void Professor_Elec_Convergence_URL()
+    {
+        Application.OpenURL("https://radiowave.kw.ac.kr/research/professor.php");
+    }
+    public void Professor_Eletric_URL()
+    {
+        Application.OpenURL("https://electric.kw.ac.kr/department_introduction/professor_info_list.php");
+    }
+    public void Professor_Elec_Material_URL()
+    {
+        Application.OpenURL("https://snme.kw.ac.kr/professor_info/professor_info_list.php");
+    }
+    public void Professor_RoboticURL()
+    {
+        Application.OpenURL("https://cni.kw.ac.kr/member/professor_info_list.php");
+    }
+
+
+    //Bima Curriculum
+    public void Curriculum_Electronic_URL()
+    {
+        Application.OpenURL("https://ee.kw.ac.kr/HTML/edu/undergrad_introduction.php");
+    }
+    public void Curriculum_Elec_Communication_URL()
+    {
+        Application.OpenURL("https://elcomm.kw.ac.kr/introduction/subject.php");
+    }
+    public void Curriculum_Elec_Convergence_URL()
+    {
+        Application.OpenURL("https://radiowave.kw.ac.kr/edu/subject.php");
+    }
+    public void Curriculum_Eletric_URL()
+    {
+        Application.OpenURL("https://electric.kw.ac.kr/department_introduction/subject_guide.php");
+    }
+    public void Curriculum_Elec_Material_URL()
+    {
+        Application.OpenURL("https://snme.kw.ac.kr/department_introduction/subject_2.php");
+    }
+    public void Curriculum_RoboticURL()
+    {
+        Application.OpenURL("https://cni.kw.ac.kr/department/control.php");
+    }
+
+    //Bima Notice
+    public void Notice_Electronic_URL()
+    {
+        Application.OpenURL("https://ee.kw.ac.kr/HTML/department/undergrad_info.php");
+    }
+    public void Notice_Elec_Communication_URL()
+    {
+        Application.OpenURL("https://elcomm.kw.ac.kr/department/office_notice.php");
+    }
+    public void Notice_Elec_Convergence_URL()
+    {
+        Application.OpenURL("https://radiowave.kw.ac.kr/community/s_notice.php");
+    }
+    public void Notice_Eletric_URL()
+    {
+        Application.OpenURL("https://electric.kw.ac.kr/community/s_notice.php");
+    }
+    public void Notice_Elec_Material_URL()
+    {
+        Application.OpenURL("https://snme.kw.ac.kr/college/college_notice.php");
+    }
+    public void Notice_RoboticURL()
+    {
+        Application.OpenURL("https://cni.kw.ac.kr/department/control.php");
+    }
+
+=======
+>>>>>>> e7645a8df5ea0276289f8db2e3ff5ddd20220494
 
 
 
