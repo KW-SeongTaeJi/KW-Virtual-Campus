@@ -1,0 +1,25 @@
+{
+<<<<<<< HEAD
+    "name": "HeathenEngineering.UX",
+    "references": [
+        "GUID:58d42c70423577947911995925414405",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
+=======
+    "name": "Mirror.Examples",
+    "references": [
+        "Mirror",
+        "Mirror.Components",
+        "Unity.TextMeshPro"
+>>>>>>> e7645a8df5ea0276289f8db2e3ff5ddd20220494
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
