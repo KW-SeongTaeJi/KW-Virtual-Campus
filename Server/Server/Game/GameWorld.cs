@@ -248,34 +248,34 @@ namespace Server.Game
             switch (session.MyPlayer.Place)
             {
                 case Place.IndoorBima:
-                    session.MyPlayer.Position.X = -25;
-                    session.MyPlayer.Position.Y = 14;
-                    session.MyPlayer.Position.Z = -25;
+                    session.MyPlayer.Position.X = 53;
+                    session.MyPlayer.Position.Y = 20;
+                    session.MyPlayer.Position.Z = -72;
                     break;
                 case Place.IndoorHanwool:
-                    session.MyPlayer.Position.X = -25;
-                    session.MyPlayer.Position.Y = 14;
-                    session.MyPlayer.Position.Z = -25;
+                    session.MyPlayer.Position.X = -140;
+                    session.MyPlayer.Position.Y = 6;
+                    session.MyPlayer.Position.Z = -15;
                     break;
                 case Place.IndoorHwado:
-                    session.MyPlayer.Position.X = -25;
-                    session.MyPlayer.Position.Y = 14;
-                    session.MyPlayer.Position.Z = -25;
+                    session.MyPlayer.Position.X = 30;
+                    session.MyPlayer.Position.Y = 24;
+                    session.MyPlayer.Position.Z = 68;
                     break;
                 case Place.IndoorLibrary:
-                    session.MyPlayer.Position.X = -25;
-                    session.MyPlayer.Position.Y = 14;
-                    session.MyPlayer.Position.Z = -25;
+                    session.MyPlayer.Position.X = -71;
+                    session.MyPlayer.Position.Y = 7;
+                    session.MyPlayer.Position.Z = -5;
                     break;
                 case Place.IndoorOgui:
                     session.MyPlayer.Position.X = -25;
                     session.MyPlayer.Position.Y = 14;
-                    session.MyPlayer.Position.Z = -25;
+                    session.MyPlayer.Position.Z = -144;
                     break;
                 case Place.IndoorSaebit:
-                    session.MyPlayer.Position.X = -25;
-                    session.MyPlayer.Position.Y = 14;
-                    session.MyPlayer.Position.Z = -25;
+                    session.MyPlayer.Position.X = -26;
+                    session.MyPlayer.Position.Y = 96;
+                    session.MyPlayer.Position.Z = -120;
                     break;
             }
             session.MyPlayer.Place = Place.Outdoor;

@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Ball
   - GoalNet
+  - Floor
+  - Fire
+  - CinemachineTarget
   layers:
   - Default
   - TransparentFX
@@ -13,7 +16,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Building
   - 
   - 
   - 

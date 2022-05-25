@@ -19,6 +19,9 @@ public class MyPlayerController : PlayerController
     [SerializeField, Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
     protected GameObject cinemachineCameraTarget;
 
+    [SerializeField]
+    private LayerMask buildingLayer;
+
     // cinemachine
     protected float _cinemachineTargetYaw;
     protected float _cinemachineTargetPitch;
@@ -49,6 +52,7 @@ public class MyPlayerController : PlayerController
         GroundedCheck();
         JumpAndGravity();
         Move();
+        RaycastBuilding();
         CheckChanges();
     }
 
@@ -175,6 +179,40 @@ public class MyPlayerController : PlayerController
         {
             _animator.SetFloat(_animIDSpeed, _animationBlend);
             _animator.SetFloat(_animIDMotionSpeed, 1.0f);
+        }
+    }
+
+    void RaycastBuilding()
+    {
+        RaycastHit hit;
+        //Debug.DrawRay(transform.position, (transform.forward + new Vector3(0, 0.2f, 0)) * 50, Color.red);
+        if (Physics.Raycast(transform.position, transform.forward + new Vector3(0,0.2f,0), out hit, 50, buildingLayer))
+        {
+            switch (hit.transform.name)
+            {
+                case "비마":
+                    ((UI_GameScene)Managers.UI.SceneUI).SetBuildingButton("비마관");
+                    break;
+                case "한울":
+                    ((UI_GameScene)Managers.UI.SceneUI).SetBuildingButton("한울관");
+                    break;
+                case "화도":
+                    ((UI_GameScene)Managers.UI.SceneUI).SetBuildingButton("화도관");
+                    break;
+                case "중앙도서관":
+                    ((UI_GameScene)Managers.UI.SceneUI).SetBuildingButton("중앙도서관");
+                    break;
+                case "옥의":
+                    ((UI_GameScene)Managers.UI.SceneUI).SetBuildingButton("옥의관");
+                    break;
+                case "새빛":
+                    ((UI_GameScene)Managers.UI.SceneUI).SetBuildingButton("새빛관");
+                    break;
+            }
+        }
+        else
+        {
+            ((UI_GameScene)Managers.UI.SceneUI).UnsetBuildingButton();
         }
     }
 
