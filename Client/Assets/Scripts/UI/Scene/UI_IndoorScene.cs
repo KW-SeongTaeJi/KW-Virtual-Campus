@@ -22,6 +22,11 @@ public class UI_IndoorScene : UI_Scene
         ExitButton,
         FriendListButton,
         ChatLogButton,
+        BuildingButton
+    }
+    enum Texts
+    {
+        BuildingTitleText
     }
 
     bool _prevEnter = false;
@@ -44,34 +49,41 @@ public class UI_IndoorScene : UI_Scene
     {
         base.Init();
 
+        // Bind UI
+        Bind<Button>(typeof(Buttons));
+        Bind<TMP_InputField>(typeof(InputFields));
+        Bind<TextMeshProUGUI>(typeof(Texts));
+
         BaseScene currentScene = Managers.SceneLoad.CurrentScene;
         switch (currentScene.SceneType)
         {
             case Define.Scene.IndoorBima:
                 _input = ((IndoorScene_Bima)currentScene).GetComponent<MyIndoorPlayerInput>();
+                Get<TextMeshProUGUI>((int)Texts.BuildingTitleText).text = "비마관";
                 break;
             case Define.Scene.IndoorHanwool:
                 _input = ((IndoorScene_Hanwool)currentScene).GetComponent<MyIndoorPlayerInput>();
+                Get<TextMeshProUGUI>((int)Texts.BuildingTitleText).text = "한울관";
                 break;
             case Define.Scene.IndoorHwado:
                 _input = ((IndoorScene_Hwado)currentScene).GetComponent<MyIndoorPlayerInput>();
+                Get<TextMeshProUGUI>((int)Texts.BuildingTitleText).text = "화도관";
                 break;
             case Define.Scene.IndoorLibrary:
                 _input = ((IndoorScene_Library)currentScene).GetComponent<MyIndoorPlayerInput>();
+                Get<TextMeshProUGUI>((int)Texts.BuildingTitleText).text = "중앙도서관";
                 break;
             case Define.Scene.IndoorOgui:
                 _input = ((IndoorScene_Ogui)currentScene).GetComponent<MyIndoorPlayerInput>();
+                Get<TextMeshProUGUI>((int)Texts.BuildingTitleText).text = "옥의";
                 break;
             case Define.Scene.IndoorSaebit:
                 _input = ((IndoorScene_Saebit)currentScene).GetComponent<MyIndoorPlayerInput>();
+                Get<TextMeshProUGUI>((int)Texts.BuildingTitleText).text = "새빛";
                 break;
         }
         _content = gameObject.FindChild<Transform>("Content", true);
         FriendListPanel = gameObject.FindChild("FriendListPanel");
-
-        // Bind UI
-        Bind<Button>(typeof(Buttons));
-        Bind<TMP_InputField>(typeof(InputFields));
 
         // Bind button event
         GetButton((int)Buttons.HelpButton).gameObject.BindEvent(OnClickHelpButton, Define.UIEvent.Click);
@@ -80,6 +92,7 @@ public class UI_IndoorScene : UI_Scene
         GetButton((int)Buttons.ExitButton).gameObject.BindEvent(OnClickExitButton, Define.UIEvent.Click);
         GetButton((int)Buttons.FriendListButton).gameObject.BindEvent(OnClickFriendListButton, Define.UIEvent.Click);
         GetButton((int)Buttons.ChatLogButton).gameObject.BindEvent(OnClickChatLogButton, Define.UIEvent.Click);
+        GetButton((int)Buttons.BuildingButton).gameObject.BindEvent(OnClickBuildingButton, Define.UIEvent.Click);
 
         // Binc chatting event
         ChatInputField = Get<TMP_InputField>((int)InputFields.ChatInputField);
@@ -133,6 +146,32 @@ public class UI_IndoorScene : UI_Scene
     public void OnClickChatLogButton(PointerEventData evt)
     {
 
+    }
+
+    public void OnClickBuildingButton(PointerEventData evt)
+    {
+        string building = Get<TextMeshProUGUI>((int)Texts.BuildingTitleText).text;
+        switch (building)
+        {
+            case "비마관":
+                Managers.UI.ShowPopupUI<UI_SaebitIntroPopup>();
+                break;
+            case "화도관":
+                Managers.UI.ShowPopupUI<UI_HwadoIntroPopup>();
+                break;
+            case "한울관":
+                Managers.UI.ShowPopupUI<UI_HanwoolIntroPopup>();
+                break;
+            case "중앙도서관":
+                Managers.UI.ShowPopupUI<UI_LibraryIntroPopup>();
+                break;
+            case "옥의관":
+                Managers.UI.ShowPopupUI<UI_OguiIntroPopup>();
+                break;
+            case "새빛관":
+                Managers.UI.ShowPopupUI<UI_SaebitIntroPopup>();
+                break;
+        }
     }
 
     void OnSubmitChat()

@@ -48,7 +48,6 @@ public class OpenURL : MonoBehaviour
     }
 
 
-<<<<<<< HEAD
     // Bima Professor
     public void Professor_Electronic_URL()
     {
@@ -128,8 +127,6 @@ public class OpenURL : MonoBehaviour
         Application.OpenURL("https://cni.kw.ac.kr/department/control.php");
     }
 
-=======
->>>>>>> e7645a8df5ea0276289f8db2e3ff5ddd20220494
 
 
 

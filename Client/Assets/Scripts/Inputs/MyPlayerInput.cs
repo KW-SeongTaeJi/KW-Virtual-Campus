@@ -94,42 +94,42 @@ public class MyPlayerInput : MonoBehaviour
 
 	public void OnOne(InputAction.CallbackContext value)
 	{
-		if (_gameSceneUI.Alert2Popup == null)
+		if (_gameSceneUI.Alert2Popup == null && _gameSceneUI.ChatInputField.isFocused == false)
 			OneInput(value.action.triggered);
 		else
 			OneInput(false);
 	}
 	public void OnTwo(InputAction.CallbackContext value)
 	{
-		if (_gameSceneUI.Alert2Popup == null)
+		if (_gameSceneUI.Alert2Popup == null && _gameSceneUI.ChatInputField.isFocused == false)
 			TwoInput(value.action.triggered);
 		else
 			TwoInput(false);
 	}
 	public void OnThree(InputAction.CallbackContext value)
 	{
-		if (_gameSceneUI.Alert2Popup == null)
+		if (_gameSceneUI.Alert2Popup == null && _gameSceneUI.ChatInputField.isFocused == false)
 			ThreeInput(value.action.triggered);
 		else
 			ThreeInput(false);
 	}
 	public void OnFour(InputAction.CallbackContext value)
 	{
-		if (_gameSceneUI.Alert2Popup == null)
+		if (_gameSceneUI.Alert2Popup == null && _gameSceneUI.ChatInputField.isFocused == false)
 			FourInput(value.action.triggered);
 		else
 			FourInput(false);
 	}
 	public void OnFive(InputAction.CallbackContext value)
 	{
-		if (_gameSceneUI.Alert2Popup == null)
+		if (_gameSceneUI.Alert2Popup == null && _gameSceneUI.ChatInputField.isFocused == false)
 			FiveInput(value.action.triggered);
 		else
 			FiveInput(false);
 	}
 	public void OnSix(InputAction.CallbackContext value)
 	{
-		if (_gameSceneUI.Alert2Popup == null)
+		if (_gameSceneUI.Alert2Popup == null && _gameSceneUI.ChatInputField.isFocused == false)
 			SixInput(value.action.triggered);
 		else
 			SixInput(false);

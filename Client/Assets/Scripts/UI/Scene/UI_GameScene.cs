@@ -34,6 +34,11 @@ public class UI_GameScene : UI_Scene
         ExitButton,
         FriendListButton,
         ChatLogButton,
+        BuildingButton
+    }
+    enum Texts
+    {
+        BuildingTitleText
     }
 
     bool _prevEnter = false;
@@ -76,6 +81,7 @@ public class UI_GameScene : UI_Scene
         // Bind UI
         Bind<Button>(typeof(Buttons));
         Bind<TMP_InputField>(typeof(InputFields));
+        Bind<TextMeshProUGUI>(typeof(Texts));
 
         // Bind button event
         GetButton((int)Buttons.HelpButton).gameObject.BindEvent(OnClickHelpButton, Define.UIEvent.Click);
@@ -84,7 +90,8 @@ public class UI_GameScene : UI_Scene
         GetButton((int)Buttons.ExitButton).gameObject.BindEvent(OnClickExitButton, Define.UIEvent.Click);
         GetButton((int)Buttons.FriendListButton).gameObject.BindEvent(OnClickFriendListButton, Define.UIEvent.Click);
         GetButton((int)Buttons.ChatLogButton).gameObject.BindEvent(OnClickChatLogButton, Define.UIEvent.Click);
-        
+        GetButton((int)Buttons.BuildingButton).gameObject.BindEvent(OnClickBuildingButton, Define.UIEvent.Click);
+
         // Bind button enter & exit event
         foreach (Buttons btnName in Enum.GetValues(typeof(Buttons)))
         {
@@ -165,6 +172,32 @@ public class UI_GameScene : UI_Scene
     {
 
     }
+    
+    public void OnClickBuildingButton(PointerEventData evt)
+    {
+        string building = Get<TextMeshProUGUI>((int)Texts.BuildingTitleText).text;
+        switch (building)
+        {
+            case "비마관":
+                Managers.UI.ShowPopupUI<UI_SaebitIntroPopup>();
+                break;
+            case "화도관":
+                Managers.UI.ShowPopupUI<UI_HwadoIntroPopup>();
+                break;
+            case "한울관":
+                Managers.UI.ShowPopupUI<UI_HanwoolIntroPopup>();
+                break;
+            case "중앙도서관":
+                Managers.UI.ShowPopupUI<UI_LibraryIntroPopup>();
+                break;
+            case "옥의관":
+                Managers.UI.ShowPopupUI<UI_OguiIntroPopup>();
+                break;
+            case "새빛관":
+                Managers.UI.ShowPopupUI<UI_SaebitIntroPopup>();
+                break;
+        }
+    }
 
     public void OnEnterEmotionButton(PointerEventData evt)
     {
@@ -199,6 +232,16 @@ public class UI_GameScene : UI_Scene
             friendSlot.SetFriendInfo(friend);
             FriendListSlots.Add(friend.Name, friendSlot);
         }
+    }
+
+    public void SetBuildingButton(string building)
+    {
+        GetButton((int)Buttons.BuildingButton).gameObject.SetActive(true);
+        Get<TextMeshProUGUI>((int)Texts.BuildingTitleText).text = building;
+    }
+    public void UnsetBuildingButton()
+    {
+        GetButton((int)Buttons.BuildingButton).gameObject.SetActive(false);
     }
 
     void HandleEnter()

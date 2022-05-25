@@ -264,6 +264,9 @@ MonoBehaviour:
   cameraAngleOverride: 0
   lockCameraPosition: 0
   cinemachineCameraTarget: {fileID: 209330296775549413}
+  buildingLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &6576399416771545464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1239,7 +1242,8 @@ MonoBehaviour:
   m_text: "\uD50C\uB808\uC774\uC5B4"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a3504e80a429fae42a238050f6c7e822, type: 2}
-  m_sharedMaterial: {fileID: 3208244171018209578, guid: a3504e80a429fae42a238050f6c7e822, type: 2}
+  m_sharedMaterial: {fileID: 3208244171018209578, guid: a3504e80a429fae42a238050f6c7e822,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1777,7 +1781,8 @@ MonoBehaviour:
   m_text: "\uC548\uB155\uD558\uC138\uC694. \uBC18\uAC00\uC6CC\uC694."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2ba7d002fddcdae4d8150610bb634366, type: 2}
-  m_sharedMaterial: {fileID: 2480664288694131381, guid: 2ba7d002fddcdae4d8150610bb634366, type: 2}
+  m_sharedMaterial: {fileID: 2480664288694131381, guid: 2ba7d002fddcdae4d8150610bb634366,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

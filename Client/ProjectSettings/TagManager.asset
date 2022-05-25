@@ -4,8 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Ball
+  - GoalNet
   - Floor
-  - Light
+  - Fire
   - CinemachineTarget
   layers:
   - Default
@@ -14,7 +16,7 @@ TagManager:
   - 
   - Water
   - UI
-  - Player
+  - Building
   - 
   - 
   - 

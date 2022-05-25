@@ -1,13 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-<<<<<<< HEAD:develop/Building_Inside/Assets/Mirror/Examples/MultipleAdditiveScenes/Materials.meta
 guid: ef54d3fc8c3b6c845bb29f2d04ea7edb
-=======
-guid: 7ef7a74859259a546b73ed820e449ae8
->>>>>>> e7645a8df5ea0276289f8db2e3ff5ddd20220494:develop/Building_Inside/Assets/Mirror/Examples/AdditiveScenes/Materials.meta
-=======
-guid: ef54d3fc8c3b6c845bb29f2d04ea7edb
->>>>>>> e7645a8df5ea0276289f8db2e3ff5ddd20220494
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
