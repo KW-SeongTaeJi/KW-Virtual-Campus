@@ -4,9 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Floor
-  - Light
-  - CinemachineTarget
+  - Ball
+  - GoalNet
   layers:
   - Default
   - TransparentFX
@@ -14,7 +13,7 @@ TagManager:
   - 
   - Water
   - UI
-  - Player
+  - 
   - 
   - 
   - 
