@@ -52,7 +52,7 @@ public class UI_CustermizePopup : UI_Popup
     UI_AlertPopup _alertPopup;
     UI_LoadingCirclePopup _loadingPopup;
  
-    PlayerInfo playerInfo;
+    Player playerInfo;
 
     HairType _realHairType;
     FaceType _realFaceType;

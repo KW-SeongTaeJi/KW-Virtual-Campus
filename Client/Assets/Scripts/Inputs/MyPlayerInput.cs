@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TMPro;
 
 public class MyPlayerInput : MonoBehaviour
 {
@@ -13,6 +12,13 @@ public class MyPlayerInput : MonoBehaviour
 	public bool Sprint { get; set; }
 	public bool Enter { get; set; }
 	public bool Tap { get; set; }
+	public bool One { get; set; }
+	public bool Two { get; set; }
+	public bool Three { get; set; }
+	public bool Four { get; set; }
+	public bool Five { get; set; }
+	public bool Six { get; set; }
+
 
 	// Mouse Cursor Settings
 	bool _cursorLock;
@@ -86,6 +92,49 @@ public class MyPlayerInput : MonoBehaviour
 		TapInput(value.action.ReadValue<float>() == 1);
 	}
 
+	public void OnOne(InputAction.CallbackContext value)
+	{
+		if (_gameSceneUI.Alert2Popup == null)
+			OneInput(value.action.triggered);
+		else
+			OneInput(false);
+	}
+	public void OnTwo(InputAction.CallbackContext value)
+	{
+		if (_gameSceneUI.Alert2Popup == null)
+			TwoInput(value.action.triggered);
+		else
+			TwoInput(false);
+	}
+	public void OnThree(InputAction.CallbackContext value)
+	{
+		if (_gameSceneUI.Alert2Popup == null)
+			ThreeInput(value.action.triggered);
+		else
+			ThreeInput(false);
+	}
+	public void OnFour(InputAction.CallbackContext value)
+	{
+		if (_gameSceneUI.Alert2Popup == null)
+			FourInput(value.action.triggered);
+		else
+			FourInput(false);
+	}
+	public void OnFive(InputAction.CallbackContext value)
+	{
+		if (_gameSceneUI.Alert2Popup == null)
+			FiveInput(value.action.triggered);
+		else
+			FiveInput(false);
+	}
+	public void OnSix(InputAction.CallbackContext value)
+	{
+		if (_gameSceneUI.Alert2Popup == null)
+			SixInput(value.action.triggered);
+		else
+			SixInput(false);
+	}
+
 	public void OnCursorLock(InputAction.CallbackContext value)
 	{
 		CursorLockInput(value.action.triggered);
@@ -121,6 +170,31 @@ public class MyPlayerInput : MonoBehaviour
 	public void TapInput(bool newTapState)
 	{
 		Tap = newTapState;
+	}
+
+	public void OneInput(bool newOneState)
+    {
+		One = newOneState;
+    }
+	public void TwoInput(bool newTwoState)
+	{
+		Two = newTwoState;
+	}
+	public void ThreeInput(bool newThreeState)
+	{
+		Three = newThreeState;
+	}
+	public void FourInput(bool newFourState)
+	{
+		Four = newFourState;
+	}
+	public void FiveInput(bool newFiveState)
+	{
+		Five = newFiveState;
+	}
+	public void SixInput(bool newSixState)
+	{
+		Six = newSixState;
 	}
 
 	public void CursorLockInput(bool newCursorLockState)

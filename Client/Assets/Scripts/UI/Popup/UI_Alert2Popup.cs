@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using Google.Protobuf.Protocol;
 
 public class UI_Alert2Popup : UI_Popup
 {
