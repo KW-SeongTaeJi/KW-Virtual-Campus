@@ -6,9 +6,11 @@ using TMPro;
 
 public class ObjectManager
 {
-	public PlayerInfo MyPlayer { get; set; }
     Dictionary<int, GameObject> _objects = new Dictionary<int, GameObject>();
-    Dictionary<string, GameObject> _players = new Dictionary<string, GameObject>();
+    Dictionary<string, PlayerInfo> _players = new Dictionary<string, PlayerInfo>();
+
+	public Player MyPlayer { get; set; }
+	public IndoorPlayer MyIndoorPlayer { get; set; }
 
 
     public static GameObjectType GetObjectTypeById(int id)
@@ -26,17 +28,21 @@ public class ObjectManager
 			return null;
 
 		GameObjectType objectType = GetObjectTypeById(info.ObjectId);
+
+		/* Add player instance */
 		if (objectType == GameObjectType.Player)
 		{
+			if (_players.ContainsKey(info.PlayerInfo.Name) == false)
+				_players.Add(info.PlayerInfo.Name, info.PlayerInfo);
+
 			if (myPlayer)
 			{
 				GameObject gameObject = Managers.Resource.Instantiate("Object/MyGamePlayer");
 				gameObject.transform.position = new Vector3(info.Position.X, info.Position.Y, info.Position.Z);
 				gameObject.transform.rotation = Quaternion.Euler(0, info.RotationY, 0);
 				_objects.Add(info.ObjectId, gameObject);
-				_players.Add(info.PlayerInfo.Name, gameObject);
 
-				MyPlayer = gameObject.GetComponent<PlayerInfo>();
+				MyPlayer = gameObject.GetComponent<Player>();
 				MyPlayer.Id = info.ObjectId;
 				MyPlayer.Name = info.PlayerInfo.Name;
 				MyPlayer.HairType = info.PlayerInfo.HairType;
@@ -46,6 +52,7 @@ public class ObjectManager
 				MyPlayer.FaceColor_X = info.PlayerInfo.FaceColor.X;
 				MyPlayer.FaceColor_Y = info.PlayerInfo.FaceColor.Y;
 				MyPlayer.FaceColor_Z = info.PlayerInfo.FaceColor.Z;
+				MyPlayer.Place = info.PlayerInfo.Place;
 
 				gameObject.FindChild<TextMeshProUGUI>("NameText", recursive: true).text = MyPlayer.Name;
 
@@ -57,27 +64,107 @@ public class ObjectManager
 			}
 			else
 			{
-				GameObject gameObject = Managers.Resource.Instantiate("Object/GamePlayer");
-				gameObject.transform.position = new Vector3(info.Position.X, info.Position.Y, info.Position.Z);
-				gameObject.transform.rotation = Quaternion.Euler(0, info.RotationY, 0);
+				if (MyPlayer != null)
+				{
+					if (info.PlayerInfo.Place == MyPlayer.Place)
+					{
+						GameObject gameObject = Managers.Resource.Instantiate("Object/GamePlayer");
+						gameObject.transform.position = new Vector3(info.Position.X, info.Position.Y, info.Position.Z);
+						gameObject.transform.rotation = Quaternion.Euler(0, info.RotationY, 0);
+						_objects.Add(info.ObjectId, gameObject);
+
+						Player player = gameObject.GetComponent<Player>();
+						player.Id = info.ObjectId;
+						player.Name = info.PlayerInfo.Name;
+						player.HairType = info.PlayerInfo.HairType;
+						player.FaceType = info.PlayerInfo.FaceType;
+						player.JacketType = info.PlayerInfo.JacketType;
+						player.HairColor = info.PlayerInfo.HairColor;
+						player.FaceColor_X = info.PlayerInfo.FaceColor.X;
+						player.FaceColor_Y = info.PlayerInfo.FaceColor.Y;
+						player.FaceColor_Z = info.PlayerInfo.FaceColor.Z;
+						player.Place = info.PlayerInfo.Place;
+
+						gameObject.FindChild<TextMeshProUGUI>("NameText", recursive: true).text = player.Name;
+
+						return gameObject;
+					}
+				}
+			}
+		}
+
+		return null;
+	}
+	public GameObject AddIndoor(ObjectInfo info, bool myPlayer = false)
+    {
+		if (MyIndoorPlayer != null && MyIndoorPlayer.Id == info.ObjectId)
+			return null;
+
+		if (_objects.ContainsKey(info.ObjectId))
+			return null;
+
+		GameObjectType objectType = GetObjectTypeById(info.ObjectId);
+
+		if (objectType == GameObjectType.Player)
+		{
+			if (_players.ContainsKey(info.PlayerInfo.Name) == false)
+				_players.Add(info.PlayerInfo.Name, info.PlayerInfo);
+
+			if (myPlayer)
+			{
+				GameObject gameObject = Managers.Resource.Instantiate("Object/MyIndoorPlayer");
+				gameObject.transform.position = new Vector3(info.Position.X, info.Position.Y, info.Position.Z - _objects.Count);
 				_objects.Add(info.ObjectId, gameObject);
-				_players.Add(info.PlayerInfo.Name, gameObject);
 
-				PlayerInfo player = gameObject.GetComponent<PlayerInfo>();
-				player.Id = info.ObjectId;
-				player.Name = info.PlayerInfo.Name;
-				player.HairType = info.PlayerInfo.HairType;
-				player.FaceType = info.PlayerInfo.FaceType;
-				player.JacketType = info.PlayerInfo.JacketType;
-				player.HairColor = info.PlayerInfo.HairColor;
-				player.FaceColor_X = info.PlayerInfo.FaceColor.X;
-				player.FaceColor_Y = info.PlayerInfo.FaceColor.Y;
-				player.FaceColor_Z = info.PlayerInfo.FaceColor.Z;
+				MyIndoorPlayer = gameObject.GetComponent<IndoorPlayer>();
+				MyIndoorPlayer.FaceColor_X = info.PlayerInfo.FaceColor.X;
+				MyIndoorPlayer.FaceColor_Y = info.PlayerInfo.FaceColor.Y;
+				MyIndoorPlayer.FaceColor_Z = info.PlayerInfo.FaceColor.Z;
+				MyIndoorPlayer.Id = info.ObjectId;
+				MyIndoorPlayer.Name = info.PlayerInfo.Name;
+				MyIndoorPlayer.HairType = info.PlayerInfo.HairType;
+				MyIndoorPlayer.FaceType = info.PlayerInfo.FaceType;
+				MyIndoorPlayer.JacketType = info.PlayerInfo.JacketType;
+				MyIndoorPlayer.HairColor = info.PlayerInfo.HairColor;
+				MyIndoorPlayer.Place = info.PlayerInfo.Place;
+				MyIndoorPlayer.SetBodyColor();
 
-				gameObject.FindChild<TextMeshProUGUI>("NameText", recursive: true).text = player.Name;
+				gameObject.FindChild<TextMeshProUGUI>("NameText", recursive: true).text = MyIndoorPlayer.Name;
+
+				UI_IndoorScene indoorSceneUI = (UI_IndoorScene)Managers.UI.SceneUI;
+				indoorSceneUI.MyPlayerCanvas = gameObject.FindChild<Canvas>().GetComponent<IndoorPlayerCanvasController>();
 
 				return gameObject;
 			}
+            else
+            {
+				if (MyIndoorPlayer != null)
+				{
+					if (info.PlayerInfo.Place == MyIndoorPlayer.Place)
+					{
+						GameObject gameObject = Managers.Resource.Instantiate("Object/IndoorPlayer");
+						gameObject.transform.position = new Vector3(info.Position.X, info.Position.Y, info.Position.Z - _objects.Count);
+						_objects.Add(info.ObjectId, gameObject);
+
+						IndoorPlayer player = gameObject.GetComponent<IndoorPlayer>();
+						player.FaceColor_X = info.PlayerInfo.FaceColor.X;
+						player.FaceColor_Y = info.PlayerInfo.FaceColor.Y;
+						player.FaceColor_Z = info.PlayerInfo.FaceColor.Z;
+						player.Id = info.ObjectId;
+						player.Name = info.PlayerInfo.Name;
+						player.HairType = info.PlayerInfo.HairType;
+						player.FaceType = info.PlayerInfo.FaceType;
+						player.JacketType = info.PlayerInfo.JacketType;
+						player.HairColor = info.PlayerInfo.HairColor;
+						player.Place = info.PlayerInfo.Place;
+						player.SetBodyColor();
+
+						gameObject.FindChild<TextMeshProUGUI>("NameText", recursive: true).text = player.Name;
+
+						return gameObject;
+					}
+				}
+            }
 		}
 
 		return null;
@@ -90,27 +177,27 @@ public class ObjectManager
 		return gameObject;
 	}
 
-	public GameObject FindPlayerByName(string name)
+	public PlayerInfo FindPlayerByName(string name)
     {
-		GameObject gameObject = null;
-		_players.TryGetValue(name, out gameObject);
-		return gameObject;
+		PlayerInfo player = null;
+		_players.TryGetValue(name, out player);
+		return player;
     }
 
-	public void Remove(int id)
+	public void Remove(int id, string name)
 	{
+		if (GetObjectTypeById(id) == GameObjectType.Player)
+		{
+			if (_players.ContainsKey(name) == false)
+				return;
+			_players.Remove(name);
+		}
+
 		if (_objects.ContainsKey(id) == false)
 			return;
-
 		GameObject gameObject = FindById(id);
 		if (gameObject == null)
 			return;
-		
-		if (GetObjectTypeById(id) == GameObjectType.Player)
-        {
-			_players.Remove(gameObject.GetComponent<PlayerInfo>().Name);
-        }
-
 		_objects.Remove(id);
 		Managers.Resource.Destroy(gameObject);
 	}
@@ -123,5 +210,6 @@ public class ObjectManager
 		_objects.Clear();
 		_players.Clear();
 		MyPlayer = null;
+		MyIndoorPlayer = null;
 	}
 }

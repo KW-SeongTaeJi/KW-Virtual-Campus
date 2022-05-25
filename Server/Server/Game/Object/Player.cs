@@ -37,6 +37,11 @@ namespace Server.Game
             get { return PlayerInfo.HairColor; }
             set { PlayerInfo.HairColor = value; }
         }
+        public Place Place
+        {
+            get { return PlayerInfo.Place; }
+            set { PlayerInfo.Place = value; }
+        }
         public Vector3D FaceColor { get; set; } = new Vector3D();
 
         public Dictionary<string, PlayerInfo> Friends { get; set; } = new Dictionary<string, PlayerInfo>();

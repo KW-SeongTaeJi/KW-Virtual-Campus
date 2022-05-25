@@ -37,12 +37,18 @@ public class UI_GameScene : UI_Scene
     }
 
     bool _prevEnter = false;
+    bool _prevOne = false;
+    bool _prevTwo = false;
+    bool _prevThree = false;
+    bool _prevFour = false;
+    bool _prevFive = false;
+    bool _prevSix = false;
+
     MyPlayerInput _input;
     Transform _content;
     GameObject _selectedEmotionButton;
-    UI_Alert2Popup _alert2Popup;
-    UI_LoadingCirclePopup _loadingPopup;
-    
+
+    public UI_Alert2Popup Alert2Popup { get; set; }
     public PlayerCanvasController MyPlayerCanvas { get; set; }
     public MyPlayerController MyPlayerController { get; set; }
     public TMP_InputField ChatInputField { get; set; }
@@ -55,6 +61,7 @@ public class UI_GameScene : UI_Scene
     {
         HandleEnter();
         HandleTap();
+        HandleNum();
     }
 
     public override void Init()
@@ -100,25 +107,25 @@ public class UI_GameScene : UI_Scene
 
     public void OnClickLobbyButton(PointerEventData evt)
     {
-        _alert2Popup = Managers.UI.ShowPopupUI<UI_Alert2Popup>();
-        _alert2Popup.SetMessageText("로비로 이동하시겠습니까?");
-        _alert2Popup.OnConfirmFunction -= OnClickLobbyButton_Step2;
-        _alert2Popup.OnConfirmFunction += OnClickLobbyButton_Step2;
+        Alert2Popup = Managers.UI.ShowPopupUI<UI_Alert2Popup>();
+        Alert2Popup.SetMessageText("로비로 이동하시겠습니까?");
+        Alert2Popup.OnConfirmFunction -= OnClickLobbyButton_Step2;
+        Alert2Popup.OnConfirmFunction += OnClickLobbyButton_Step2;
     }
     public void OnClickLobbyButton_Step2()
     {
-        string host = Dns.GetHostName();
-        IPHostEntry ipHost = Dns.GetHostEntry(host);
-        IPAddress ipAddr = null;
-        foreach (IPAddress ip in ipHost.AddressList)
-        {
-            if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-            {
-                ipAddr = ip;
-                break;
-            }
-        }
-        //IPAddress ipAddr = IPAddress.Parse("52.78.163.252");  // AWS ec2 public ip
+    //    string host = Dns.GetHostName();
+    //    IPHostEntry ipHost = Dns.GetHostEntry(host);
+    //    IPAddress ipAddr = null;
+    //    foreach (IPAddress ip in ipHost.AddressList)
+    //    {
+    //        if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+    //        {
+    //            ipAddr = ip;
+    //            break;
+    //        }
+    //    }
+        IPAddress ipAddr = IPAddress.Parse("52.79.122.116");  // AWS ec2 public ip
         ChannelInfo channel = new ChannelInfo()
         {
             IpAddress = ipAddr.ToString(),
@@ -137,9 +144,9 @@ public class UI_GameScene : UI_Scene
 
     public void OnClickExitButton(PointerEventData evt)
     {
-        _alert2Popup = Managers.UI.ShowPopupUI<UI_Alert2Popup>();
-        _alert2Popup.SetMessageText("프로그램을 종료하시겠습니까?");
-        _alert2Popup.Quit = true;
+        Alert2Popup = Managers.UI.ShowPopupUI<UI_Alert2Popup>();
+        Alert2Popup.SetMessageText("프로그램을 종료하시겠습니까?");
+        Alert2Popup.Quit = true;
     }
 
     public void OnClickFriendListButton(PointerEventData evt)
@@ -185,9 +192,6 @@ public class UI_GameScene : UI_Scene
 
     public void SetFriendList()
     {
-        int curWidth = Screen.width;
-        int curHeight = Screen.height;
-        Screen.SetResolution(1920, 1080, Screen.fullScreenMode);
         foreach (FriendInfo friend in Managers.Object.MyPlayer.Friends.Values)
         {
             UI_FriendListSlot friendSlot = Managers.Resource.Instantiate("UI/Popup/UI_FriendListSlot").GetComponent<UI_FriendListSlot>();
@@ -195,7 +199,6 @@ public class UI_GameScene : UI_Scene
             friendSlot.SetFriendInfo(friend);
             FriendListSlots.Add(friend.Name, friendSlot);
         }
-        Screen.SetResolution(curWidth, curHeight, Screen.fullScreenMode);
     }
 
     void HandleEnter()
@@ -242,5 +245,142 @@ public class UI_GameScene : UI_Scene
                 _input.CursorLock = true;
             }
         }
+    }
+
+    void HandleNum()
+    {
+        if ((_prevOne == false) && _input.One)
+        {
+            _prevOne = true;
+            Alert2Popup = Managers.UI.ShowPopupUI<UI_Alert2Popup>();
+            Alert2Popup.SetMessageText("비마관으로 입장하시겠습니까?");
+            Alert2Popup.OnConfirmFunction -= EnterBima;
+            Alert2Popup.OnConfirmFunction += EnterBima;
+        }
+        if ((_prevTwo == false) && _input.Two)
+        {
+            _prevTwo = true;
+            Alert2Popup = Managers.UI.ShowPopupUI<UI_Alert2Popup>();
+            Alert2Popup.SetMessageText("한울관으로 입장하시겠습니까?");
+            Alert2Popup.OnConfirmFunction -= EnterHanwool;
+            Alert2Popup.OnConfirmFunction += EnterHanwool;
+        }
+        if ((_prevThree == false) && _input.Three)
+        {
+            _prevThree = true;
+            Alert2Popup = Managers.UI.ShowPopupUI<UI_Alert2Popup>();
+            Alert2Popup.SetMessageText("화도관으로 입장하시겠습니까?");
+            Alert2Popup.OnConfirmFunction -= EnterHwado;
+            Alert2Popup.OnConfirmFunction += EnterHwado;
+        }
+        if ((_prevFour == false) && _input.Four)
+        {
+            _prevFour = true;
+            Alert2Popup = Managers.UI.ShowPopupUI<UI_Alert2Popup>();
+            Alert2Popup.SetMessageText("중앙도서관으로 입장하시겠습니까?");
+            Alert2Popup.OnConfirmFunction -= EnterLibrary;
+            Alert2Popup.OnConfirmFunction += EnterLibrary;
+        }
+        if ((_prevFive == false) && _input.Five)
+        {
+            _prevFive = true;
+            Alert2Popup = Managers.UI.ShowPopupUI<UI_Alert2Popup>();
+            Alert2Popup.SetMessageText("옥의관으로 입장하시겠습니까?");
+            Alert2Popup.OnConfirmFunction -= EnterOgui;
+            Alert2Popup.OnConfirmFunction += EnterOgui;
+        }
+        if ((_prevSix == false) && _input.Six)
+        {
+            _prevSix = true;
+            Alert2Popup = Managers.UI.ShowPopupUI<UI_Alert2Popup>();
+            Alert2Popup.SetMessageText("새빛관으로 입장하시겠습니까?");
+            Alert2Popup.OnConfirmFunction -= EnterSaebit;
+            Alert2Popup.OnConfirmFunction += EnterSaebit;
+        }
+
+        if (_input.One == false)
+        {
+            _prevOne = false;
+        }
+        if (_input.Two == false)
+        {
+            _prevTwo = false;
+        }
+        if (_input.Three == false)
+        {
+            _prevThree = false;
+        }
+        if (_input.Four == false)
+        {
+            _prevFour = false;
+        }
+        if (_input.Five == false)
+        {
+            _prevFive = false;
+        }
+        if (_input.Six == false)
+        {
+            _prevSix = false;
+        }
+    }
+    void EnterBima()
+    {
+        C_EnterIndoor enterIndoorPacket = new C_EnterIndoor()
+        {
+            Place = Place.IndoorBima
+        };
+        Managers.Network.Send(enterIndoorPacket);
+        Managers.Object.Clear();
+        Managers.SceneLoad.LoadScene((Define.Scene)Enum.Parse(typeof(Define.Scene), enterIndoorPacket.Place.ToString()));
+    }
+    void EnterHanwool()
+    {
+        C_EnterIndoor enterIndoorPacket = new C_EnterIndoor()
+        {
+            Place = Place.IndoorHanwool
+        };
+        Managers.Network.Send(enterIndoorPacket);
+        Managers.Object.Clear();
+        Managers.SceneLoad.LoadScene((Define.Scene)Enum.Parse(typeof(Define.Scene), enterIndoorPacket.Place.ToString()));
+    }
+    void EnterHwado()
+    {
+        C_EnterIndoor enterIndoorPacket = new C_EnterIndoor()
+        {
+            Place = Place.IndoorHwado
+        };
+        Managers.Network.Send(enterIndoorPacket);
+        Managers.Object.Clear();
+        Managers.SceneLoad.LoadScene((Define.Scene)Enum.Parse(typeof(Define.Scene), enterIndoorPacket.Place.ToString()));
+    }
+    void EnterLibrary()
+    {
+        C_EnterIndoor enterIndoorPacket = new C_EnterIndoor()
+        {
+            Place = Place.IndoorLibrary
+        };
+        Managers.Network.Send(enterIndoorPacket);
+        Managers.Object.Clear();
+        Managers.SceneLoad.LoadScene((Define.Scene)Enum.Parse(typeof(Define.Scene), enterIndoorPacket.Place.ToString()));
+    }
+    void EnterOgui()
+    {
+        C_EnterIndoor enterIndoorPacket = new C_EnterIndoor()
+        {
+            Place = Place.IndoorOgui
+        };
+        Managers.Network.Send(enterIndoorPacket);
+        Managers.Object.Clear();
+        Managers.SceneLoad.LoadScene((Define.Scene)Enum.Parse(typeof(Define.Scene), enterIndoorPacket.Place.ToString()));
+    }
+    void EnterSaebit()
+    {
+        C_EnterIndoor enterIndoorPacket = new C_EnterIndoor()
+        {
+            Place = Place.IndoorSaebit
+        };
+        Managers.Network.Send(enterIndoorPacket);
+        Managers.Object.Clear();
+        Managers.SceneLoad.LoadScene((Define.Scene)Enum.Parse(typeof(Define.Scene), enterIndoorPacket.Place.ToString()));
     }
 }

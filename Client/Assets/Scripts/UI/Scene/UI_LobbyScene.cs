@@ -80,19 +80,18 @@ public class UI_LobbyScene : UI_Scene
 
     public void OnClickCampusEnterButton(PointerEventData evt)
     {
-        // TODO : 주소 재배치
-        string host = Dns.GetHostName();
-        IPHostEntry ipHost = Dns.GetHostEntry(host);
-        IPAddress ipAddr = null;
-        foreach (IPAddress ip in ipHost.AddressList)
-        {
-            if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-            {
-                ipAddr = ip;
-                break;
-            }
-        }
-        //IPAddress ipAddr = IPAddress.Parse("54.180.31.154");
+        //string host = Dns.GetHostName();
+        //IPHostEntry ipHost = Dns.GetHostEntry(host);
+        //IPAddress ipAddr = null;
+        //foreach (IPAddress ip in ipHost.AddressList)
+        //{
+        //    if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+        //    {
+        //        ipAddr = ip;
+        //        break;
+        //    }
+        //}
+        IPAddress ipAddr = IPAddress.Parse("54.180.95.162");  // AWS ec2 public ip
         ChannelInfo channel = new ChannelInfo()
         {
             IpAddress = ipAddr.ToString(),

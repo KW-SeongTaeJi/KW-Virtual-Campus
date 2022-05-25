@@ -115,18 +115,18 @@ namespace AccountServer.Controllers
             res.Token = newToken;
             res.Name = account.Name;
 
-            string host = Dns.GetHostName();
-            IPHostEntry ipHost = Dns.GetHostEntry(host);
-            IPAddress ipAddr = null;
-            foreach (IPAddress ip in ipHost.AddressList)
-            {
-                if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-                {
-                    ipAddr = ip;
-                    break;
-                }
-            }
-            //IPAddress ipAddr = IPAddress.Parse("52.78.163.252");  // AWS ec2 public ip
+            //string host = Dns.GetHostName();
+            //IPHostEntry ipHost = Dns.GetHostEntry(host);
+            //IPAddress ipAddr = null;
+            //foreach (IPAddress ip in ipHost.AddressList)
+            //{
+            //    if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+            //    {
+            //        ipAddr = ip;
+            //        break;
+            //    }
+            //}
+            IPAddress ipAddr = IPAddress.Parse("52.79.122.116");  // AWS ec2 public ip
             res.Channel = new ChannelInfo()
             {
                 IpAddress = ipAddr.ToString(),

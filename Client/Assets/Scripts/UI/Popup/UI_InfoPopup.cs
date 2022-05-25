@@ -24,7 +24,7 @@ public class UI_InfoPopup : UI_Popup
         ResetButton
     }
 
-    PlayerInfo _playerInfo;
+    Player _playerInfo;
 
     UI_LoadingCirclePopup _loadingPopup;
     UI_AlertPopup _alertPopup;

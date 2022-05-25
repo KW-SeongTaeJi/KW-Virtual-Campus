@@ -261,11 +261,8 @@ public class PlayerController : MonoBehaviour
             Vector3 destPos = Position;
             Quaternion startRot = Quaternion.Euler(0, transform.eulerAngles.y, 0);
             Quaternion destRot = Quaternion.Euler(0, RotationY, 0);
-            for (float t = 0.2f; t <= 1.0f; t += 0.2f)
-            {
-                transform.position = Vector3.Lerp(startPos, destPos, t);
-                transform.rotation = Quaternion.Lerp(startRot, destRot, t);
-            }
+            transform.position = Vector3.Lerp(startPos, destPos, Time.deltaTime * 5);
+            transform.rotation = Quaternion.Lerp(startRot, destRot, Time.deltaTime * 5);
             Sync = false;
         }
     }

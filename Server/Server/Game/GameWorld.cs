@@ -6,11 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace Server.Game
 {
     public class GameWorld : JobSerializer
     {
+        // all online players
         Dictionary<int, Player> _players = new Dictionary<int, Player>();
 
 
@@ -98,21 +100,30 @@ namespace Server.Game
 
                 // TODO : 종료 전 DB 저장
 
-                // 본인한테 정보 전송
+                // my player -> my client 
                 {
                     S_LeaveGame leavePacket = new S_LeaveGame();
                     player.Session.Send(leavePacket);
                 }
 
-                // 본인 정보 boradcast
+                // my player -> other clients
                 {
-                    S_Despawn despawnPacket = new S_Despawn();
-                    despawnPacket.ObjectId = objectId;
-                    despawnPacket.Name = player.Name;
-                    Broadcast(despawnPacket);
+                    if (player.PlayerInfo.Place == Place.Outdoor)
+                    {
+                        S_Despawn despawnPacket = new S_Despawn();
+                        despawnPacket.ObjectId = objectId;
+                        despawnPacket.Name = player.Name;
+                        Broadcast(despawnPacket);
+                    }
+                    else
+                    {
+                        S_DespawnIndoor despawnIndoorPacket = new S_DespawnIndoor();
+                        despawnIndoorPacket.ObjectId = objectId;
+                        despawnIndoorPacket.Name = player.Name;
+                        Broadcast(despawnIndoorPacket);
+                    }
                 }
             }
-
         }
 
         public void HandleMove(Player myPlayer, C_Move packet)
@@ -129,17 +140,17 @@ namespace Server.Game
             movePacket.TargetSpeed = packet.TargetSpeed;
             movePacket.TargetRotation = packet.TargetRotation;
             movePacket.Jump = packet.Jump;
-            Broadcast(movePacket, myPlayer.Id);
+            BroadcastSamePlace(movePacket, myPlayer.Id);
         }
 
-        public void HandleChat(int objectId, C_Chat packet)
+        public void HandleChat(ClientSession session, C_Chat packet)
         {
             S_Chat chatPacket = new S_Chat()
             {
-                ObjectId = objectId,
+                ObjectId = session.MyPlayer.Id,
                 Message = packet.Message
             };
-            Broadcast(chatPacket, objectId);
+            BroadcastSamePlace(chatPacket, session.MyPlayer.Id);
         }
 
         public void HandleEmotion(int objectId, C_Emotion packet)
@@ -150,6 +161,160 @@ namespace Server.Game
                 EmotionNum = packet.EmotionNum
             };
             Broadcast(emotionPacket, objectId);
+        }
+
+        public void HandleEnterIndoor(ClientSession session, C_EnterIndoor packet)
+        {
+            // my player -> other clients
+            {
+                S_Despawn despawnPacket = new S_Despawn();
+                despawnPacket.ObjectId = session.MyPlayer.Id;
+                despawnPacket.Name = session.MyPlayer.Name;
+                Broadcast(despawnPacket);
+            }
+
+            session.MyPlayer.Place = packet.Place;
+            session.MyPlayer.Position.X = -13;
+            session.MyPlayer.Position.Y = -1.5f;
+            session.MyPlayer.Position.Z = -10;
+            
+            // my player -> my client
+            {
+                S_EnterIndoor enterIndoorPacket = new S_EnterIndoor();
+                {
+                    enterIndoorPacket.MyPlayer = session.MyPlayer.ObjectInfo;
+                    enterIndoorPacket.MyPlayer.PlayerInfo = session.MyPlayer.ObjectInfo.PlayerInfo;
+                    foreach (PlayerInfo friend in session.MyPlayer.Friends.Values)
+                    {
+                        enterIndoorPacket.Friends.Add(friend);
+                    }
+                }
+                session.Send(enterIndoorPacket);
+            }
+
+            // other players -> my client
+            {
+                S_SpawnIndoor spawnIndoorPacket = new S_SpawnIndoor();
+                foreach (Player player in _players.Values)
+                {
+                    if (player.PlayerDbId != session.MyPlayer.PlayerDbId)
+                    {
+                        ObjectInfo objectInfo = player.ObjectInfo;
+                        objectInfo.PlayerInfo = player.PlayerInfo;
+                        spawnIndoorPacket.Objects.Add(objectInfo);
+                    }
+                }
+                session.Send(spawnIndoorPacket);
+            }
+
+            // my player -> other clients
+            {
+                S_SpawnIndoor spawnIndoorPacket = new S_SpawnIndoor();
+                ObjectInfo objectInfo = session.MyPlayer.ObjectInfo;
+                objectInfo.PlayerInfo = session.MyPlayer.PlayerInfo;
+                spawnIndoorPacket.Objects.Add(objectInfo);
+                Broadcast(spawnIndoorPacket, session.MyPlayer.Id);
+            }
+        }
+
+        public void HandleMoveIndoor(ClientSession session, C_MoveIndoor packet)
+        {
+            Player myPlayer = session.MyPlayer;
+
+            myPlayer.Position.X = packet.PosX;
+
+            S_MoveIndoor moveIndoorPacket = new S_MoveIndoor()
+            {
+                ObjectId = myPlayer.Id,
+                PosX = myPlayer.Position.X,
+                MoveX = packet.MoveX
+            };
+            BroadcastSamePlace(moveIndoorPacket, myPlayer.Id);
+        }
+
+        public void HandleLeaveIndoor(ClientSession session)
+        {
+            // my player -> other clients
+            {
+                S_DespawnIndoor despawnIndoorPacket = new S_DespawnIndoor();
+                despawnIndoorPacket.ObjectId = session.MyPlayer.Id;
+                despawnIndoorPacket.Name = session.MyPlayer.Name;
+                Broadcast(despawnIndoorPacket);
+            }
+
+            Thread.Sleep(500);
+
+            // Set player's outdoor position
+            switch (session.MyPlayer.Place)
+            {
+                case Place.IndoorBima:
+                    session.MyPlayer.Position.X = -25;
+                    session.MyPlayer.Position.Y = 14;
+                    session.MyPlayer.Position.Z = -25;
+                    break;
+                case Place.IndoorHanwool:
+                    session.MyPlayer.Position.X = -25;
+                    session.MyPlayer.Position.Y = 14;
+                    session.MyPlayer.Position.Z = -25;
+                    break;
+                case Place.IndoorHwado:
+                    session.MyPlayer.Position.X = -25;
+                    session.MyPlayer.Position.Y = 14;
+                    session.MyPlayer.Position.Z = -25;
+                    break;
+                case Place.IndoorLibrary:
+                    session.MyPlayer.Position.X = -25;
+                    session.MyPlayer.Position.Y = 14;
+                    session.MyPlayer.Position.Z = -25;
+                    break;
+                case Place.IndoorOgui:
+                    session.MyPlayer.Position.X = -25;
+                    session.MyPlayer.Position.Y = 14;
+                    session.MyPlayer.Position.Z = -25;
+                    break;
+                case Place.IndoorSaebit:
+                    session.MyPlayer.Position.X = -25;
+                    session.MyPlayer.Position.Y = 14;
+                    session.MyPlayer.Position.Z = -25;
+                    break;
+            }
+            session.MyPlayer.Place = Place.Outdoor;
+
+            // my player -> my client
+            {
+                S_EnterGame enterPacket = new S_EnterGame();
+                enterPacket.MyPlayer = session.MyPlayer.ObjectInfo;
+                enterPacket.MyPlayer.PlayerInfo = session.MyPlayer.PlayerInfo;
+                foreach (PlayerInfo friend in session.MyPlayer.Friends.Values)
+                {
+                    enterPacket.Friends.Add(friend);
+                }
+                session.MyPlayer.Session.Send(enterPacket);
+            }
+
+            // other players -> my client
+            {
+                S_Spawn spawnPacket = new S_Spawn();
+                foreach (Player player in _players.Values)
+                {
+                    if (player.PlayerDbId != session.MyPlayer.PlayerDbId)
+                    {
+                        ObjectInfo objectInfo = player.ObjectInfo;
+                        objectInfo.PlayerInfo = player.PlayerInfo;
+                        spawnPacket.Objects.Add(objectInfo);
+                    }
+                }
+                session.MyPlayer.Session.Send(spawnPacket);
+            }
+
+            // my player -> other clients
+            {
+                S_Spawn spawnPacket = new S_Spawn();
+                ObjectInfo objectInfo = session.MyPlayer.ObjectInfo;
+                objectInfo.PlayerInfo = session.MyPlayer.PlayerInfo;
+                spawnPacket.Objects.Add(objectInfo);
+                Broadcast(spawnPacket, session.MyPlayer.Id);
+            }
         }
 
         public void Broadcast(IMessage packet)
@@ -166,6 +331,17 @@ namespace Server.Game
                 if (player.Id == id)
                     continue;
                 player.Session.Send(packet);
+            }
+        }
+        public void BroadcastSamePlace(IMessage packet, int id)
+        {
+            Player myPlayer = _players[id];
+            foreach (Player player in _players.Values)
+            {
+                if (player.Id == id)
+                    continue;
+                if (player.Place == myPlayer.Place)
+                    player.Session.Send(packet);
             }
         }
     }

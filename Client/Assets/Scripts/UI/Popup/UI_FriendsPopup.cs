@@ -63,7 +63,7 @@ public class UI_FriendsPopup : UI_Popup
         int curHeight = Screen.height;
         Screen.SetResolution(1920, 1080, Screen.fullScreenMode);
         // Set friends list
-        PlayerInfo playerInfo = ((LobbyScene)Managers.SceneLoad.CurrentScene).PlayerInfo;
+        Player playerInfo = ((LobbyScene)Managers.SceneLoad.CurrentScene).PlayerInfo;
         playerInfo.Friends.Clear();
         for (int i = 0; i < packet.Friends.Count; i++)
         {

@@ -39,6 +39,13 @@ enum MsgId {
 	S_CHAT = 111;
 	C_EMOTION = 112;
 	S_EMOTION = 113;
+	C_ENTER_INDOOR = 114;
+	S_ENTER_INDOOR = 115; 
+	S_SPAWN_INDOOR = 116;
+	S_DESPAWN_INDOOR = 117;
+	C_MOVE_INDOOR = 118;
+	S_MOVE_INDOOR = 119;
+	C_LEAVE_INDOOR = 120;
 }
 
 
@@ -78,6 +85,15 @@ enum HairColor {
 	PURPLE = 3;
 	YELLOW = 4;
 	BLACK = 5;
+}
+enum Place {
+	OUTDOOR = 0;
+	INDOOR_BIMA = 1;
+	INDOOR_HANWOOL = 2;
+	INDOOR_HWADO = 3;
+	INDOOR_LIBRARY = 4;
+	INDOOR_OGUI = 5;
+	INDOOR_SAEBIT = 6;
 }
 
 message L_Connected {
@@ -228,6 +244,35 @@ message S_Emotion {
 	int32 emotionNum = 2;
 }
 
+message C_EnterIndoor {
+	Place place = 1;
+}
+message S_EnterIndoor {
+	ObjectInfo myPlayer = 1;
+	repeated PlayerInfo friends = 2;
+}
+
+message S_SpawnIndoor {
+	repeated ObjectInfo objects = 1;
+}
+message S_DespawnIndoor {
+	int32 objectId = 1;
+	string name = 2;
+}
+
+message C_MoveIndoor {
+	float posX = 1;
+	float moveX = 2;
+}
+message S_MoveIndoor {
+	int32 objectId = 1;
+	float posX = 2;
+	float moveX = 3;
+}
+
+message C_LeaveIndoor {
+}
+
 
 message Vector3D {
 	float x = 1;
@@ -247,4 +292,5 @@ message PlayerInfo {
 	JacketType jacketType = 4;
 	HairColor hairColor = 5;
 	Vector3D faceColor = 6;
+	Place place = 7;
 }

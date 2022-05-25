@@ -24,7 +24,7 @@ namespace Server
                 cache.Set($"{enterGamePacket.AccountId}Where", "game");
             }
 
-            // Find player
+            // Find client information
             using (AppDbContext db = new AppDbContext())
             {
                 AccountDb findAccount = db.Accounts
@@ -46,6 +46,7 @@ namespace Server
                         MyPlayer.Position.Y = 14;
                         MyPlayer.Position.Z = -37;
                         MyPlayer.RotationY = 0;
+                        MyPlayer.Place = Place.Outdoor;
                         MyPlayer.PlayerDbId = findAccount.Player.PlayerDbId;
                         MyPlayer.Name = findAccount.Name;
                         MyPlayer.Session = this;
@@ -76,6 +77,7 @@ namespace Server
                         };
                         MyPlayer.Friends.Add(friend.Name, friend);
                     }
+
                     GameWorld gameWorld = GameLogic.Instance.GameWorld;
                     gameWorld.PushQueue(gameWorld.EnterGame, MyPlayer);
                 }

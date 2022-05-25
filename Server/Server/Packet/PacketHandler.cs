@@ -41,9 +41,8 @@ class PacketHandler
 		ClientSession clientSession = (ClientSession)session;
 		C_Chat chatPacket = (C_Chat)packet;
 
-		int playerId = clientSession.MyPlayer.Id;
 		GameWorld gameWorld = GameLogic.Instance.GameWorld;
-		gameWorld.PushQueue(gameWorld.HandleChat, playerId, chatPacket);
+		gameWorld.PushQueue(gameWorld.HandleChat, clientSession, chatPacket);
 	}
 
 	public static void C_EmotionHandler(PacketSession session, IMessage packet)
@@ -54,5 +53,31 @@ class PacketHandler
 		int playerId = clientSession.MyPlayer.Id;
 		GameWorld gameWorld = GameLogic.Instance.GameWorld;
 		gameWorld.PushQueue(gameWorld.HandleEmotion, playerId, emotionPacket);
+	}
+
+	public static void C_EnterIndoorHandler(PacketSession session, IMessage packet)
+	{
+		ClientSession clientSession = (ClientSession)session;
+		C_EnterIndoor enterIndoorPacket = (C_EnterIndoor)packet;
+
+		GameWorld gameWorld = GameLogic.Instance.GameWorld;
+		gameWorld.PushQueue(gameWorld.HandleEnterIndoor, clientSession, enterIndoorPacket);
+	}
+
+	public static void C_MoveIndoorHandler(PacketSession session, IMessage packet)
+	{
+		ClientSession clientSession = (ClientSession)session;
+		C_MoveIndoor moveIndoorPacket = (C_MoveIndoor)packet;
+
+		GameWorld gameWorld = GameLogic.Instance.GameWorld;
+		gameWorld.PushQueue(gameWorld.HandleMoveIndoor, clientSession, moveIndoorPacket);
+	}
+
+	public static void C_LeaveIndoorHandler(PacketSession session, IMessage packet)
+	{
+		ClientSession clientSession = (ClientSession)session;
+
+		GameWorld gameWorld = GameLogic.Instance.GameWorld;
+		gameWorld.PushQueue(gameWorld.HandleLeaveIndoor, clientSession);
 	}
 }

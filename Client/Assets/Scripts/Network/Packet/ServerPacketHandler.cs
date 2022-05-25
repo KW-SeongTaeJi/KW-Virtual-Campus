@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -67,14 +68,24 @@ partial class PacketHandler
 	{
 		S_Spawn spawnPacket = (S_Spawn)packet;
 
-		UI_GameScene gameSceneUI = ((UI_GameScene)Managers.UI.SceneUI);
+		UI_Scene sceneUI = Managers.UI.SceneUI;
 		foreach (ObjectInfo obj in spawnPacket.Objects)
 		{
 			Managers.Object.Add(obj);
-			if (gameSceneUI.FriendListSlots.ContainsKey(obj.PlayerInfo.Name))
-            {
-				gameSceneUI.FriendListSlots[obj.PlayerInfo.Name].SetOnline();
-            }
+			if (Managers.SceneLoad.CurrentScene.SceneType == Define.Scene.Game)
+			{
+				if (((UI_GameScene)sceneUI).FriendListSlots.ContainsKey(obj.PlayerInfo.Name))
+				{
+					((UI_GameScene)sceneUI).FriendListSlots[obj.PlayerInfo.Name].SetOnline();
+				}
+			}
+            else
+			{
+				if (((UI_IndoorScene)sceneUI).FriendListSlots.ContainsKey(obj.PlayerInfo.Name))
+				{
+					((UI_IndoorScene)sceneUI).FriendListSlots[obj.PlayerInfo.Name].SetOnline();
+				}
+			}
 		}
 	}
 
@@ -82,11 +93,22 @@ partial class PacketHandler
 	{
 		S_Despawn despawnPacket = packet as S_Despawn;
 
-		UI_GameScene gameSceneUI = ((UI_GameScene)Managers.UI.SceneUI);
-		Managers.Object.Remove(despawnPacket.ObjectId);
-		if (gameSceneUI.FriendListSlots.ContainsKey(despawnPacket.Name))
+		Managers.Object.Remove(despawnPacket.ObjectId, despawnPacket.Name);
+
+		UI_Scene sceneUI = Managers.UI.SceneUI;
+		if (Managers.SceneLoad.CurrentScene.SceneType == Define.Scene.Game)
 		{
-			gameSceneUI.FriendListSlots[despawnPacket.Name].SetOffline();
+			if (((UI_GameScene)sceneUI).FriendListSlots.ContainsKey(despawnPacket.Name))
+			{
+				((UI_GameScene)sceneUI).FriendListSlots[despawnPacket.Name].SetOffline();
+			}
+		}
+        else
+        {
+			if (((UI_IndoorScene)sceneUI).FriendListSlots.ContainsKey(despawnPacket.Name))
+			{
+				((UI_IndoorScene)sceneUI).FriendListSlots[despawnPacket.Name].SetOffline();
+			}
 		}
 	}
 
@@ -103,7 +125,7 @@ partial class PacketHandler
 			return;
 
 		/* Set property used for move sync */
-		// For  player Move() And JumpAndGravity()
+		// For player Move() And JumpAndGravity()
 		player.TargetSpeed = movePacket.TargetSpeed;
 		player.TargetRotation = movePacket.TargetRotation;
 		player.Jump = movePacket.Jump;
@@ -120,9 +142,19 @@ partial class PacketHandler
 		GameObject gameObject = Managers.Object.FindById(chatPacket.ObjectId);
 		if (gameObject == null)
 			return;
-
-		PlayerCanvasController playerCanvas = gameObject.FindChild<Canvas>().GetComponent<PlayerCanvasController>();
-		playerCanvas.OnEnterChat(chatPacket.Message);
+		
+		// outdoor
+		if (Managers.Object.MyPlayer != null)
+		{
+			PlayerCanvasController playerCanvas = gameObject.FindChild<Canvas>().GetComponent<PlayerCanvasController>();
+			playerCanvas.OnEnterChat(chatPacket.Message);
+		}
+		// indoor
+		else
+		{
+			IndoorPlayerCanvasController playerCanvas = gameObject.FindChild<Canvas>().GetComponent<IndoorPlayerCanvasController>();
+			playerCanvas.OnEnterChat(chatPacket.Message);
+		}
 	}
 	
 	public static void S_EmotionHandler(PacketSession session, IMessage packet)
@@ -138,5 +170,97 @@ partial class PacketHandler
 			return;
 
 		player.SetEmotionAnimation(emotionPacket.EmotionNum);
+	}
+
+	public static void S_EnterIndoorHandler(PacketSession session, IMessage packet)
+    {
+		S_EnterIndoor enterIndoorPacket = (S_EnterIndoor)packet;
+
+		// Instantiate my player
+		GameObject myPlayer = Managers.Object.AddIndoor(enterIndoorPacket.MyPlayer, myPlayer: true);
+		for (int i = 0; i < enterIndoorPacket.Friends.Count; i++)
+		{
+			FriendInfo friend = new FriendInfo()
+			{
+				Name = enterIndoorPacket.Friends[i].Name,
+				HairType = enterIndoorPacket.Friends[i].HairType,
+				FaceType = enterIndoorPacket.Friends[i].FaceType,
+				JacketType = enterIndoorPacket.Friends[i].JacketType,
+				HairColor = enterIndoorPacket.Friends[i].HairColor,
+				FaceColor_X = enterIndoorPacket.Friends[i].FaceColor.X,
+				FaceColor_Y = enterIndoorPacket.Friends[i].FaceColor.Y,
+				FaceColor_Z = enterIndoorPacket.Friends[i].FaceColor.Z
+			};
+			Managers.Object.MyIndoorPlayer.Friends.Add(friend.Name, friend);
+		}
+		((UI_IndoorScene)Managers.UI.SceneUI).SetFriendList();
+	}
+
+	public static void S_SpawnIndoorHandler(PacketSession session, IMessage packet)
+    {
+		S_SpawnIndoor spawnIndoorPacket = (S_SpawnIndoor)packet;
+
+		UI_Scene sceneUI = Managers.UI.SceneUI;
+		foreach (ObjectInfo obj in spawnIndoorPacket.Objects)
+		{
+			Managers.Object.AddIndoor(obj);
+			if (Managers.SceneLoad.CurrentScene.SceneType == Define.Scene.Game)
+			{
+				if (((UI_GameScene)sceneUI).FriendListSlots.ContainsKey(obj.PlayerInfo.Name))
+				{
+					((UI_GameScene)sceneUI).FriendListSlots[obj.PlayerInfo.Name].SetOnline();
+				}
+			}
+			else
+			{
+				if (((UI_IndoorScene)sceneUI).FriendListSlots.ContainsKey(obj.PlayerInfo.Name))
+				{
+					((UI_IndoorScene)sceneUI).FriendListSlots[obj.PlayerInfo.Name].SetOnline();
+				}
+			}
+		}
+	}
+
+	public static void S_DespawnIndoorHandler(PacketSession session, IMessage packet)
+	{
+		S_DespawnIndoor despawnIndoorPacket = (S_DespawnIndoor)packet;
+
+		Managers.Object.Remove(despawnIndoorPacket.ObjectId, despawnIndoorPacket.Name);
+
+		UI_Scene sceneUI = Managers.UI.SceneUI;
+		if (Managers.SceneLoad.CurrentScene.SceneType == Define.Scene.Game)
+		{
+			if (((UI_GameScene)sceneUI).FriendListSlots.ContainsKey(despawnIndoorPacket.Name))
+			{
+				((UI_GameScene)sceneUI).FriendListSlots[despawnIndoorPacket.Name].SetOffline();
+			}
+		}
+		else
+		{
+			if (((UI_IndoorScene)sceneUI).FriendListSlots.ContainsKey(despawnIndoorPacket.Name))
+			{
+				((UI_IndoorScene)sceneUI).FriendListSlots[despawnIndoorPacket.Name].SetOffline();
+			}
+		}
+	}
+
+	public static void S_MoveIndoorHandler(PacketSession session, IMessage packet)
+    {
+		S_MoveIndoor moveIndoorPacket = (S_MoveIndoor)packet;
+
+		GameObject gameObject = Managers.Object.FindById(moveIndoorPacket.ObjectId);
+		if (gameObject == null)
+			return;
+
+		IndoorPlayerController player = gameObject.GetComponent<IndoorPlayerController>();
+		if (player == null)
+			return;
+
+		/* Set property used for move sync */
+		// For player Move()
+		player.MoveX = moveIndoorPacket.MoveX;
+		// For player SyncPosition()
+		player.Sync = true;
+		player.PosX = moveIndoorPacket.PosX;
 	}
 }

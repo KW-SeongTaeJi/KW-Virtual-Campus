@@ -9,7 +9,13 @@ public class Define
         Unknown,
         Login,
         Lobby,
-        Game
+        Game,
+        IndoorBima,
+        IndoorHanwool,
+        IndoorHwado,
+        IndoorLibrary,
+        IndoorOgui,
+        IndoorSaebit
     }
 
     public enum UIEvent
