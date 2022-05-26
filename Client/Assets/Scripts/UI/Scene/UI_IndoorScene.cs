@@ -154,7 +154,7 @@ public class UI_IndoorScene : UI_Scene
         switch (building)
         {
             case "비마관":
-                Managers.UI.ShowPopupUI<UI_SaebitIntroPopup>();
+                Managers.UI.ShowPopupUI<UI_BimaIntroPopup>();
                 break;
             case "화도관":
                 Managers.UI.ShowPopupUI<UI_HwadoIntroPopup>();
