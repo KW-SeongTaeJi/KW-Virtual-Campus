@@ -91,7 +91,7 @@ public class UI_LobbyScene : UI_Scene
         //        break;
         //    }
         //}
-        IPAddress ipAddr = IPAddress.Parse("54.180.95.162");  // AWS ec2 public ip
+        IPAddress ipAddr = IPAddress.Parse("13.125.59.67");  // AWS ec2 public ip
         ChannelInfo channel = new ChannelInfo()
         {
             IpAddress = ipAddr.ToString(),

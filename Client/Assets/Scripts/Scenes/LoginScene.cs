@@ -31,7 +31,7 @@ public class LoginScene : BaseScene
         SceneType = Define.Scene.Login;
 
         //Managers.Web.BaseUrl = "https://localhost:5001/api";
-        Managers.Web.BaseUrl = "http://3.39.23.70:5000/api";  // AWS ec2 public ip
+        Managers.Web.BaseUrl = "http://13.125.241.5:5000/api";  // AWS ec2 public ip
 
         Screen.SetResolution(1920, 1080, Screen.fullScreenMode);
 

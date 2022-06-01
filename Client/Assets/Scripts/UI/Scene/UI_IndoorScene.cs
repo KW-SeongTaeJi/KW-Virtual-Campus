@@ -75,11 +75,11 @@ public class UI_IndoorScene : UI_Scene
                 break;
             case Define.Scene.IndoorOgui:
                 _input = ((IndoorScene_Ogui)currentScene).GetComponent<MyIndoorPlayerInput>();
-                Get<TextMeshProUGUI>((int)Texts.BuildingTitleText).text = "苛狼";
+                Get<TextMeshProUGUI>((int)Texts.BuildingTitleText).text = "苛狼包";
                 break;
             case Define.Scene.IndoorSaebit:
                 _input = ((IndoorScene_Saebit)currentScene).GetComponent<MyIndoorPlayerInput>();
-                Get<TextMeshProUGUI>((int)Texts.BuildingTitleText).text = "货蝴";
+                Get<TextMeshProUGUI>((int)Texts.BuildingTitleText).text = "货蝴包";
                 break;
         }
         _content = gameObject.FindChild<Transform>("Content", true);
