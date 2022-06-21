@@ -27,10 +27,11 @@ public class LoginPakcetRes
     public string Token;
     public string Name;
 
-    public ChannelInfo Channel;
+    public ServerInfo LobbyServer;
+    public ServerInfo GameServer1;
 }
 
-public class ChannelInfo
+public class ServerInfo
 {
     public string IpAddress;
     public int Port;

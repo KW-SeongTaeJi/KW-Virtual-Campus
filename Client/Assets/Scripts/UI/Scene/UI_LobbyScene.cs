@@ -51,7 +51,7 @@ public class UI_LobbyScene : UI_Scene
         GetButton((int)Buttons.FriendsButton).gameObject.BindEvent(OnClickFriendsButton, Define.UIEvent.Click);
         GetButton((int)Buttons.InfoButton).gameObject.BindEvent(OnClickInfoButton, Define.UIEvent.Click);
 
-        NameText = Get<TextMeshProUGUI>((int)Texts.NameText);
+        NameText = GetText((int)Texts.NameText);
         NameText.text = $"{Managers.Network.Name} ดิ";
     }
 
@@ -80,27 +80,8 @@ public class UI_LobbyScene : UI_Scene
 
     public void OnClickCampusEnterButton(PointerEventData evt)
     {
-        //string host = Dns.GetHostName();
-        //IPHostEntry ipHost = Dns.GetHostEntry(host);
-        //IPAddress ipAddr = null;
-        //foreach (IPAddress ip in ipHost.AddressList)
-        //{
-        //    if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-        //    {
-        //        ipAddr = ip;
-        //        break;
-        //    }
-        //}
-        IPAddress ipAddr = IPAddress.Parse("13.125.59.67");  // AWS ec2 public ip
-        ChannelInfo channel = new ChannelInfo()
-        {
-            IpAddress = ipAddr.ToString(),
-            Port = 8000
-        };
-
         Managers.Network.DisconnectSession();
-        Managers.Network.ConnectToGameServer(channel);
-        Managers.SceneLoad.LoadScene(Define.Scene.Game);
+        Managers.SceneLoad.LoadSceneAsync(Define.Scene.Game);
     }
 
     public void OnClickInfoButton(PointerEventData evt)

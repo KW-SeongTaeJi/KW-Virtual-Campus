@@ -30,6 +30,7 @@ public class UI_IndoorScene : UI_Scene
     }
 
     bool _prevEnter = false;
+
     MyIndoorPlayerInput _input;
     Transform _content;
     UI_Alert2Popup _alert2Popup;
@@ -49,7 +50,6 @@ public class UI_IndoorScene : UI_Scene
     {
         base.Init();
 
-        // Bind UI
         Bind<Button>(typeof(Buttons));
         Bind<TMP_InputField>(typeof(InputFields));
         Bind<TextMeshProUGUI>(typeof(Texts));
@@ -59,27 +59,27 @@ public class UI_IndoorScene : UI_Scene
         {
             case Define.Scene.IndoorBima:
                 _input = ((IndoorScene_Bima)currentScene).GetComponent<MyIndoorPlayerInput>();
-                Get<TextMeshProUGUI>((int)Texts.BuildingTitleText).text = "비마관";
+                GetText((int)Texts.BuildingTitleText).text = "비마관";
                 break;
             case Define.Scene.IndoorHanwool:
                 _input = ((IndoorScene_Hanwool)currentScene).GetComponent<MyIndoorPlayerInput>();
-                Get<TextMeshProUGUI>((int)Texts.BuildingTitleText).text = "한울관";
+                GetText((int)Texts.BuildingTitleText).text = "한울관";
                 break;
             case Define.Scene.IndoorHwado:
                 _input = ((IndoorScene_Hwado)currentScene).GetComponent<MyIndoorPlayerInput>();
-                Get<TextMeshProUGUI>((int)Texts.BuildingTitleText).text = "화도관";
+                GetText((int)Texts.BuildingTitleText).text = "화도관";
                 break;
             case Define.Scene.IndoorLibrary:
                 _input = ((IndoorScene_Library)currentScene).GetComponent<MyIndoorPlayerInput>();
-                Get<TextMeshProUGUI>((int)Texts.BuildingTitleText).text = "중앙도서관";
+                GetText((int)Texts.BuildingTitleText).text = "중앙도서관";
                 break;
             case Define.Scene.IndoorOgui:
                 _input = ((IndoorScene_Ogui)currentScene).GetComponent<MyIndoorPlayerInput>();
-                Get<TextMeshProUGUI>((int)Texts.BuildingTitleText).text = "옥의관";
+                GetText((int)Texts.BuildingTitleText).text = "옥의관";
                 break;
             case Define.Scene.IndoorSaebit:
                 _input = ((IndoorScene_Saebit)currentScene).GetComponent<MyIndoorPlayerInput>();
-                Get<TextMeshProUGUI>((int)Texts.BuildingTitleText).text = "새빛관";
+                GetText((int)Texts.BuildingTitleText).text = "새빛관";
                 break;
         }
         _content = gameObject.FindChild<Transform>("Content", true);
@@ -95,7 +95,7 @@ public class UI_IndoorScene : UI_Scene
         GetButton((int)Buttons.BuildingButton).gameObject.BindEvent(OnClickBuildingButton, Define.UIEvent.Click);
 
         // Binc chatting event
-        ChatInputField = Get<TMP_InputField>((int)InputFields.ChatInputField);
+        ChatInputField = GetInputField((int)InputFields.ChatInputField);
         ChatInputField.onSubmit.AddListener(delegate { OnSubmitChat(); });
     }
 
@@ -113,10 +113,8 @@ public class UI_IndoorScene : UI_Scene
     }
     public void OnClickOutdoorButton_Step2()
     {
-        C_LeaveIndoor leaveIndoorPacket = new C_LeaveIndoor();
-        Managers.Network.Send(leaveIndoorPacket);
         Managers.Object.Clear();
-        Managers.SceneLoad.LoadScene(Define.Scene.Game);
+        Managers.SceneLoad.LoadSceneAsync(Define.Scene.Game, 0);
     }
 
     public void OnClickSettingsButton(PointerEventData evt)
@@ -150,7 +148,7 @@ public class UI_IndoorScene : UI_Scene
 
     public void OnClickBuildingButton(PointerEventData evt)
     {
-        string building = Get<TextMeshProUGUI>((int)Texts.BuildingTitleText).text;
+        string building = GetText((int)Texts.BuildingTitleText).text;
         switch (building)
         {
             case "비마관":

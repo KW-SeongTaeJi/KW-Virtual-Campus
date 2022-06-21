@@ -7,8 +7,8 @@ namespace LobbyServer.DB
 {
     public class RedisDb: IDisposable
     {
-        //static string redisConnectionString = "localhost:6379";
-        static string redisConnectionString = "52.79.233.201:6379,password=rlaalsxo";
+        static string redisConnectionString = "localhost:6379";
+        //static string redisConnectionString = "15.164.213.196:6379,password=rlaalsxo";
         ConnectionMultiplexer redisConnection;
         IDatabase redisDb;
 

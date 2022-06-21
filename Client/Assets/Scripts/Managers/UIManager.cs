@@ -15,10 +15,8 @@ public class UIManager
         }
     }
 
-    // one current Scene UI 
     public UI_Scene SceneUI { get; private set; }
 
-    // can have many ordered Popup UI 
     public Stack<UI_Popup> PopupUIStack { get; set; } = new Stack<UI_Popup>();
     int _popupOrder = 10;
 

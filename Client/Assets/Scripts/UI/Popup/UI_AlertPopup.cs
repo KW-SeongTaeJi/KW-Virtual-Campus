@@ -17,10 +17,10 @@ public class UI_AlertPopup : UI_Popup
         ConfirmButton
     }
 
+    bool _initEnter = true;
+
     public bool CloasAll { get; set; } = false;
     public bool Quit { get; set; } = false;
-
-    bool _initEnter = true;
 
 
     public override void Init()
@@ -48,7 +48,7 @@ public class UI_AlertPopup : UI_Popup
 
     public void SetMessageText(string message)
     {
-        Get<TextMeshProUGUI>((int)Texts.MessageText).text = message;
+        GetText((int)Texts.MessageText).text = message;
     }
 
     public void HandleKeyEvent(bool enter)

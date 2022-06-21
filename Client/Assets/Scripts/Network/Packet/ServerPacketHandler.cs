@@ -31,62 +31,19 @@ partial class PacketHandler
 	public static void S_EnterGameHandler(PacketSession session, IMessage packet)
 	{
 		S_EnterGame enterGamePacket = (S_EnterGame)packet;
-
-		// Instantiate my player
-		GameObject myPlayer = Managers.Object.Add(enterGamePacket.MyPlayer, myPlayer: true);
-		for (int i = 0; i < enterGamePacket.Friends.Count; i++)
-        {
-			FriendInfo friend = new FriendInfo()
-			{
-				Name = enterGamePacket.Friends[i].Name,
-				HairType = enterGamePacket.Friends[i].HairType,
-				FaceType = enterGamePacket.Friends[i].FaceType,
-				JacketType = enterGamePacket.Friends[i].JacketType,
-				HairColor = enterGamePacket.Friends[i].HairColor,
-				FaceColor_X = enterGamePacket.Friends[i].FaceColor.X,
-				FaceColor_Y = enterGamePacket.Friends[i].FaceColor.Y,
-				FaceColor_Z = enterGamePacket.Friends[i].FaceColor.Z
-			};
-			Managers.Object.MyPlayer.Friends.Add(friend.Name, friend);
-        }
-		((UI_GameScene)Managers.UI.SceneUI).SetFriendList();
-
-		// Set player follow Camera
-		GameObject gameObject = Managers.Resource.Instantiate("Object/MyPlayerFollowCamera");
-		CinemachineVirtualCamera followCamera = gameObject.GetComponent<CinemachineVirtualCamera>();
-		followCamera.Follow = myPlayer.FindChild("PlayerCameraRoot").transform;
+		Managers.Instance.HandleEnterGame(enterGamePacket);
 	}
 
 	public static void S_LeaveGameHandler(PacketSession session, IMessage packet)
 	{
-		S_LeaveGame leaveGamePacket = packet as S_LeaveGame;
-
+		S_LeaveGame leaveGamePacket = (S_LeaveGame)packet;
 		Managers.Object.Clear();
 	}
 
 	public static void S_SpawnHandler(PacketSession session, IMessage packet)
 	{
 		S_Spawn spawnPacket = (S_Spawn)packet;
-
-		UI_Scene sceneUI = Managers.UI.SceneUI;
-		foreach (ObjectInfo obj in spawnPacket.Objects)
-		{
-			Managers.Object.Add(obj);
-			if (Managers.SceneLoad.CurrentScene.SceneType == Define.Scene.Game)
-			{
-				if (((UI_GameScene)sceneUI).FriendListSlots.ContainsKey(obj.PlayerInfo.Name))
-				{
-					((UI_GameScene)sceneUI).FriendListSlots[obj.PlayerInfo.Name].SetOnline();
-				}
-			}
-            else
-			{
-				if (((UI_IndoorScene)sceneUI).FriendListSlots.ContainsKey(obj.PlayerInfo.Name))
-				{
-					((UI_IndoorScene)sceneUI).FriendListSlots[obj.PlayerInfo.Name].SetOnline();
-				}
-			}
-		}
+		Managers.Instance.HandleSpawn(spawnPacket);
 	}
 
 	public static void S_DespawnHandler(PacketSession session, IMessage packet)
@@ -175,50 +132,13 @@ partial class PacketHandler
 	public static void S_EnterIndoorHandler(PacketSession session, IMessage packet)
     {
 		S_EnterIndoor enterIndoorPacket = (S_EnterIndoor)packet;
-
-		// Instantiate my player
-		GameObject myPlayer = Managers.Object.AddIndoor(enterIndoorPacket.MyPlayer, myPlayer: true);
-		for (int i = 0; i < enterIndoorPacket.Friends.Count; i++)
-		{
-			FriendInfo friend = new FriendInfo()
-			{
-				Name = enterIndoorPacket.Friends[i].Name,
-				HairType = enterIndoorPacket.Friends[i].HairType,
-				FaceType = enterIndoorPacket.Friends[i].FaceType,
-				JacketType = enterIndoorPacket.Friends[i].JacketType,
-				HairColor = enterIndoorPacket.Friends[i].HairColor,
-				FaceColor_X = enterIndoorPacket.Friends[i].FaceColor.X,
-				FaceColor_Y = enterIndoorPacket.Friends[i].FaceColor.Y,
-				FaceColor_Z = enterIndoorPacket.Friends[i].FaceColor.Z
-			};
-			Managers.Object.MyIndoorPlayer.Friends.Add(friend.Name, friend);
-		}
-		((UI_IndoorScene)Managers.UI.SceneUI).SetFriendList();
+		Managers.Instance.HandleEnterIndoor(enterIndoorPacket);
 	}
 
 	public static void S_SpawnIndoorHandler(PacketSession session, IMessage packet)
     {
 		S_SpawnIndoor spawnIndoorPacket = (S_SpawnIndoor)packet;
-
-		UI_Scene sceneUI = Managers.UI.SceneUI;
-		foreach (ObjectInfo obj in spawnIndoorPacket.Objects)
-		{
-			Managers.Object.AddIndoor(obj);
-			if (Managers.SceneLoad.CurrentScene.SceneType == Define.Scene.Game)
-			{
-				if (((UI_GameScene)sceneUI).FriendListSlots.ContainsKey(obj.PlayerInfo.Name))
-				{
-					((UI_GameScene)sceneUI).FriendListSlots[obj.PlayerInfo.Name].SetOnline();
-				}
-			}
-			else
-			{
-				if (((UI_IndoorScene)sceneUI).FriendListSlots.ContainsKey(obj.PlayerInfo.Name))
-				{
-					((UI_IndoorScene)sceneUI).FriendListSlots[obj.PlayerInfo.Name].SetOnline();
-				}
-			}
-		}
+		Managers.Instance.HandleSpawnIndoor(spawnIndoorPacket);
 	}
 
 	public static void S_DespawnIndoorHandler(PacketSession session, IMessage packet)

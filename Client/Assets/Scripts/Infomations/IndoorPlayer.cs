@@ -98,6 +98,8 @@ public class IndoorPlayer : MonoBehaviour
     SpriteRenderer _faceRenderer;
     SpriteRenderer _upperHandRenderer;
     SpriteRenderer _lowerHandRenderer;
+    SpriteRenderer _upperLegRenderer;
+    SpriteRenderer _lowerLegRenderer;
     SpriteRenderer _upperFootRenderer;
     SpriteRenderer _lowerFootRenderer;
 
@@ -127,6 +129,8 @@ public class IndoorPlayer : MonoBehaviour
         _faceRenderer = gameObject.FindChild<SpriteRenderer>("face", recursive: true);
         _upperHandRenderer = gameObject.FindChild<SpriteRenderer>("upper_hand", recursive: true);
         _lowerHandRenderer = gameObject.FindChild<SpriteRenderer>("lower_hand", recursive: true);
+        _upperLegRenderer = gameObject.FindChild<SpriteRenderer>("upper_leg", recursive: true);
+        _lowerLegRenderer = gameObject.FindChild<SpriteRenderer>("lower_leg", recursive: true);
         _upperFootRenderer = gameObject.FindChild<SpriteRenderer>("upper_foot", recursive: true);
         _lowerFootRenderer = gameObject.FindChild<SpriteRenderer>("lower_foot", recursive: true);
     }
@@ -134,12 +138,15 @@ public class IndoorPlayer : MonoBehaviour
     public void SetBodyColor()
     {
         if (_faceRenderer == null || _upperHandRenderer == null || _lowerHandRenderer == null ||
+            _upperLegRenderer == null || _lowerLegRenderer == null ||
             _upperFootRenderer == null || _lowerFootRenderer == null)
             Init();
 
         _faceRenderer.color = new Color(_faceColorX, _faceColorY, _faceColorZ, 1);
         _upperHandRenderer.color = new Color(_faceColorX, _faceColorY, _faceColorZ, 1);
         _lowerHandRenderer.color = new Color(_faceColorX, _faceColorY, _faceColorZ, 1);
+        _upperLegRenderer.color = new Color(_faceColorX, _faceColorY, _faceColorZ, 1);
+        _lowerLegRenderer.color = new Color(_faceColorX, _faceColorY, _faceColorZ, 1);
         _upperFootRenderer.color = new Color(_faceColorX, _faceColorY, _faceColorZ, 1);
         _lowerFootRenderer.color = new Color(_faceColorX, _faceColorY, _faceColorZ, 1);
     }

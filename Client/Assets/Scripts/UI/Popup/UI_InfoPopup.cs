@@ -58,7 +58,7 @@ public class UI_InfoPopup : UI_Popup
         _loadingPopup.SetMessageText("새 정보 저장 중");
 
         // Check empty info
-        string name = Get<TMP_InputField>((int)InputFields.NameInputField).text;
+        string name = GetInputField((int)InputFields.NameInputField).text;
         if (name == "")
         {
             _loadingPopup.ClosePopup();
@@ -68,9 +68,9 @@ public class UI_InfoPopup : UI_Popup
         }
 
         // Check if include password change
-        string pwd = Get<TMP_InputField>((int)InputFields.PasswordInputField).text;
-        string newPwd = Get<TMP_InputField>((int)InputFields.NewPasswordInputField).text;
-        string newPwdCheck = Get<TMP_InputField>((int)InputFields.NewPasswordCheckInputField).text;
+        string pwd = GetInputField((int)InputFields.PasswordInputField).text;
+        string newPwd = GetInputField((int)InputFields.NewPasswordInputField).text;
+        string newPwdCheck = GetInputField((int)InputFields.NewPasswordCheckInputField).text;
         bool pwdExcept = (pwd == "") && (newPwd == "") && (newPwdCheck == "");
 
         /* Not include password change */
@@ -154,9 +154,9 @@ public class UI_InfoPopup : UI_Popup
     void ResetInfo()
     {
         // Set input field text to current player info
-        Get<TMP_InputField>((int)InputFields.NameInputField).text = _playerInfo.Name;
-        Get<TMP_InputField>((int)InputFields.PasswordInputField).text = "";
-        Get<TMP_InputField>((int)InputFields.NewPasswordInputField).text = "";
-        Get<TMP_InputField>((int)InputFields.NewPasswordCheckInputField).text = "";
+        GetInputField((int)InputFields.NameInputField).text = _playerInfo.Name;
+        GetInputField((int)InputFields.PasswordInputField).text = "";
+        GetInputField((int)InputFields.NewPasswordInputField).text = "";
+        GetInputField((int)InputFields.NewPasswordCheckInputField).text = "";
     }
 }

@@ -8,17 +8,15 @@ using UnityEngine;
 
 public class NetworkManager
 {
-    public string AccountId { get; set; }
+	ServerSession _session;
+
+	public string AccountId { get; set; }
     public string Token { get; set; }
 	public string Name { get; set; }
 
-    ServerSession _session;
+	public ServerInfo LobbyServer { get; set; }
+	public ServerInfo GameServer1 { get; set; }
 
-
-    public void Send(IMessage packet)
-    {
-        _session.Send(packet);
-    }
 
 	public void Update()
 	{
@@ -31,24 +29,27 @@ public class NetworkManager
 		}
 	}
 
-	public void ConnectToLobbyServer(ChannelInfo info)
+	public void Send(IMessage packet)
+	{
+		_session.Send(packet);
+	}
+
+	public void ConnectToServer(ServerInfo server)
 	{
 		_session = new ServerSession();
-		IPAddress ipAddr = IPAddress.Parse(info.IpAddress);
-		IPEndPoint endPoint = new IPEndPoint(ipAddr, info.Port);
 
+		IPAddress ipAddr = IPAddress.Parse(server.IpAddress);
+		IPEndPoint endPoint = new IPEndPoint(ipAddr, server.Port);
 		Connector connector = new Connector();
 		connector.Connect(endPoint, () => { return _session; }, 1);
 	}
-
-	public void ConnectToGameServer(ChannelInfo info)
+	public void ConnectToLobbyServer()
 	{
-		_session = new ServerSession();
-		IPAddress ipAddr = IPAddress.Parse(info.IpAddress);
-		IPEndPoint endPoint = new IPEndPoint(ipAddr, info.Port);
-
-		Connector connector = new Connector();
-		connector.Connect(endPoint, () => { return _session; }, 1);
+		ConnectToServer(LobbyServer);
+	}
+	public void ConnectToGameServer1()
+	{
+		ConnectToServer(GameServer1);
 	}
 
 	public void DisconnectSession()

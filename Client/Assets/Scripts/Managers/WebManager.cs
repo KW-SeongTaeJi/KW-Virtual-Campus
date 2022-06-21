@@ -10,7 +10,8 @@ public class WebManager
     public string BaseUrl { get; set; }
 
 
-    // <T>: response packet type, res: response callback function 
+    // T: response packet type
+    // res: response callback function 
     IEnumerator CoSendWebRequest<T>(string extraUrl, string method, object packet, Action<T> resCallback)
     {
         string url = $"{BaseUrl}/{extraUrl}";

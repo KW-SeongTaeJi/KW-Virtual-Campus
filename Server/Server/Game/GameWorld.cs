@@ -113,14 +113,14 @@ namespace Server.Game
                         S_Despawn despawnPacket = new S_Despawn();
                         despawnPacket.ObjectId = objectId;
                         despawnPacket.Name = player.Name;
-                        Broadcast(despawnPacket);
+                        Broadcast(despawnPacket, objectId);
                     }
                     else
                     {
                         S_DespawnIndoor despawnIndoorPacket = new S_DespawnIndoor();
                         despawnIndoorPacket.ObjectId = objectId;
                         despawnIndoorPacket.Name = player.Name;
-                        Broadcast(despawnIndoorPacket);
+                        Broadcast(despawnIndoorPacket, objectId);
                     }
                 }
             }
@@ -170,7 +170,7 @@ namespace Server.Game
                 S_Despawn despawnPacket = new S_Despawn();
                 despawnPacket.ObjectId = session.MyPlayer.Id;
                 despawnPacket.Name = session.MyPlayer.Name;
-                Broadcast(despawnPacket);
+                Broadcast(despawnPacket, session.MyPlayer.Id);
             }
 
             session.MyPlayer.Place = packet.Place;
@@ -239,10 +239,8 @@ namespace Server.Game
                 S_DespawnIndoor despawnIndoorPacket = new S_DespawnIndoor();
                 despawnIndoorPacket.ObjectId = session.MyPlayer.Id;
                 despawnIndoorPacket.Name = session.MyPlayer.Name;
-                Broadcast(despawnIndoorPacket);
+                Broadcast(despawnIndoorPacket, session.MyPlayer.Id);
             }
-
-            Thread.Sleep(500);
 
             // Set player's outdoor position
             switch (session.MyPlayer.Place)
@@ -253,9 +251,9 @@ namespace Server.Game
                     session.MyPlayer.Position.Z = -72;
                     break;
                 case Place.IndoorHanwool:
-                    session.MyPlayer.Position.X = -140;
-                    session.MyPlayer.Position.Y = 6;
-                    session.MyPlayer.Position.Z = -15;
+                    session.MyPlayer.Position.X = -225;
+                    session.MyPlayer.Position.Y = 5;
+                    session.MyPlayer.Position.Z = 142;
                     break;
                 case Place.IndoorHwado:
                     session.MyPlayer.Position.X = 30;
@@ -273,9 +271,9 @@ namespace Server.Game
                     session.MyPlayer.Position.Z = -144;
                     break;
                 case Place.IndoorSaebit:
-                    session.MyPlayer.Position.X = -26;
-                    session.MyPlayer.Position.Y = 96;
-                    session.MyPlayer.Position.Z = -120;
+                    session.MyPlayer.Position.X = 205;
+                    session.MyPlayer.Position.Y = 30;
+                    session.MyPlayer.Position.Z = -11;
                     break;
             }
             session.MyPlayer.Place = Place.Outdoor;

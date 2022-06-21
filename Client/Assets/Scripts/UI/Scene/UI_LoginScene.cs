@@ -44,8 +44,8 @@ public class UI_LoginScene : UI_Scene
         _loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingCirclePopup>();
         _loadingPopup.SetMessageText("로그인 중");
 
-        string id = Get<TMP_InputField>((int)InputFields.Id).text;
-        string password = Get<TMP_InputField>((int)InputFields.Password).text;
+        string id = GetInputField((int)InputFields.Id).text;
+        string password = GetInputField((int)InputFields.Password).text;
 
         // TODO : PW 해시 처리
 
@@ -62,8 +62,8 @@ public class UI_LoginScene : UI_Scene
         // Close Loading Popup
         _loadingPopup.ClosePopup();
 
-        Get<TMP_InputField>((int)InputFields.Id).text = "";
-        Get<TMP_InputField>((int)InputFields.Password).text = "";
+        GetInputField((int)InputFields.Id).text = "";
+        GetInputField((int)InputFields.Password).text = "";
 
         /* Login Success */
         if (res.LoginOk)
@@ -71,10 +71,10 @@ public class UI_LoginScene : UI_Scene
             Managers.Network.AccountId = res.AccountId;
             Managers.Network.Token = res.Token;
             Managers.Network.Name = res.Name;
+            Managers.Network.LobbyServer = res.LobbyServer;
+            Managers.Network.GameServer1 = res.GameServer1;
 
-            // TODO : 로비서버로 연결 및 씬 이동
-            Managers.Network.ConnectToLobbyServer(res.Channel);
-            Managers.SceneLoad.LoadScene(Define.Scene.Lobby);
+            Managers.SceneLoad.LoadSceneAsync(Define.Scene.Lobby);
         }
         /* Login Fail */
         else
@@ -113,10 +113,10 @@ public class UI_LoginScene : UI_Scene
         if ((_prevTap == false) && tap && isValid)
         {
             _prevTap = true;
-            if (Get<TMP_InputField>((int)InputFields.Id).isFocused)
-                Get<TMP_InputField>((int)InputFields.Password).Select();
+            if (GetInputField((int)InputFields.Id).isFocused)
+                GetInputField((int)InputFields.Password).Select();
             else
-                Get<TMP_InputField>((int)InputFields.Id).Select();
+                GetInputField((int)InputFields.Id).Select();
         }
         if (tap == false)
             _prevTap = false;

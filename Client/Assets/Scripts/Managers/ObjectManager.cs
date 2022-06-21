@@ -37,9 +37,9 @@ public class ObjectManager
 
 			if (myPlayer)
 			{
-				GameObject gameObject = Managers.Resource.Instantiate("Object/MyGamePlayer");
-				gameObject.transform.position = new Vector3(info.Position.X, info.Position.Y, info.Position.Z);
-				gameObject.transform.rotation = Quaternion.Euler(0, info.RotationY, 0);
+				Vector3 pos = new Vector3(info.Position.X, info.Position.Y, info.Position.Z);
+				Quaternion rot = Quaternion.Euler(0, info.RotationY, 0);
+				GameObject gameObject = Managers.Resource.Instantiate("Object/MyGamePlayer", pos, rot);
 				_objects.Add(info.ObjectId, gameObject);
 
 				MyPlayer = gameObject.GetComponent<Player>();
@@ -68,9 +68,9 @@ public class ObjectManager
 				{
 					if (info.PlayerInfo.Place == MyPlayer.Place)
 					{
-						GameObject gameObject = Managers.Resource.Instantiate("Object/GamePlayer");
-						gameObject.transform.position = new Vector3(info.Position.X, info.Position.Y, info.Position.Z);
-						gameObject.transform.rotation = Quaternion.Euler(0, info.RotationY, 0);
+						Vector3 pos = new Vector3(info.Position.X, info.Position.Y, info.Position.Z);
+						Quaternion rot = Quaternion.Euler(0, info.RotationY, 0);
+						GameObject gameObject = Managers.Resource.Instantiate("Object/GamePlayer", pos, rot);
 						_objects.Add(info.ObjectId, gameObject);
 
 						Player player = gameObject.GetComponent<Player>();
@@ -95,6 +95,7 @@ public class ObjectManager
 
 		return null;
 	}
+
 	public GameObject AddIndoor(ObjectInfo info, bool myPlayer = false)
     {
 		if (MyIndoorPlayer != null && MyIndoorPlayer.Id == info.ObjectId)
@@ -112,8 +113,9 @@ public class ObjectManager
 
 			if (myPlayer)
 			{
-				GameObject gameObject = Managers.Resource.Instantiate("Object/MyIndoorPlayer");
-				gameObject.transform.position = new Vector3(info.Position.X, info.Position.Y, info.Position.Z - _objects.Count);
+				Vector3 pos = new Vector3(info.Position.X, info.Position.Y, info.Position.Z - _objects.Count);
+				Quaternion rot = Quaternion.Euler(0, 0, 0);
+				GameObject gameObject = Managers.Resource.Instantiate("Object/MyIndoorPlayer", pos, rot);
 				_objects.Add(info.ObjectId, gameObject);
 
 				MyIndoorPlayer = gameObject.GetComponent<IndoorPlayer>();
@@ -142,8 +144,9 @@ public class ObjectManager
 				{
 					if (info.PlayerInfo.Place == MyIndoorPlayer.Place)
 					{
-						GameObject gameObject = Managers.Resource.Instantiate("Object/IndoorPlayer");
-						gameObject.transform.position = new Vector3(info.Position.X, info.Position.Y, info.Position.Z - _objects.Count);
+						Vector3 pos = new Vector3(info.Position.X, info.Position.Y, info.Position.Z - _objects.Count);
+						Quaternion rot = Quaternion.Euler(0, 0, 0);
+						GameObject gameObject = Managers.Resource.Instantiate("Object/IndoorPlayer", pos, rot);
 						_objects.Add(info.ObjectId, gameObject);
 
 						IndoorPlayer player = gameObject.GetComponent<IndoorPlayer>();

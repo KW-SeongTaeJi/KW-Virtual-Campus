@@ -5,7 +5,6 @@ using UnityEngine;
 public class LoginScene : BaseScene
 {
     UI_LoginScene _sceneUI;
-
     LoginInput _loginInput;
 
 
@@ -30,14 +29,15 @@ public class LoginScene : BaseScene
 
         SceneType = Define.Scene.Login;
 
-        //Managers.Web.BaseUrl = "https://localhost:5001/api";
-        Managers.Web.BaseUrl = "http://13.125.241.5:5000/api";  // AWS ec2 public ip
-
-        Screen.SetResolution(1920, 1080, Screen.fullScreenMode);
-
         _sceneUI = Managers.UI.ShowSceneUI<UI_LoginScene>();
-
         _loginInput = GetComponent<LoginInput>();
+
+        // TODO : URL 공용 도메인
+        Managers.Web.BaseUrl = "https://localhost:5001/api";
+        //Managers.Web.BaseUrl = "http://3.39.234.208:5000/api";  // AWS ec2 public ip
+
+        // TODO : 해상도 처리
+        Screen.SetResolution(1920, 1080, Screen.fullScreenMode);
     }
 
     public override void Clear()

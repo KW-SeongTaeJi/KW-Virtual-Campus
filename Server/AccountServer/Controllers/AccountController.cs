@@ -115,22 +115,29 @@ namespace AccountServer.Controllers
             res.Token = newToken;
             res.Name = account.Name;
 
-            //string host = Dns.GetHostName();
-            //IPHostEntry ipHost = Dns.GetHostEntry(host);
-            //IPAddress ipAddr = null;
-            //foreach (IPAddress ip in ipHost.AddressList)
-            //{
-            //    if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-            //    {
-            //        ipAddr = ip;
-            //        break;
-            //    }
-            //}
-            IPAddress ipAddr = IPAddress.Parse("52.79.122.116");  // AWS ec2 public ip
-            res.Channel = new ChannelInfo()
+            // TODO : 로비 및 게임 서버 주소 교체
+            string host = Dns.GetHostName();
+            IPHostEntry ipHost = Dns.GetHostEntry(host);
+            IPAddress ipAddr = null;
+            foreach (IPAddress ip in ipHost.AddressList)
+            {
+                if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                {
+                    ipAddr = ip;
+                    break;
+                }
+            }
+            //IPAddress lobbyIpAddr = IPAddress.Parse("13.125.207.171");  // AWS ec2 public ip
+            //IPAddress gameIpAddr1 = IPAddress.Parse("13.125.207.171");  // AWS ec2 public ip
+            res.LobbyServer = new ServerInfo()
             {
                 IpAddress = ipAddr.ToString(),
                 Port = 4000
+            };
+            res.GameServer1 = new ServerInfo()
+            {
+                IpAddress = ipAddr.ToString(),
+                Port = 8000
             };
 
             return res;

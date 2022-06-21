@@ -53,10 +53,10 @@ public class UI_GameScene : UI_Scene
     Transform _content;
     GameObject _selectedEmotionButton;
 
-    public UI_Alert2Popup Alert2Popup { get; set; }
     public PlayerCanvasController MyPlayerCanvas { get; set; }
     public MyPlayerController MyPlayerController { get; set; }
     public TMP_InputField ChatInputField { get; set; }
+    public UI_Alert2Popup Alert2Popup { get; set; }
     public GameObject EmotionPanel { get; set; }
     public GameObject FriendListPanel { get; set; }
     public Dictionary<string, UI_FriendListSlot> FriendListSlots { get; set; } = new Dictionary<string, UI_FriendListSlot>();
@@ -75,10 +75,10 @@ public class UI_GameScene : UI_Scene
 
         _input = ((GameScene)Managers.SceneLoad.CurrentScene).GetComponent<MyPlayerInput>();
         _content = gameObject.FindChild<Transform>("Content", true);
+
         EmotionPanel = gameObject.FindChild("EmotionPanel");
         FriendListPanel = gameObject.FindChild("FriendListPanel");
 
-        // Bind UI
         Bind<Button>(typeof(Buttons));
         Bind<TMP_InputField>(typeof(InputFields));
         Bind<TextMeshProUGUI>(typeof(Texts));
@@ -121,27 +121,9 @@ public class UI_GameScene : UI_Scene
     }
     public void OnClickLobbyButton_Step2()
     {
-    //    string host = Dns.GetHostName();
-    //    IPHostEntry ipHost = Dns.GetHostEntry(host);
-    //    IPAddress ipAddr = null;
-    //    foreach (IPAddress ip in ipHost.AddressList)
-    //    {
-    //        if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-    //        {
-    //            ipAddr = ip;
-    //            break;
-    //        }
-    //    }
-        IPAddress ipAddr = IPAddress.Parse("13.125.194.172");  // AWS ec2 public ip
-        ChannelInfo channel = new ChannelInfo()
-        {
-            IpAddress = ipAddr.ToString(),
-            Port = 4000
-        };
         Managers.Object.Clear();
         Managers.Network.DisconnectSession();
-        Managers.Network.ConnectToGameServer(channel);
-        Managers.SceneLoad.LoadScene(Define.Scene.Lobby);
+        Managers.SceneLoad.LoadSceneAsync(Define.Scene.Lobby);
     }
 
     public void OnClickSettingsButton(PointerEventData evt)
@@ -175,7 +157,7 @@ public class UI_GameScene : UI_Scene
     
     public void OnClickBuildingButton(PointerEventData evt)
     {
-        string building = Get<TextMeshProUGUI>((int)Texts.BuildingTitleText).text;
+        string building = GetText((int)Texts.BuildingTitleText).text;
         switch (building)
         {
             case "ºñ¸¶°ü":
@@ -237,7 +219,7 @@ public class UI_GameScene : UI_Scene
     public void SetBuildingButton(string building)
     {
         GetButton((int)Buttons.BuildingButton).gameObject.SetActive(true);
-        Get<TextMeshProUGUI>((int)Texts.BuildingTitleText).text = building;
+        GetText((int)Texts.BuildingTitleText).text = building;
     }
     public void UnsetBuildingButton()
     {
@@ -368,62 +350,32 @@ public class UI_GameScene : UI_Scene
     }
     void EnterBima()
     {
-        C_EnterIndoor enterIndoorPacket = new C_EnterIndoor()
-        {
-            Place = Place.IndoorBima
-        };
-        Managers.Network.Send(enterIndoorPacket);
         Managers.Object.Clear();
-        Managers.SceneLoad.LoadScene((Define.Scene)Enum.Parse(typeof(Define.Scene), enterIndoorPacket.Place.ToString()));
+        Managers.SceneLoad.LoadSceneAsync(Define.Scene.IndoorBima);
     }
     void EnterHanwool()
     {
-        C_EnterIndoor enterIndoorPacket = new C_EnterIndoor()
-        {
-            Place = Place.IndoorHanwool
-        };
-        Managers.Network.Send(enterIndoorPacket);
         Managers.Object.Clear();
-        Managers.SceneLoad.LoadScene((Define.Scene)Enum.Parse(typeof(Define.Scene), enterIndoorPacket.Place.ToString()));
+        Managers.SceneLoad.LoadSceneAsync(Define.Scene.IndoorHanwool);
     }
     void EnterHwado()
     {
-        C_EnterIndoor enterIndoorPacket = new C_EnterIndoor()
-        {
-            Place = Place.IndoorHwado
-        };
-        Managers.Network.Send(enterIndoorPacket);
         Managers.Object.Clear();
-        Managers.SceneLoad.LoadScene((Define.Scene)Enum.Parse(typeof(Define.Scene), enterIndoorPacket.Place.ToString()));
+        Managers.SceneLoad.LoadSceneAsync(Define.Scene.IndoorHwado);
     }
     void EnterLibrary()
     {
-        C_EnterIndoor enterIndoorPacket = new C_EnterIndoor()
-        {
-            Place = Place.IndoorLibrary
-        };
-        Managers.Network.Send(enterIndoorPacket);
         Managers.Object.Clear();
-        Managers.SceneLoad.LoadScene((Define.Scene)Enum.Parse(typeof(Define.Scene), enterIndoorPacket.Place.ToString()));
+        Managers.SceneLoad.LoadSceneAsync(Define.Scene.IndoorLibrary);
     }
     void EnterOgui()
     {
-        C_EnterIndoor enterIndoorPacket = new C_EnterIndoor()
-        {
-            Place = Place.IndoorOgui
-        };
-        Managers.Network.Send(enterIndoorPacket);
         Managers.Object.Clear();
-        Managers.SceneLoad.LoadScene((Define.Scene)Enum.Parse(typeof(Define.Scene), enterIndoorPacket.Place.ToString()));
+        Managers.SceneLoad.LoadSceneAsync(Define.Scene.IndoorOgui);
     }
     void EnterSaebit()
     {
-        C_EnterIndoor enterIndoorPacket = new C_EnterIndoor()
-        {
-            Place = Place.IndoorSaebit
-        };
-        Managers.Network.Send(enterIndoorPacket);
         Managers.Object.Clear();
-        Managers.SceneLoad.LoadScene((Define.Scene)Enum.Parse(typeof(Define.Scene), enterIndoorPacket.Place.ToString()));
+        Managers.SceneLoad.LoadSceneAsync(Define.Scene.IndoorSaebit);
     }
 }

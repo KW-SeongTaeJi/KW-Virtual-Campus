@@ -28,10 +28,11 @@ public class LoginPakcetRes
     public string Token { get; set; }
     public string Name { get; set; }
 
-    public ChannelInfo Channel { get; set; }
+    public ServerInfo LobbyServer { get; set; }
+    public ServerInfo GameServer1 { get; set; }
 }
 
-public class ChannelInfo
+public class ServerInfo
 {
     public string IpAddress { get; set; }
     public int Port { get; set; }

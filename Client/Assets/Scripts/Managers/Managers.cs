@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Managers : MonoBehaviour
+public partial class Managers : MonoBehaviour
 {
+    #region Singleton
     static Managers _instance;
     public static Managers Instance 
     {
@@ -13,6 +14,7 @@ public class Managers : MonoBehaviour
             return _instance; 
         } 
     }
+    #endregion
 
     NetworkManager _network = new NetworkManager();
     ObjectManager _obj = new ObjectManager();

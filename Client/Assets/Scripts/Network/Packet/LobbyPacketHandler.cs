@@ -27,32 +27,7 @@ partial class PacketHandler
 	{
 		L_EnterLobby enterPacket = (L_EnterLobby)packet;
 
-		// Disconnect invalid Access
-		if (enterPacket.AccessOk == false)
-        {
-			Managers.Network.DisconnectSession();
-			UI_AlertPopup alertPopup = Managers.UI.ShowPopupUI<UI_AlertPopup>();
-			alertPopup.SetMessageText("이미 접속중인 계정이거나, 올바르지 않은 접근입니다!\n프로그램을 종료합니다.");
-			alertPopup.Quit = true;
-			return;
-		}
-
-		// Set player in lobby
-		GameObject player = Managers.Resource.Instantiate("Object/MyLobbyPlayer");
-		Player info = player.GetComponent<Player>();
-		{
-			info.Name = Managers.Network.Name;
-			info.HairType = enterPacket.HairType;
-			info.FaceType = enterPacket.FaceType;
-			info.JacketType = enterPacket.JacketType;
-			info.HairColor = enterPacket.HairColor;
-			info.FaceColor_X = enterPacket.FaceColor.X;
-			info.FaceColor_Y = enterPacket.FaceColor.Y;
-			info.FaceColor_Z = enterPacket.FaceColor.Z;
-		}
-
-		LobbyScene lobbyScene = (LobbyScene)Managers.SceneLoad.CurrentScene;
-		lobbyScene.PlayerInfo = info;
+		Managers.Instance.HandleEnterLobby(enterPacket);
 	}
 
 	public static void L_SaveCustermizeHandler(PacketSession session, IMessage packet)

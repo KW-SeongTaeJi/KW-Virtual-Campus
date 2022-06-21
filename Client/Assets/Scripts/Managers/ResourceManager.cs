@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ResourceManager
 {
-    // "Asset/Resources/" 산하의 리소스 로드
+    /* "Asset/Resources" 산하의 리소스 로드 */
     public T Load<T>(string path) where T : Object
     {
         if (typeof(T) == typeof(GameObject))
@@ -22,7 +22,7 @@ public class ResourceManager
         return Resources.Load<T>(path);
     }
 
-    // "Asset/Resources/Prefabs" 산하의 프리팹 생성
+    /* "Asset/Resources/Prefabs" 산하의 프리팹 생성 */
     public GameObject Instantiate(string path, Transform parent = null)
     {
         GameObject original = Load<GameObject>($"Prefabs/{path}");
@@ -38,6 +38,24 @@ public class ResourceManager
 
         // Non-Poolable 오브젝트 생성
         GameObject gameObject = Object.Instantiate(original, parent);
+        gameObject.name = original.name;
+        return gameObject;
+    }
+    public GameObject Instantiate(string path, Vector3 pos, Quaternion rot, Transform parent = null)
+    {
+        GameObject original = Load<GameObject>($"Prefabs/{path}");
+        if (original == null)
+        {
+            Debug.Log($"Error : Failed to load prefab at {path}");
+            return null;
+        }
+
+        // Poolable 오브젝트 생성
+        if (original.GetComponent<Poolable>() != null)
+            return Managers.Pool.Pop(original, parent).gameObject;
+
+        // Non-Poolable 오브젝트 생성
+        GameObject gameObject = Object.Instantiate(original, pos, rot, parent);
         gameObject.name = original.name;
         return gameObject;
     }

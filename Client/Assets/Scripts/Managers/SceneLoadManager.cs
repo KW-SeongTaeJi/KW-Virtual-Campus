@@ -34,6 +34,14 @@ public class SceneLoadManager
         SceneManager.LoadScene(GetSceneName(sceneType));
     }
 
+    public void LoadSceneAsync(Define.Scene sceneType, int channel = 1)
+    {
+        Managers.Clear();
+        UI_LoadScene.NextScene = GetSceneName(sceneType);
+        UI_LoadScene.GameChannel = channel;
+        SceneManager.LoadScene("Load");
+    }
+
     string GetSceneName(Define.Scene sceneType)
     {
         string name = System.Enum.GetName(typeof(Define.Scene), sceneType);

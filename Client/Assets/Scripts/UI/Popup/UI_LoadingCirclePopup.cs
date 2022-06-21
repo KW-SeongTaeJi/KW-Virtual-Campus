@@ -22,6 +22,6 @@ public class UI_LoadingCirclePopup : UI_Popup
 
     public void SetMessageText(string message)
     {
-        Get<TextMeshProUGUI>((int)Texts.LoadingMessageText).text = message;
+       GetText((int)Texts.LoadingMessageText).text = message;
     }
 }

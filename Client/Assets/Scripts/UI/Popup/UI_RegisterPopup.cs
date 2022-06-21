@@ -22,10 +22,10 @@ public class UI_RegisterPopup : UI_Popup
         CancelButton
     }
 
+    bool _prevTap = false;
+
     UI_AlertPopup _alertPopup;
     UI_LoadingCirclePopup _loadingPopup;
-
-    bool _prevTap = false;
 
 
     public override void Init()
@@ -45,10 +45,10 @@ public class UI_RegisterPopup : UI_Popup
         _loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingCirclePopup>();
         _loadingPopup.SetMessageText("사용자 등록 중");
 
-        string name = Get<TMP_InputField>((int)InputFields.Name).text; 
-        string id = Get<TMP_InputField>((int)InputFields.Id).text;
-        string password = Get<TMP_InputField>((int)InputFields.Password).text;
-        string passwordCheck = Get<TMP_InputField>((int)InputFields.PasswordCheck).text;
+        string name = GetText((int)InputFields.Name).text; 
+        string id = GetText((int)InputFields.Id).text;
+        string password = GetText((int)InputFields.Password).text;
+        string passwordCheck = GetText((int)InputFields.PasswordCheck).text;
 
         /* Register Fail */
         // 1. empty information
@@ -126,17 +126,18 @@ public class UI_RegisterPopup : UI_Popup
     {
         bool isValid = (_loadingPopup == null) && (_alertPopup == null);
 
+        // Input "Tap"
         if ((_prevTap == false) && tap && isValid)
         {
             _prevTap = true;
-            if (Get<TMP_InputField>((int)InputFields.Name).isFocused)
-                Get<TMP_InputField>((int)InputFields.Id).Select();
-            else if (Get<TMP_InputField>((int)InputFields.Id).isFocused)
-                Get<TMP_InputField>((int)InputFields.Password).Select();
-            else if (Get<TMP_InputField>((int)InputFields.Password).isFocused)
-                Get<TMP_InputField>((int)InputFields.PasswordCheck).Select();
+            if (GetInputField((int)InputFields.Name).isFocused)
+                GetInputField((int)InputFields.Id).Select();
+            else if (GetInputField((int)InputFields.Id).isFocused)
+                GetInputField((int)InputFields.Password).Select();
+            else if (GetInputField((int)InputFields.Password).isFocused)
+                GetInputField((int)InputFields.PasswordCheck).Select();
             else
-                Get<TMP_InputField>((int)InputFields.Name).Select();
+                GetInputField((int)InputFields.Name).Select();
         }
         if (tap == false)
             _prevTap = false;
