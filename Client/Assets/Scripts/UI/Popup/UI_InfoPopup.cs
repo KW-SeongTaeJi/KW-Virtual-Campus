@@ -9,7 +9,7 @@ using Google.Protobuf.Protocol;
 
 public class UI_InfoPopup : UI_Popup
 {
-    // each name of components to bind
+    // UI component name to bind
     enum InputFields
     {
         NameInputField,
@@ -24,10 +24,10 @@ public class UI_InfoPopup : UI_Popup
         ResetButton
     }
 
-    Player _playerInfo;
-
     UI_LoadingCirclePopup _loadingPopup;
     UI_AlertPopup _alertPopup;
+
+    Player _playerInfo;
 
 
     public override void Init()
@@ -53,7 +53,7 @@ public class UI_InfoPopup : UI_Popup
 
     public void OnClickSaveButton(PointerEventData evt)
     {
-        // Show Loading UI
+        // Show loading UI
         _loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingCirclePopup>();
         _loadingPopup.SetMessageText("새 정보 저장 중");
 

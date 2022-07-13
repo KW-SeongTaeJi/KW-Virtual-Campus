@@ -6,7 +6,7 @@ using TMPro;
 
 public class UI_LoadingCirclePopup : UI_Popup
 {
-    // each name of components to bind
+    // UI component name to bind
     enum Texts
     {
         LoadingMessageText

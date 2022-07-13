@@ -9,8 +9,6 @@ public class SceneLoadManager
 
     public List<Resolution> Resolutions { get; set; } = new List<Resolution>();
 
-    FullScreenMode _currentMode;
-
     
     public void Init()
     {
@@ -19,13 +17,6 @@ public class SceneLoadManager
             if (Screen.resolutions[i].refreshRate == 60)
                 Resolutions.Add(Screen.resolutions[i]);
         }
-        _currentMode = Screen.fullScreenMode;
-    }
-
-    public void Update()
-    {
-        if (_currentMode.Equals(Screen.fullScreen) == false)
-            _currentMode = Screen.fullScreenMode;
     }
 
     public void LoadScene(Define.Scene sceneType)

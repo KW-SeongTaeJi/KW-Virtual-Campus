@@ -19,7 +19,7 @@ public class GameScene : BaseScene
         _input = GetComponent<MyPlayerInput>();
 
         // TODO : 해상도 처리
-        Screen.SetResolution(1920, 1080, Screen.fullScreenMode);
+        //Screen.SetResolution(1920, 1080, Screen.fullScreenMode);
     }
 
     public override void Clear()

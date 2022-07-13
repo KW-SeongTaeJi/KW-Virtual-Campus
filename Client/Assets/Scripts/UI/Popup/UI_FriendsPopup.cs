@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class UI_FriendsPopup : UI_Popup
 {
+    // UI component name to bind
     enum Buttons
     {
         CloseButton,
@@ -14,8 +15,9 @@ public class UI_FriendsPopup : UI_Popup
         FriendRequestButton
     }
 
-    UI_LoadingCirclePopup _loadingPopup;
     Transform _content;
+    
+    UI_LoadingCirclePopup _loadingPopup;
 
     public UI_FriendAddPopup FriendAddPopup { get; set; }
     public UI_FriendRequestPopup FriendRequestPopup { get; set; }
@@ -59,9 +61,6 @@ public class UI_FriendsPopup : UI_Popup
 
     public void OnRecvFriendListPacket(L_FriendList packet)
     {
-        int curWidth = Screen.width;
-        int curHeight = Screen.height;
-        Screen.SetResolution(1920, 1080, Screen.fullScreenMode);
         // Set friends list
         Player playerInfo = ((LobbyScene)Managers.SceneLoad.CurrentScene).PlayerInfo;
         playerInfo.Friends.Clear();
@@ -81,7 +80,6 @@ public class UI_FriendsPopup : UI_Popup
             playerInfo.Friends.Add(friend.Name, friend);
             AddFriendSlot(friend);
         }
-        Screen.SetResolution(curWidth, curHeight, Screen.fullScreenMode);
 
         // Close loading UI 
         UI_Popup friendPopup = Managers.UI.PopupUIStack.Pop();
@@ -94,7 +92,7 @@ public class UI_FriendsPopup : UI_Popup
     public void AddFriendSlot(FriendInfo info)
     {
         UI_FriendSlot friendSlot = Managers.Resource.Instantiate("UI/Popup/UI_FriendSlot").GetComponent<UI_FriendSlot>();
-        friendSlot.transform.SetParent(_content);
+        friendSlot.transform.SetParent(_content, false);
         friendSlot.SetFriendInfo(info);
         FriendSlots.Add(info.Name, friendSlot);
     }

@@ -7,12 +7,11 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UI_LoadScene : UI_Base
-{
-    static public string NextScene { get; set; }
+{   static public string NextScene { get; set; }
     static public int GameChannel { get; set; }
     static public AsyncOperation AsyncOp { get; set; }
 
-    // name of components to bind
+    // UI component name to bind
     enum Images
     {
         LoadingbarImage

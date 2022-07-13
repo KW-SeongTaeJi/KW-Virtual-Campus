@@ -6,6 +6,7 @@ using TMPro;
 
 public class UI_FriendListSlot : UI_Base
 {
+    // UI component name to bind
     enum Texts
     {
         NameText,

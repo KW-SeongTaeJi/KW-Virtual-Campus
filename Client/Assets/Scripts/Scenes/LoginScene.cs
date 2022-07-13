@@ -10,7 +10,7 @@ public class LoginScene : BaseScene
 
     private void Update()
     {
-        // Call input Key Event
+        // Keyboard event РќДо
         if (Managers.UI.PopupUIStack.Count == 0)
             _sceneUI.HandleKeyEvent(_loginInput.Tap, _loginInput.Enter);
         else

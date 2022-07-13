@@ -7,7 +7,7 @@ using TMPro;
 
 public class UI_LoginScene : UI_Scene
 {
-    // each name of components to bind
+    // UI component name to bind
     enum InputFields
     {
         Id,
@@ -59,7 +59,7 @@ public class UI_LoginScene : UI_Scene
     }
     void OnRecvLoginPacket(LoginPakcetRes res)
     {
-        // Close Loading Popup
+        // Close Loading UI
         _loadingPopup.ClosePopup();
 
         GetInputField((int)InputFields.Id).text = "";

@@ -8,6 +8,7 @@ using Google.Protobuf.Protocol;
 
 public class UI_FriendAddPopup : UI_Popup
 {
+    // UI component name to bind
     enum Buttons
     {
         CloseButton,
