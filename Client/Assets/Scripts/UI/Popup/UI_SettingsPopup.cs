@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 
 public class UI_SettingsPopup : UI_Popup
 {
+    // UI component name to bind
     enum Buttons
     {
         CloseButton
@@ -24,8 +25,6 @@ public class UI_SettingsPopup : UI_Popup
         FullscreenToggle,
         SoundToggle
     }
-
-    int _resolutionNum;
 
 
     public override void Init()

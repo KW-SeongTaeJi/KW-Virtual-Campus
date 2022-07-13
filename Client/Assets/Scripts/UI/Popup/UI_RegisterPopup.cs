@@ -8,7 +8,7 @@ using TMPro;
 
 public class UI_RegisterPopup : UI_Popup
 {
-    // each name of components to bind
+    // UI component name to bind
     enum InputFields
     {
         Name,
@@ -89,17 +89,17 @@ public class UI_RegisterPopup : UI_Popup
     }
     void OnRecvRegisterPacket(CreateAccountPacketRes res)
     {
-        // Close Loading Popup
+        // Close Loading UI
         _loadingPopup.ClosePopup();
-        
-        // Register Success
+
+        /* Register Success */
         if (res.CreateAccountOk)
         {
             _alertPopup = Managers.UI.ShowPopupUI<UI_AlertPopup>();
             _alertPopup.SetMessageText("사용자 등록 성공!");
             _alertPopup.CloasAll = true;
         }
-        // Register Fail
+        /* Register Fail */
         else
         {
             // ErrorCode 1 : Same name is already used 

@@ -11,7 +11,7 @@ public class WebManager
 
 
     // T: response packet type
-    // res: response callback function 
+    // resCallback: response callback function 
     IEnumerator CoSendWebRequest<T>(string extraUrl, string method, object packet, Action<T> resCallback)
     {
         string url = $"{BaseUrl}/{extraUrl}";

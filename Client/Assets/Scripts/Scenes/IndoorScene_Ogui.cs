@@ -15,8 +15,6 @@ public class IndoorScene_Ogui : BaseScene
 
         SceneType = Define.Scene.IndoorOgui;
 
-        Screen.SetResolution(1920, 1080, Screen.fullScreenMode);
-
         _sceneUI = Managers.UI.ShowSceneUI<UI_IndoorScene>();
 
         _input = GetComponent<MyIndoorPlayerInput>();

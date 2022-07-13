@@ -9,7 +9,7 @@ using Google.Protobuf.Protocol;
 
 public class UI_Alert2Popup : UI_Popup
 {
-    // each name of components to bind
+    // UI component name to bind
     enum Texts
     {
         MessageText
@@ -20,12 +20,12 @@ public class UI_Alert2Popup : UI_Popup
         CancelButton
     }
 
+    bool _initEnter = true;
+
     public bool CloasAll { get; set; } = false;
     public bool Quit { get; set; } = false;
 
     public Action OnConfirmFunction { get; set; }
-
-    bool _initEnter = true;
 
 
     public override void Init()

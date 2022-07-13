@@ -40,7 +40,6 @@ public partial class Managers : MonoBehaviour
     void Update()
     {
         _network.Update();
-        _sceneLoad.Update();
     }
 
     static void Init()

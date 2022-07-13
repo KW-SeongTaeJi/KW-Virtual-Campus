@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class UI_LobbyScene : UI_Scene
 {
-    // each name of components to bind
+    // UI component name to bind
     enum Buttons
     {
         LogoutButton,

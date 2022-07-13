@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class LoginInput : MonoBehaviour
 {
-    // Keyboard Input Valus
+    // Keyboard Input Values
     public bool Tap { get; set; }
     public bool Enter { get; set; }
 

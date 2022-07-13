@@ -9,7 +9,7 @@ public class LoadScene : BaseScene
         base.Init();
 
         // TODO : 해상도 처리
-        Screen.SetResolution(1920, 1080, Screen.fullScreenMode);
+        //Screen.SetResolution(1920, 1080, Screen.fullScreenMode);
     }
 
     public override void Clear()

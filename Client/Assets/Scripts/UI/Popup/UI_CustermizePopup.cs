@@ -1,4 +1,3 @@
-
 using Google.Protobuf.Protocol;
 using System;
 using System.Collections;
@@ -9,7 +8,7 @@ using UnityEngine.UI;
 
 public class UI_CustermizePopup : UI_Popup
 {
-    // each name of components to bind
+    // UI component name to bind
     enum Sliders
     {
         BodyRSlider,
@@ -68,11 +67,9 @@ public class UI_CustermizePopup : UI_Popup
     {
         base.Init();
 
-        // bind each components
         Bind<Slider>(typeof(Sliders));
         Bind<Button>(typeof(Buttons));
 
-        // bind each event
         #region bind event
         GetSlider((int)Sliders.BodyRSlider).onValueChanged.AddListener(OnValueChangedBodyRSlider);
         GetSlider((int)Sliders.BodyGSlider).onValueChanged.AddListener(OnValueChangedBodyGSlider);
@@ -108,13 +105,13 @@ public class UI_CustermizePopup : UI_Popup
         GetButton((int)Buttons.SportsButton).gameObject.BindEvent(OnClickJacketSportButton, Define.UIEvent.Click);
         #endregion
 
-        // get lobby player custermize infomation 
+        // Get lobby player custermize infomation 
         playerInfo = ((LobbyScene)Managers.SceneLoad.CurrentScene).PlayerInfo;
 
-        // save previous player custermize infomation 
+        // Save real player custermize infomation 
         SavePlayerInfo();
 
-        // set sliders value
+        // Set sliders value
         GetSlider((int)Sliders.BodyRSlider).value = playerInfo.FaceColor_X;
         GetSlider((int)Sliders.BodyGSlider).value = playerInfo.FaceColor_Y;
         GetSlider((int)Sliders.BodyBSlider).value = playerInfo.FaceColor_Z;
@@ -170,7 +167,7 @@ public class UI_CustermizePopup : UI_Popup
 
     public void OnClickSaveButton(PointerEventData evt)
     {
-        // Show Loading UI
+        // Show loading UI
         _loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingCirclePopup>();
         _loadingPopup.SetMessageText("커스터마이징 저장 중");
 

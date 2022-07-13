@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class UI_FriendRequestPopup : UI_Popup
 {
+    // UI component name to bind
     enum Buttons
     {
         CloseButton
@@ -22,7 +23,7 @@ public class UI_FriendRequestPopup : UI_Popup
     {
         base.Init();
 
-        // Show Loading UI
+        // Show loading UI
         _loadingPopup = Managers.UI.ShowPopupUI<UI_LoadingCirclePopup>();
         _loadingPopup.SetMessageText("요청함 로딩 중");
 
@@ -43,18 +44,14 @@ public class UI_FriendRequestPopup : UI_Popup
 
     public void OnRecvFriendRequestListPacket(L_FriendRequestList packet)
     {
-        int curWidth = Screen.width;
-        int curHeight = Screen.height;
-        Screen.SetResolution(1920, 1080, Screen.fullScreenMode);
         // Set friends request list
         foreach (string name in packet.FriendNames)
         {
             UI_FriendRequestSlot requestSlot = Managers.Resource.Instantiate("UI/Popup/UI_FriendRequestSlot").GetComponent<UI_FriendRequestSlot>();
-            requestSlot.transform.SetParent(_content);
+            requestSlot.transform.SetParent(_content, false);
             requestSlot.SetFriendName(name);
             ReqeustSlots.Add(name, requestSlot);
         }
-        Screen.SetResolution(curWidth, curHeight, Screen.fullScreenMode);
 
         // Close loading UI 
         UI_Popup requestPopup = Managers.UI.PopupUIStack.Pop();

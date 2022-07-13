@@ -10,7 +10,7 @@ using System.Net;
 
 public class UI_GameScene : UI_Scene
 {
-    // each name of components to bind
+    // UI component name to bind
     enum InputFields
     {
         ChatInputField
@@ -210,7 +210,7 @@ public class UI_GameScene : UI_Scene
         foreach (FriendInfo friend in Managers.Object.MyPlayer.Friends.Values)
         {
             UI_FriendListSlot friendSlot = Managers.Resource.Instantiate("UI/Popup/UI_FriendListSlot").GetComponent<UI_FriendListSlot>();
-            friendSlot.transform.SetParent(_content);
+            friendSlot.transform.SetParent(_content, false);
             friendSlot.SetFriendInfo(friend);
             FriendListSlots.Add(friend.Name, friendSlot);
         }

@@ -8,6 +8,7 @@ using Google.Protobuf.Protocol;
 
 public class UI_FriendSlot : UI_Base
 {
+    // UI component name to bind
     enum Texts
     {
         FriendNameText
