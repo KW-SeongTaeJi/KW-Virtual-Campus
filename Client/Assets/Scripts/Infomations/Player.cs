@@ -140,7 +140,7 @@ public class Player : MonoBehaviour
                     _hairColors.Add(hairColor, Color.blue);
                     break;
                 case HairColor.Purple:
-                    _hairColors.Add(hairColor, Color.magenta);
+                    _hairColors.Add(hairColor, new Color(128 / 255f, 0, 128 / 255f));
                     break;
                 case HairColor.Yellow:
                     _hairColors.Add(hairColor, Color.yellow);

@@ -5,7 +5,7 @@ import "google/protobuf/timestamp.proto";
 option csharp_namespace = "Google.Protobuf.Protocol";
 
 
-enum MsgId {
+enum MsgId { 
 	L_CONNECTED = 0;
 	L_PING = 1;
 	B_PONG = 2;
