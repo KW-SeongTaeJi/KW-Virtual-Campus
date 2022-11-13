@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 
 namespace NetworkCore
 {
@@ -24,6 +25,9 @@ namespace NetworkCore
                 args.UserToken = socket;
 
                 RegisterConnect(args);
+
+                // temp for dummy client test 
+                Thread.Sleep(10);
             }
         }
 

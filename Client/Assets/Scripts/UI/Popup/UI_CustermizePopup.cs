@@ -62,7 +62,6 @@ public class UI_CustermizePopup : UI_Popup
     float _realFaceColorZ;
 
 
-
     public override void Init()
     {
         base.Init();
@@ -206,22 +205,27 @@ public class UI_CustermizePopup : UI_Popup
     public void OnClickHairOneButton(PointerEventData evt)
     {
         playerInfo.HairType = HairType.HairOne;
+        playerInfo.HairColor = playerInfo.HairColor;
     }
     public void OnClickHairTwoButton(PointerEventData evt)
     {
         playerInfo.HairType = HairType.HairTwo;
+        playerInfo.HairColor = playerInfo.HairColor;
     }
     public void OnClickHairThreeButton(PointerEventData evt)
     {
         playerInfo.HairType = HairType.HairThree;
+        playerInfo.HairColor = playerInfo.HairColor;
     }
     public void OnClickHairFourButton(PointerEventData evt)
     {
         playerInfo.HairType = HairType.HairFour;
+        playerInfo.HairColor = playerInfo.HairColor;
     }
     public void OnClickHairFiveButton(PointerEventData evt)
     {
         playerInfo.HairType = HairType.HairFive;
+        playerInfo.HairColor = playerInfo.HairColor;
     }
 
     public void OnClickHairRedButton(PointerEventData evt)

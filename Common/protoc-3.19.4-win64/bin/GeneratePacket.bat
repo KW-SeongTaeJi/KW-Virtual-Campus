@@ -5,6 +5,8 @@ START ../../../Server/PacketGenerator/bin/Debug/netcoreapp3.1/PacketGenerator.ex
 XCOPY /Y Protocol.cs "../../../Server/Server/Packet"
 XCOPY /Y Protocol.cs "../../../Client/Assets/Scripts/Network/Packet"
 XCOPY /Y Protocol.cs "../../../Server/LobbyServer/Packet"
+XCOPY /Y Protocol.cs "../../../Server/DummyClient/Packet"
 XCOPY /Y ServerPacketManager.cs "../../../Server/Server/Packet"
 XCOPY /Y ClientPacketManager.cs "../../../Client/Assets/Scripts/Network/Packet"
 XCOPY /Y LobbyPacketManager.cs "../../../Server/LobbyServer/Packet"
+XCOPY /Y ClientPacketManager.cs "../../../Server/DummyClient/Packet"
