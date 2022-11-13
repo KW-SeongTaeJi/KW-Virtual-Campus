@@ -15,14 +15,12 @@ namespace Server
         public int AccountDbId { get; private set; }
         public Player MyPlayer { get; set; }
 
+        // temp
+        float _dummyPosZ = -48.0f;
 
         public void HandleEnterGame(C_EnterGame enterGamePacket)
         {
-            // Update token validation
-            using (RedisDb cache = new RedisDb())
-            {
-                cache.Set($"{enterGamePacket.AccountId}Where", "game");
-            }
+            
 
             // Find client information
             using (AppDbContext db = new AppDbContext())
@@ -38,6 +36,12 @@ namespace Server
 
                 if (findAccount != null)
                 {
+                    // Update token validation
+                    using (RedisDb cache = new RedisDb())
+                    {
+                        cache.Set($"{enterGamePacket.AccountId}Where", "game");
+                    }
+
                     // Load client player infomation
                     AccountDbId = findAccount.AccountDbId;
                     MyPlayer = ObjectManager.Instance.Add<Player>();
@@ -80,6 +84,31 @@ namespace Server
 
                     GameWorld gameWorld = GameLogic.Instance.GameWorld;
                     gameWorld.PushQueue(gameWorld.EnterGame, MyPlayer);
+                }
+                // dummy client 처리용 temp
+                else
+                {
+                    MyPlayer = ObjectManager.Instance.Add<Player>();
+                    {
+                        MyPlayer.Position.X = -48;
+                        MyPlayer.Position.Y = 14;
+                        MyPlayer.Position.Z = _dummyPosZ;
+                        MyPlayer.RotationY = 180;
+                        MyPlayer.Place = Place.Outdoor;
+                        //MyPlayer.PlayerDbId = findAccount.Player.PlayerDbId;
+                        MyPlayer.Name = enterGamePacket.AccountId;
+                        MyPlayer.Session = this;
+                        MyPlayer.HairType = HairType.HairOne;
+                        MyPlayer.FaceType = FaceType.FaceOne;
+                        MyPlayer.JacketType = JacketType.ComputerEngineering;
+                        MyPlayer.HairColor = HairColor.Red;
+                        MyPlayer.FaceColor.X = 0.5f;
+                        MyPlayer.FaceColor.Y = 0.5f;
+                        MyPlayer.FaceColor.Z = 0.5f;
+                    }
+                    _dummyPosZ -= 1;
+                    GameWorld gameWorld = GameLogic.Instance.GameWorld;
+                    gameWorld.PushQueue(gameWorld.EnterGameDummy, MyPlayer);
                 }
 
                 // TODO : DB에 정보 없을 때 오류 처리

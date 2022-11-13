@@ -73,6 +73,29 @@ namespace Server.Game
             // TODO : 다른 오브젝트들 입장
         }
 
+        public void EnterGameDummy(GameObject gameObject)
+        {
+            if (gameObject == null)
+                return;
+
+            GameObjectType type = ObjectManager.GetObjectTypeById(gameObject.Id);
+
+            if (type == GameObjectType.Player)
+            {
+                Player myPlayer = gameObject as Player;
+                _players.Add(gameObject.Id, myPlayer);
+
+                // my player -> other clients
+                {
+                    S_Spawn spawnPacket = new S_Spawn();
+                    ObjectInfo objectInfo = myPlayer.ObjectInfo;
+                    objectInfo.PlayerInfo = myPlayer.PlayerInfo;
+                    spawnPacket.Objects.Add(gameObject.ObjectInfo);
+                    Broadcast(spawnPacket, gameObject.Id);
+                }
+            }
+        }
+
         public void LeaveGame(int objectId)
         {
             GameObjectType type = ObjectManager.GetObjectTypeById(objectId);
